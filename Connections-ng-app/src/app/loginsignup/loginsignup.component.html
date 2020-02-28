@@ -1,0 +1,84 @@
+<div class="container">
+        <div class="row">
+        
+          <div class="col-md-4">
+                <h4><label for="name" class="font-weight-bold">Login</label></h4>
+            <form name="form" #f="ngForm"  novalidate class="feedback-form">
+              <!-- Name -->
+              <div class="form-group">
+                <label for="name">UserName</label>
+                <input type="text"
+                       id="username"
+                       class="form-control"
+                       name="name"
+                       placeholder="Your username"/>
+               
+              </div>
+              <div class="form-group">
+                <label for="email">Password</label>
+                <input type="password"
+                       id="email"
+                       class="form-control"
+                       name="password"
+                       placeholder="Your password"
+                       />
+              </div>
+              <button type="submit" class="btn btn-info pull-right">
+               <span>Submit</span>
+              </button>
+            </form>
+          </div>
+		  <div class="col-md-3"></div>
+		  <div class="col-md-5">
+             <h4><label for="name" class="font-weight-bold">Sign Up</label></h4>
+            <form name="form" #f="ngForm"  novalidate class="feedback-form">
+              <!-- Name -->
+              <div class="form-group">
+                <label for="name">UserName</label>
+                <input type="text"
+                       id="usernamer"
+                       class="form-control"
+                       name="name"
+                       placeholder="Your username"/>
+               
+              </div>
+              <div class="form-group">
+                <label for="email">Password</label>
+                <input type="password"
+                       id="passwordr"
+                       class="form-control"
+                       name="passwordr"
+                       placeholder="Your password"
+                       />
+              </div>
+
+              <div class="form-group">
+                    <label for="repassword">Re-Type Password</label>
+                    <input type="repassword"
+                           id="email"
+                           class="form-control"
+                           name="repassword"
+                           placeholder="Retype your password"
+                           />
+                  </div>
+
+                  <div class="form-group">
+                        <label for="email">email</label>
+                        <input type="email"
+                               id="email"
+                               class="form-control"
+                               name="email"
+                               placeholder="Your email"
+                               />
+                      </div>    
+
+              <button type="submit" class="btn btn-info pull-right">
+                <span>Register</span>
+              </button>
+            </form>
+          </div>
+		  
+		  
+          <div class="offset-3"></div>
+        </div>
+     </div>
