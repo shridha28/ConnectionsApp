@@ -8,6 +8,7 @@ import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import {Router,Routes, RouterModule} from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 import { config } from 'rxjs';
 
 const appRoutes:Routes=[
@@ -40,7 +41,8 @@ const appRoutes:Routes=[
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes,{enableTracing:true}),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

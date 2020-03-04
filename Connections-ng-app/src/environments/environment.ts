@@ -3,8 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  Url: 'http://localhost:8080',
+ debugMode: false
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
