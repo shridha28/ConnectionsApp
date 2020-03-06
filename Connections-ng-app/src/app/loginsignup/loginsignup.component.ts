@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import {Router, ActivatedRoute} from '@angular/router';
+import {TransferService} from '../app.transferservice';
 
 @Component({
   selector: 'app-loginsignup',
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./loginsignup.component.css']
 })
 export class LoginsignupComponent implements OnInit {
+  @Input('singupmodel')
   signupModel:SignUpViewModel={
     username:'',
     password:'',
@@ -19,13 +21,14 @@ export class LoginsignupComponent implements OnInit {
     password:''
   }
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+    private router:Router,private _route:ActivatedRoute,private transferService:TransferService) { }
 
   login():void{  
     let url = "http://localhost:8787/api/login";
     this.http.post(url,this.loginModel).subscribe(
      res =>  {
-       location.reload();
+       this.router.navigateByUrl('/feedback');
      },
      err=> {alert("Sorry an error occured");
     });
@@ -36,7 +39,8 @@ export class LoginsignupComponent implements OnInit {
     let url = "http://localhost:8787/api/signup";
     this.http.post(url,this.signupModel).subscribe(
      res =>  {
-       location.reload();
+       this.transferService.setData(this.signupModel.emailid);
+      this.router.navigateByUrl('/editProfile');
      },
      err=> {alert("Sorry an error occured");
     });
@@ -44,7 +48,7 @@ export class LoginsignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
+  } 
 
 }
 
