@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
-import {TransferService} from '../app.transferservice';
+import {DataServiceService} from '../services-shared/data-service.service';
 
 @Component({
   selector: 'app-loginsignup',
@@ -9,7 +9,7 @@ import {TransferService} from '../app.transferservice';
   styleUrls: ['./loginsignup.component.css']
 })
 export class LoginsignupComponent implements OnInit {
-  @Input('singupmodel')
+
   signupModel:SignUpViewModel={
     username:'',
     password:'',
@@ -22,7 +22,10 @@ export class LoginsignupComponent implements OnInit {
   }
 
   constructor(private http:HttpClient,
-    private router:Router,private _route:ActivatedRoute,private transferService:TransferService) { }
+    private router:Router,private _route:ActivatedRoute,private transferService:DataServiceService) { 
+        
+      transferService.setData(this.signupModel.emailid);  
+    }
 
   login():void{  
     let url = "http://localhost:8787/api/login";

@@ -10,7 +10,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { config } from 'rxjs';
-import { EditprofileComponent } from './editprofile/editprofile.component';
+import { EditprofileComponent } from './loginsignup/editprofile/editprofile.component';
 import {ConfirmEqualValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
 
 const appRoutes:Routes=[
