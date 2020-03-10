@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import com.myproject.connections.service.CustomerService;
+import com.myproject.connections.utility.UniqueEmail;
 
 @Entity
 public class CustomerDetails {
@@ -14,7 +18,11 @@ public class CustomerDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@UniqueEmail
 	private String emailid;
+	
+	@NotNull
 	private String password;
 	public String getPassword() {
 		return password;

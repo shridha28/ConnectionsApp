@@ -1,11 +1,12 @@
 package com.myproject.connections.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myproject.connections.beans.CustomerDetails;
@@ -26,8 +27,19 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/api/signup")
-	public void signUpCustomer(@RequestBody CustomerDetails customerDetails){
+	public void signUpCustomer(@RequestBody @Valid CustomerDetails customerDetails){
 	    customerService.saveUser(customerDetails);
+	}
+
+	
+	/* Note: using getters and setters only for mockito*/
+	
+	public CustomerServiceImpl getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(CustomerServiceImpl customerService) {
+		this.customerService = customerService;
 	}
 
 

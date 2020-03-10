@@ -2,6 +2,8 @@ package com.myproject.connections.serviceimpl;
 
 import java.util.Calendar;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,12 +25,26 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	
 	
-	public CustomerDetails saveUser(CustomerDetails customerDetails) {
+	public Long saveUser(CustomerDetails customerDetails) {
 		customerDetails.setPassword(bCryptPasswordEncoder.encode(customerDetails.getPassword()));
 		customerDetails.setCreation_date(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		
-	    return custDetailsRepository.save(customerDetails);
-	  
+	    custDetailsRepository.save(customerDetails);
+	  return customerDetails.getId();
 	}
+	
+	
+	
+	public boolean doesEmailIDExists(String username){
+		
+		boolean userInDb = true;
+		if (custDetailsRepository.findByEmailid(username)!=null)
+		return userInDb;
+		else 
+			return false;
+	}
+
+
+	
 
 }

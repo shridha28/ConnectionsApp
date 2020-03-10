@@ -6,5 +6,7 @@ import com.myproject.connections.beans.CustomerDetails;
 
 
 public interface CustDetailsRepository extends JpaRepository<CustomerDetails, String>{
-
+	
+	
+	public CustomerDetails findByEmailid(String userName);
 }

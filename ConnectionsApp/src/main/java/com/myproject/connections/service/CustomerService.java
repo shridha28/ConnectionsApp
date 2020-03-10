@@ -6,6 +6,7 @@ public interface CustomerService {
 	
 	
 	
-	public CustomerDetails saveUser(CustomerDetails user);
+	public Long saveUser(CustomerDetails user);
 
+	public boolean doesEmailIDExists(String username);
 }
