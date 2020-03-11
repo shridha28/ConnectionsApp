@@ -12,7 +12,7 @@ export class DataServiceService {
   }  
   
   getData() {  
-    return this.data;  
+    return this.data;   
   }
 
   constructor() { }

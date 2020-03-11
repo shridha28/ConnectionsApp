@@ -1,0 +1,15 @@
+#houseno {
+    width: 150px;
+    display: inline-block;
+}
+
+#street {
+    width: 150px;
+    display: inline-block;
+}
+
+
+#landmark {
+    width: 150px;
+    display: inline-block;
+}

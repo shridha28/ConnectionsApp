@@ -11,21 +11,26 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { config } from 'rxjs';
 import { EditprofileComponent } from './loginsignup/editprofile/editprofile.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ConfirmEqualValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
 
 const appRoutes:Routes=[
   {
     path:'loginsignup',
-    component:LoginsignupComponent
+    component:LoginsignupComponent,
+    data: {animation: 'LoginSingUp'}
   },
   {
     path:'feedback',
-    component:FeedbackComponent
+    component:FeedbackComponent,
+    data: {animation: 'Feedback'}
   },
 
   {
     path:'editProfile',
-    component:EditprofileComponent
+    component:EditprofileComponent,
+    data: {animation: 'EditProfile'}
   },
   {
     path:'',
@@ -42,6 +47,7 @@ const appRoutes:Routes=[
 @NgModule({
   declarations: [
     AppComponent,
+    
     NavigationComponent,
     FeedbackComponent,
     LoginsignupComponent,
@@ -53,7 +59,8 @@ const appRoutes:Routes=[
     BrowserModule,
     RouterModule.forRoot(appRoutes,{enableTracing:true}),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

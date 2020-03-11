@@ -1,4 +1,96 @@
+<div class="container">
 
+<h1>Hello {{email_Id}} ! Need some more details and we are good to go</h1>
+    <div class="row">
+    
+      
+      <div class="col-md-3"></div>
+      <div class="col-md-5">
+        <form name="signUpform" #f="ngForm"
+        novalidate class="feedback-form ">
+        
+          <div class="form-group">
+            <label for="emailid">Name</label>
+            <input ngModel type="text"
+                   email
+                   id="name"
+                   class="form-control form-control-sm "
+                   name="username"
+                   placeholder="Your Name" 
+                   #username="ngModel"
+                   [ngClass]="{'is-invalid':f.submitted && username.invalid}"
+                   required/>
+                     
+                
+                 
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Address</label><br>
+            
+            <input ngModel type="text"
+            id="houseno"
+            class="form-control form-control-sm"
+            name="houseno"
+            placeholder="House Number"
+            
+            required
+            />
+           
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+            <input ngModel type="text"
+                   id="street"
+                   class="form-control form-control-sm"
+                   name="street"
+                   placeholder="Street"
+                  
+                   required
+                   />
+                 <br/>
+                    <br/>
+                 
+                   <input ngModel type="text"
+                   id="landmark"
+                   class="form-control form-control-sm"
+                   name="landmark"
+                   placeholder="Landmark"
+                 
+                   required
+                   />
+            <br/>
+            <br/>
 
+                   <input ngModel type="text"
+                   id="city"
+                   class="form-control form-control-sm"
+                   name="city"
+                   placeholder="City"
+                  
+                   required
+                   />
+                   <br/>
+                
+                   <input ngModel type="text"
+                   id="State"
+                   class="form-control form-control-sm"
+                   name="State"
+                   placeholder="State"
+                   
+                   required
+                   />
+            </div>    
+                
 
-<h1>The value is {{ email_Id }}</h1>
+          <button type="submit" class="btn btn-info pull-right">
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+      
+      
+      <div class="offset-3"></div>
+    </div>
+ </div>
+ <!--<div *ngIf="emailname.valid">
+  <app-editprofile [email_Id]="signupModel.emailid"></app-editprofile>
+  </div>-->

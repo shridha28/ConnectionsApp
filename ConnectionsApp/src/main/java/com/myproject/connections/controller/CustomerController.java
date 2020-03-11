@@ -3,13 +3,14 @@ package com.myproject.connections.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myproject.connections.beans.CustomerDetails;
+import com.myproject.connections.beans.MessageBean;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
 @RestController
@@ -19,16 +20,20 @@ public class CustomerController {
 	@Autowired
 	CustomerServiceImpl customerService;
 
-	
 
-	@GetMapping("/api/signup/demo")
-	public void message(){
-	    System.out.println("fff");
-	}
 	
 	@PostMapping("/api/signup")
-	public void signUpCustomer(@RequestBody @Valid CustomerDetails customerDetails){
+	public MessageBean signUpCustomer(@RequestBody @Valid CustomerDetails customerDetails,BindingResult bindingResult){
+		if(bindingResult.hasErrors()) {
+	    	System.out.println(bindingResult.getFieldError().getDefaultMessage());
+	    	String message = bindingResult.getFieldError().getDefaultMessage();
+	    	MessageBean bean = new MessageBean();
+	    	bean.setError(message);
+	    	 return bean;
+	    
+	    }
 	    customerService.saveUser(customerDetails);
+	    return new MessageBean();
 	}
 
 	

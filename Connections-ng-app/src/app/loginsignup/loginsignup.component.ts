@@ -9,6 +9,8 @@ import {DataServiceService} from '../services-shared/data-service.service';
   styleUrls: ['./loginsignup.component.css']
 })
 export class LoginsignupComponent implements OnInit {
+  response:any;
+
 
   signupModel:SignUpViewModel={
     username:'',
@@ -43,6 +45,10 @@ export class LoginsignupComponent implements OnInit {
     this.http.post(url,this.signupModel).subscribe(
      res =>  {
        this.transferService.setData(this.signupModel.emailid);
+      
+      this.response = JSON.stringify(res);
+      alert(this.response['error']);
+     if(this.response.length==0)
       this.router.navigateByUrl('/editProfile');
      },
      err=> {alert("Sorry an error occured");
