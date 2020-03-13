@@ -16,7 +16,7 @@ import com.myproject.connections.utility.impl.UniqueEmailValidator;
 @Target({ ElementType.FIELD })
 public @interface UniqueEmail {
 
-	public String message() default "There is already user with this email!";
+	public String message() default "There is already a user registered with this email!";
 	
 	public Class<?>[] groups() default {};
 	
