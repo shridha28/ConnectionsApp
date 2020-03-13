@@ -1,8 +1,10 @@
 <div class="container">
 
-<h1>Hello {{email_Id}} ! Need some more details and we are good to go</h1>
+<h1>Hello {{email_Id}} ! Need some more details and we are good to go!
+</h1>
     <div class="row">
     
+      
       
       <div class="col-md-3"></div>
       <div class="col-md-5">
@@ -70,7 +72,7 @@
                    />
                    <br/>
                 
-                   <input ngModel type="text"
+                   <!--<input ngModel type="text"
                    id="State"
                    class="form-control form-control-sm"
                    name="State"
@@ -78,6 +80,15 @@
                    
                    required
                    />
+                   <br/>-->
+                   <label for="password">State</label>
+                   <select id="orders" class="form-control">
+                    <option *ngFor="let responseId of response; let i = index" [value]="response[i].stateName">
+                      {{response[i].stateName}}
+                    </option>
+                  </select>
+                
+                
             </div>    
                 
 
@@ -85,10 +96,11 @@
             <span>Submit</span>
           </button>
         </form>
+        
       </div>
       
-      
-      <div class="offset-3"></div>
+     
+
     </div>
  </div>
  <!--<div *ngIf="emailname.valid">

@@ -2,3 +2,16 @@
 .invalid-input{
     color: red;
   }
+  .container{
+    background-image:url(../../assets/woman2.jpg);
+    opacity: 0.75;
+    max-height: max-content ;
+    background-size: cover;
+  }
+
+  label{
+    font-weight: bold;
+  }
+
+
+  

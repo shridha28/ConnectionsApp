@@ -5,9 +5,7 @@
                 <h4><label for="name" class="font-weight-bold">Login</label></h4>
             <form name="loginForm" #loginForm="ngForm" (submit)="loginForm.form.valid && login() "   novalidate class="feedback-form">
               <!-- Name -->
-              <div *ngIf="response" class="alert alert-danger">
-                  {{response.error}}
-                </div>
+              
 
               <div class="form-group">
                 <label for="name">UserName</label>
@@ -39,14 +37,16 @@
               </button>
             </form>
           </div>
-		  <div class="col-md-3"></div>
-		  <div class="col-md-5">
+		       <div class="col-md-3"></div>
+		        <div class="col-md-5">
              <h4><label for="name" class="font-weight-bold">Sign Up</label></h4>
             <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signup()" 
             novalidate class="feedback-form">
-            
+            <div *ngIf="response" class="alert alert-danger">
+              {{response.error}}
+            </div>
               <div class="form-group">
-                <label for="emailid">Email-ID</label>
+               <b> <label for="emailid">Email-ID</label></b>  
                 <input ngModel type="email"
                        email
                        id="emailid"
@@ -103,6 +103,8 @@
                           <div *ngIf="passwrname.errors?.notEqual && f.submitted" class="alert alert-danger">
                             Password and Confirm Password Do Not Match
                           </div>
+
+                          
                   </div>
                   
                     
@@ -110,11 +112,25 @@
               <button type="submit" class="btn btn-info pull-right">
                 <span>Register</span>
               </button>
+
+
+
             </form>
+            
           </div>
-		  
-		  
-          <div class="offset-3"></div>
+          
+         
+        </div>
+       
+         
+        
+     </div>
+
+     <div class="container">
+
+        <div class="row">
+
+           
         </div>
      </div>
      <!--<div *ngIf="emailname.valid">

@@ -13,3 +13,15 @@
     width: 150px;
     display: inline-block;
 }
+
+label{
+    font-weight: bold;
+  }
+
+
+  .container{
+    background-image:url(../../../assets/bgimage_t.jpg);
+    opacity: 0.75;
+    max-height: max-content ;
+    background-size: cover;
+  }

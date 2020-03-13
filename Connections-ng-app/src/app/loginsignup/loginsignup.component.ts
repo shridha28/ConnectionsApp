@@ -24,7 +24,7 @@ export class LoginsignupComponent implements OnInit {
   }
 
   constructor(private http:HttpClient,
-    private router:Router,private _route:ActivatedRoute,private transferService:DataServiceService) { 
+    private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService) { 
         
       transferService.setData(this.signupModel.emailid);  
     }
@@ -46,9 +46,9 @@ export class LoginsignupComponent implements OnInit {
      res =>  {
        this.transferService.setData(this.signupModel.emailid);
       
-      this.response = JSON.stringify(res);
-      alert(this.response['error']);
-     if(this.response.length==0)
+      this.response = JSON.parse(JSON.stringify(res));
+      
+     if(this.response.error==null || this.response.error=="")
       this.router.navigateByUrl('/editProfile');
      },
      err=> {alert("Sorry an error occured");
