@@ -1,5 +1,6 @@
 Create Table IF NOT EXISTS Roles(
-   id BIGINT PRIMARY KEY, 
+   id BIGINT PRIMARY KEY,
+   name VARCHAR(50) NOT NULL, 
    rolename VARCHAR(50) NOT NULL,
    creation_date DATE,
    modified_date DATE
@@ -40,3 +41,19 @@ values ('KA','KARNATAKA',SYSDATE,SYSDATE);
 
 insert into States (stateID,state_name,creation_date,modified_date)
 values ('MH','MAHARASHTRA',SYSDATE,SYSDATE);
+
+insert into City (c_stateID,city_name) 
+values ('KA','Bangalore');
+
+insert into City (c_stateID,city_name) 
+values ('KA','Mysore');
+insert into City (c_stateID,city_name) 
+values ('KA','Belgaum');
+insert into City (c_stateID,city_name) 
+values ('KA','Dharwad');
+
+insert into City (c_stateID,city_name) 
+values ('MH','Sangli');
+insert into City (c_stateID,city_name) 
+values ('MH','Bombay');
+

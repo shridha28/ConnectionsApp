@@ -1,7 +1,9 @@
 package com.myproject.connections.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,22 +12,55 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.myproject.connections.service.CustomerService;
 import com.myproject.connections.utility.UniqueEmail;
+
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="customers")
-public class CustomerDetails {
+public class CustomerDetails implements Serializable{
 	
+	
+	private static final long serialVersionUID = -3617767414915807263L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Getter@Setter
+	private String name;
+	
 	@UniqueEmail
 	private String emailid;
 	
+	@Embedded
+	private Address address;
+	
 	@NotNull
 	private String password;
+    
+	private Date creation_date;
+	
+	private Date  modified_date;
+	
+	@OneToOne
+	private Role role;
+	
+	
+
+	
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+
 	public String getPassword() {
 		return password;
 	}
@@ -34,11 +69,7 @@ public class CustomerDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	private Date creation_date;
-	private Date  modified_date;
-	@OneToOne
-	private Role role;
-	
+
 	
 	public Role getRole() {
 		return role;

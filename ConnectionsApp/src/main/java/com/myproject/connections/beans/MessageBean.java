@@ -1,7 +1,11 @@
 package com.myproject.connections.beans;
 
+import java.io.Serializable;
 
-public class MessageBean {
+public class MessageBean implements Serializable{
+	
+	
+	private static final long serialVersionUID = -7308147947092645013L;
 	
 	private String error;
 

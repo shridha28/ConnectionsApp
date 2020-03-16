@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,9 +20,16 @@ import com.myproject.connections.beans.States;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
 
+/**
+ * @author acer
+ *
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerController {
+	
+	
+	private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	
 	@Autowired
 	CustomerServiceImpl customerService;
@@ -32,25 +41,23 @@ public class CustomerController {
 	
 	@PostMapping("/api/signup")
 	public MessageBean signUpCustomer(@RequestBody @Valid CustomerDetails customerDetails,BindingResult bindingResult){
+		logger.info("Validating customer details");
 		if(bindingResult.hasErrors()) {
-	    	System.out.println(bindingResult.getFieldError().getDefaultMessage());
+		logger.info("Server error: Invalid Customer details,returning server error in the front end");
 	    	String message = bindingResult.getFieldError().getDefaultMessage();
 	    	MessageBean bean = new MessageBean();
 	    	bean.setError(message);
 	    	 return bean;
 	    
 	    }
+		
+		logger.info("Saving Customer Data in the database");
+		 logger.info("Calling CustomerServiceImpl to save Customer Data");
 	    customerService.saveUser(customerDetails);
 	    return new MessageBean();
 	}
 	
-	@GetMapping("/getStatesData")
-	public List<States> getStates(){
-		System.out.println("Shridha");
-		List<States> listOfStates = stateService.getAllStates();
-		return listOfStates;
-		
-	}
+	
 
 	
 	/* Note: using getters and setters only for mockito*/

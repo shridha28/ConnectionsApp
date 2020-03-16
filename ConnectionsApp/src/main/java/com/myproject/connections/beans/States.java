@@ -1,21 +1,32 @@
 package com.myproject.connections.beans;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="States")
-public class States {
+public class States implements Serializable{
 	
+	
+	private static final long serialVersionUID = 4254428267358544179L;
 	
 	@Id
 	private String stateID;
 	private String stateName;
 	private Date creation_date;
 	private Date  modified_date;
+	
+	@OneToMany
+	@JoinColumn(name="c_stateID")
+	private List<City> cities;
 	
 	
 	
