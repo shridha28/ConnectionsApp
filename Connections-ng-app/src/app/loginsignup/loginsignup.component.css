@@ -3,8 +3,7 @@
     color: red;
   }
   .container{
-    background-image:url(../../assets/woman2.jpg);
-    opacity: 0.75;
+    background-image:url(../../assets/conn.jpg);
     max-height: max-content ;
     background-size: cover;
   }

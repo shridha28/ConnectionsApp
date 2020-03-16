@@ -11,14 +11,34 @@
         <form name="signUpform" #f="ngForm"
         novalidate class="feedback-form ">
         
+        <!--<div class="form-group">
+          <label for="password">Password</label>
+          <input ngModel type="password"
+                 id="passwordr"
+                 class="form-control"
+                 name="passwordr"
+                 placeholder="Your password"
+                 [(ngModel)]="signupModel.password"
+                 #passwname="ngModel"
+                 [ngClass]="{'is-invalid':f.submitted && passwname.invalid}"
+                 required
+                 />
+                 <div *ngIf="passwname.errors?.required && f.submitted
+                 " class="alert alert-danger">
+                  Password is required.
+                </div>
+        </div>-->
+
+
+
           <div class="form-group">
             <label for="emailid">Name</label>
             <input ngModel type="text"
-                   email
                    id="name"
                    class="form-control form-control-sm "
                    name="username"
-                   placeholder="Your Name" 
+                   placeholder="Your Name"
+                   [(ngModel)]="eProfileModel.name"
                    #username="ngModel"
                    [ngClass]="{'is-invalid':f.submitted && username.invalid}"
                    required/>
@@ -28,14 +48,16 @@
           </div>
           
           <div class="form-group">
-            <label for="password">Address</label><br>
+            <label for="Address">Address</label><br>
             
             <input ngModel type="text"
             id="houseno"
             class="form-control form-control-sm"
-            name="houseno"
+            name="houseNumber"
             placeholder="House Number"
-            
+            [(ngModel)]="eProfileModel.houseNumber"
+            #houseno="ngModel"
+            [ngClass]="{'is-invalid':f.submitted && houseno.invalid}"
             required
             />
            
@@ -45,7 +67,9 @@
                    class="form-control form-control-sm"
                    name="street"
                    placeholder="Street"
-                  
+                   [(ngModel)]="eProfileModel.street"
+                   #street="ngModel"
+                   [ngClass]="{'is-invalid':f.submitted && street.invalid}"                         
                    required
                    />
                  <br/>
@@ -56,47 +80,40 @@
                    class="form-control form-control-sm"
                    name="landmark"
                    placeholder="Landmark"
-                 
+                   [(ngModel)]="eProfileModel.landmark"
+                   #landMark="ngModel"
+                   [ngClass]="{'is-invalid':f.submitted && landMark.invalid}"   
                    required
                    />
             <br/>
             <br/>
-
-                   <input ngModel type="text"
-                   id="city"
-                   class="form-control form-control-sm"
-                   name="city"
-                   placeholder="City"
-                  
-                   required
-                   />
-                   <br/>
-                
-                   <!--<input ngModel type="text"
-                   id="State"
-                   class="form-control form-control-sm"
-                   name="State"
-                   placeholder="State"
-                   
-                   required
-                   />
-                   <br/>-->
-                   <label for="password">State</label>
-                   <select id="orders" class="form-control">
-                    <option *ngFor="let responseId of response; let i = index" [value]="response[i].stateName">
-                      {{response[i].stateName}}
-                    </option>
-                  </select>
-                
-                
-            </div>    
-                
+            <label for="password">State</label>
+            <select id="statesid" class="form-control" (change)="populateCities()" [(ngModel)]="state" 
+            name="selectedState" ng-init="state=response[0].stateID">
+             <option *ngFor="let responseId of response; let i = index"
+             [attr.selected]="!i"
+              [value]="response[i].stateID"
+             >
+               {{response[i].stateName}}
+             </option>
+           </select>
+           <br/>
+         <div *ngIf="state">
+            <label for="city">City</label>
+            <select id="cityid" class="form-control" 
+            name="selectedCity" >
+            
+             <option *ngFor="let responseId of cities; let i = index" [value]="cities[i].cityName">
+               {{cities[i].cityName}}
+             </option>
+           </select>
+           </div>                             
+            </div>   
 
           <button type="submit" class="btn btn-info pull-right">
             <span>Submit</span>
           </button>
         </form>
-        
       </div>
       
      

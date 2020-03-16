@@ -12,6 +12,18 @@ export class EditprofileComponent implements OnInit {
 
   email_Id:string;
   response:any;
+  state:string;
+  cities:any;
+
+  eProfileModel:EditProfileModel={
+    emailid:'',
+    name:'',
+    street:'',
+    landmark:'',
+    houseNumber:'',
+    city:'',
+    state:''
+  };
 
    viewModel:SignUpViewModel;
 
@@ -31,6 +43,27 @@ export class EditprofileComponent implements OnInit {
     });
   }
 
- 
+ populateCities():void{
+   //alert(this.state);
+   let url = "http://localhost:8787/getStatesData/"+this.state;
+    this.http.get(url).subscribe(
+     res =>  {
+     this.cities =  JSON.parse(JSON.stringify(res));
+     },
+     err=> {alert("Sorry an error occured");
+    });
+ }
   
+}
+
+
+export interface EditProfileModel{
+  emailid:string,
+  street:string,
+  landmark:string,
+  houseNumber:string,
+  city:string,
+  state:string,
+  name:string
+
 }
