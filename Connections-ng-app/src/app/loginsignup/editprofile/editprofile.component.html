@@ -9,30 +9,14 @@
       <div class="col-md-3"></div>
       <div class="col-md-5">
         <form name="signUpform" #f="ngForm"
-        novalidate class="feedback-form ">
+        novalidate class="feedback-form" (submit)="f.form.valid && submit()">
         
-        <!--<div class="form-group">
-          <label for="password">Password</label>
-          <input ngModel type="password"
-                 id="passwordr"
-                 class="form-control"
-                 name="passwordr"
-                 placeholder="Your password"
-                 [(ngModel)]="signupModel.password"
-                 #passwname="ngModel"
-                 [ngClass]="{'is-invalid':f.submitted && passwname.invalid}"
-                 required
-                 />
-                 <div *ngIf="passwname.errors?.required && f.submitted
-                 " class="alert alert-danger">
-                  Password is required.
-                </div>
-        </div>-->
+
 
 
 
           <div class="form-group">
-            <label for="emailid">Name</label>
+            <label for="name">Name</label>
             <input ngModel type="text"
                    id="name"
                    class="form-control form-control-sm "
@@ -80,7 +64,7 @@
                    class="form-control form-control-sm"
                    name="landmark"
                    placeholder="Landmark"
-                   [(ngModel)]="eProfileModel.landmark"
+                   [(ngModel)]="eProfileModel.landMark"
                    #landMark="ngModel"
                    [ngClass]="{'is-invalid':f.submitted && landMark.invalid}"   
                    required
@@ -88,12 +72,10 @@
             <br/>
             <br/>
             <label for="password">State</label>
-            <select id="statesid" class="form-control" (change)="populateCities()" [(ngModel)]="state" 
-            name="selectedState" ng-init="state=response[0].stateID">
+            <select id="statesid" class="form-control" [(ngModel)]="state" 
+            name="selectedState">
              <option *ngFor="let responseId of response; let i = index"
-             [attr.selected]="!i"
-              [value]="response[i].stateID"
-             >
+              [value]="i">
                {{response[i].stateName}}
              </option>
            </select>
@@ -101,10 +83,11 @@
          <div *ngIf="state">
             <label for="city">City</label>
             <select id="cityid" class="form-control" 
-            name="selectedCity" >
+            name="selectedCity" [(ngModel)]="eProfileModel.city"  >
             
-             <option *ngFor="let responseId of cities; let i = index" [value]="cities[i].cityName">
-               {{cities[i].cityName}}
+             <option *ngFor="let city of response; let i = index"
+              [value]="response[state].cities[i].cityName">
+               {{response[state].cities[i].cityName}}
              </option>
            </select>
            </div>                             
@@ -120,6 +103,3 @@
 
     </div>
  </div>
- <!--<div *ngIf="emailname.valid">
-  <app-editprofile [email_Id]="signupModel.emailid"></app-editprofile>
-  </div>-->

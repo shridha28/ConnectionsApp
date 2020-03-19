@@ -12,14 +12,17 @@ export class EditprofileComponent implements OnInit {
 
   email_Id:string;
   response:any;
+  arrays:object[];
+  stateCities:Object[];
   state:string;
   cities:any;
+
 
   eProfileModel:EditProfileModel={
     emailid:'',
     name:'',
     street:'',
-    landmark:'',
+    landMark:'',
     houseNumber:'',
     city:'',
     state:''
@@ -33,7 +36,6 @@ export class EditprofileComponent implements OnInit {
   }
   
   ngOnInit(): void {
-   // alert('hithere');
     let url = "http://localhost:8787/getStatesData";
     this.http.get(url).subscribe(
      res =>  {
@@ -44,7 +46,6 @@ export class EditprofileComponent implements OnInit {
   }
 
  populateCities():void{
-   //alert(this.state);
    let url = "http://localhost:8787/getStatesData/"+this.state;
     this.http.get(url).subscribe(
      res =>  {
@@ -53,6 +54,19 @@ export class EditprofileComponent implements OnInit {
      err=> {alert("Sorry an error occured");
     });
  }
+
+ submit():void{
+   this.eProfileModel.state = this.response[this.state].stateName;
+   this.eProfileModel.emailid = this.email_Id;
+   let url = "http://localhost:8787/api/updateProfile";
+   this.http.patch(url,this.eProfileModel).subscribe(
+    res =>  {
+     alert("Profile Updated Successfully");
+     this.response = JSON.parse(JSON.stringify(res));
+    },
+    err=> {alert("Sorry an error occured");
+   });
+ }
   
 }
 
@@ -60,7 +74,7 @@ export class EditprofileComponent implements OnInit {
 export interface EditProfileModel{
   emailid:string,
   street:string,
-  landmark:string,
+  landMark:string,
   houseNumber:string,
   city:string,
   state:string,
