@@ -1,6 +1,6 @@
 package com.myproject.connections.service;
 
-import com.myproject.connections.beans.CustomerDetails;
+import com.myproject.connections.entitybeans.CustomerDetails;
 
 public interface CustomerService {
 	

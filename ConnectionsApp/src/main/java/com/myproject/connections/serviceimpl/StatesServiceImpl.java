@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.myproject.connections.beans.City;
-import com.myproject.connections.beans.States;
+import com.myproject.connections.entitybeans.City;
+import com.myproject.connections.entitybeans.States;
 import com.myproject.connections.repository.CityRepository;
 import com.myproject.connections.repository.StateRepository;
 

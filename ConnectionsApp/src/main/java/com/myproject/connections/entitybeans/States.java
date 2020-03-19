@@ -1,16 +1,18 @@
-package com.myproject.connections.beans;
+package com.myproject.connections.entitybeans;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import lombok.Data;
+@Data
 @Entity
 @Table(name="States")
 public class States implements Serializable{
@@ -24,7 +26,8 @@ public class States implements Serializable{
 	private Date creation_date;
 	private Date  modified_date;
 	
-	@OneToMany
+	
+	@OneToMany /* (cascade=CascadeType.ALL) */
 	@JoinColumn(name="c_stateID")
 	private List<City> cities;
 	
@@ -34,7 +37,7 @@ public class States implements Serializable{
 	
 	
 	public Date getCreation_date() {
-		return creation_date;
+		return creation_date;	
 	}
 	public void setCreation_date(Date creation_date) {
 		this.creation_date = creation_date;
@@ -64,7 +67,7 @@ public class States implements Serializable{
 		this.creation_date = creation_date;
 		this.modified_date = modified_date;
 	}
-	
+
 	
 	
 	

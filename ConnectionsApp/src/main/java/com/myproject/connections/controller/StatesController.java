@@ -1,5 +1,6 @@
 package com.myproject.connections.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myproject.connections.beans.City;
-import com.myproject.connections.beans.States;
+import com.myproject.connections.entitybeans.City;
+import com.myproject.connections.entitybeans.States;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
 
 
@@ -26,15 +27,17 @@ public class StatesController {
 	StatesServiceImpl stateService;
 	
 	@GetMapping("/getStatesData")
-	public List<States> getStates(){
+	public Iterable<States> getStates(){
 		logger.info("Retrieving list of states");
-		List<States> listOfStates = stateService.getAllStates();
-		return listOfStates;
+		 Iterable<States> assureurs = new ArrayList<>();
+		 assureurs = stateService.getAllStates();
+		return assureurs;
 		
 	}
 	
 	@GetMapping("/getStatesData/{stateID}")
 	public List<City> getCitiesPerState(@PathVariable("stateID") String state){
+		
 		List<City> cities = stateService.getCityPerState(state);
 		return cities;
 	}

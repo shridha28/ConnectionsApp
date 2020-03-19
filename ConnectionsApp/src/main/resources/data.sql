@@ -1,6 +1,5 @@
 Create Table IF NOT EXISTS Roles(
    id BIGINT PRIMARY KEY,
-   name VARCHAR(50) NOT NULL, 
    rolename VARCHAR(50) NOT NULL,
    creation_date DATE,
    modified_date DATE

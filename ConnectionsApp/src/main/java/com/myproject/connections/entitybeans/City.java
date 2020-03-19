@@ -1,4 +1,4 @@
-package com.myproject.connections.beans;
+package com.myproject.connections.entitybeans;
 
 import java.io.Serializable;
 
@@ -22,6 +22,10 @@ public class City implements Serializable {
 	
 	@Id
 	private String cityName;
+	
+	/*
+	 * @ManyToOne private States stateCity;
+	 */
   
 	
 }

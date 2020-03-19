@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.myproject.connections.beans.CustomerDetails;
+import com.myproject.connections.entitybeans.CustomerDetails;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
 
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService{
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
 		custDetailsRepository.save(customerDetails);
 		logger.debug("Data Successfully saved");
-		return customerDetails.getId();
+		return new Long(100);
 	}
 	
 	

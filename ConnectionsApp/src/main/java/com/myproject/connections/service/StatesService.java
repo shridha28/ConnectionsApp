@@ -2,8 +2,8 @@ package com.myproject.connections.service;
 
 import java.util.List;
 
-import com.myproject.connections.beans.City;
-import com.myproject.connections.beans.States;
+import com.myproject.connections.entitybeans.City;
+import com.myproject.connections.entitybeans.States;
 
 public interface StatesService {
 	

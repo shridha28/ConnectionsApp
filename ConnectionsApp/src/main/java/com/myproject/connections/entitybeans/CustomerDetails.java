@@ -1,4 +1,4 @@
-package com.myproject.connections.beans;
+package com.myproject.connections.entitybeans;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,7 +29,7 @@ public class CustomerDetails implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Getter@Setter
+	
 	private String name;
 	
 	@UniqueEmail
@@ -38,7 +38,6 @@ public class CustomerDetails implements Serializable{
 	@Embedded
 	private Address address;
 	
-	@NotNull
 	private String password;
     
 	private Date creation_date;
@@ -51,6 +50,16 @@ public class CustomerDetails implements Serializable{
 	
 
 	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	public Address getAddress() {
 		return address;
 	}

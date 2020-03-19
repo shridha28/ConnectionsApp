@@ -1,17 +1,15 @@
 package com.myproject.connections.controller;
 
-import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.myproject.connections.beans.CustomerDetails;
+import com.myproject.connections.entitybeans.CustomerDetails;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
@@ -42,7 +40,7 @@ class CustomerControllerTest {
 		controller.setCustomerService(serviceImpl);
 		CustomerDetails cust = new CustomerDetails(null,"abc.hu",null, null,null, "ddd");
 	//	System.out.println(cust.getId());
-		when(serviceImpl.saveUser(cust)).thenReturn(cust.getId());
+	//	when(serviceImpl.saveUser(cust)).thenRetur());
 	//	Assertions.assertNotNull(cust.getId());
 		
 		

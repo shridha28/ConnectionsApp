@@ -1,4 +1,4 @@
-package com.myproject.connections.beans;
+package com.myproject.connections.entitybeans;
 
 import java.sql.Date;
 

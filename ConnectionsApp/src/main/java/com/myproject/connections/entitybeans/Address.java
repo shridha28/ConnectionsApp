@@ -1,4 +1,4 @@
-package com.myproject.connections.beans;
+package com.myproject.connections.entitybeans;
 
 import java.io.Serializable;
 
@@ -20,5 +20,6 @@ public class Address implements Serializable{
 	private String landMark;
 	private String city;
 	private String state;
+
 	
 }
