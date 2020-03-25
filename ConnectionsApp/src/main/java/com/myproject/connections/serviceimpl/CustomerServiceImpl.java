@@ -37,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public Long saveUser(CustomerDetails customerDetails) {
 		logger.debug("Encrypted password using password Encoder");
 		customerDetails.setPassword(bCryptPasswordEncoder.encode(customerDetails.getPassword()));
-		customerDetails.setCreation_date(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+		//customerDetails.setCreation_date(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		logger.debug("Saving data with emailId:"+customerDetails.getEmailid());
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
 		custDetailsRepository.save(customerDetails);
