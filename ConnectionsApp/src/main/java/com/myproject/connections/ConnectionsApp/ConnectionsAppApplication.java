@@ -1,8 +1,6 @@
 package com.myproject.connections.ConnectionsApp;
 
 
-import java.awt.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,10 +11,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import com.myproject.connections.entitybeans.SpringAuditorAware;
 
 
 
@@ -26,9 +25,16 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 @EntityScan( basePackages = {"com.myproject.connections.entitybeans"} )
 @EnableDiscoveryClient
 @Configuration
+@EnableJpaAuditing(auditorAwareRef="auditorAware")
 public class ConnectionsAppApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(ConnectionsAppApplication.class);
+	
+	// autowire for auditor Aware implemented class
+	@Bean
+	public AuditorAware<String> auditorAware() {
+		return new SpringAuditorAware();
+	}
 	
 	public static void main(String[] args) {
 		
