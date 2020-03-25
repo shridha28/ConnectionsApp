@@ -37,12 +37,9 @@ public class CustomerDetails extends Auditable<String> implements Serializable{
 	private String password;
     
 	
-	
 	@OneToOne
 	private Role role;
 	
-	
-
 	
 	public String getName() {
 		return name;

@@ -8,10 +8,12 @@ import com.myproject.connections.entitybeans.CustomerDetails;
 
 public interface CustDetailsRepository extends JpaRepository<CustomerDetails, String>{
 	
-	@Query("SELECT r.emailid FROM CustomerDetails r where r.emailid = :userName")
-	public String findByEmailid(String userName);
 	
-	
-	 
+	/*Method to get CustomerDetails data based on EmaiID
+	 *@param emailid
+	 *@return CustomerDetails sql bean
+	 */
+	@Query("SELECT r FROM CustomerDetails r where r.emailid = :userName")
+	public CustomerDetails findByEmailid(String emailid);
     
 }

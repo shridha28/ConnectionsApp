@@ -46,6 +46,23 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	
+	/*service method to update Customer data in the database
+	 *@param customerDetails sql bean
+	 */
+	public void updateUser(CustomerDetails customerDetails) {
+		logger.debug("Encrypted password using password Encoder");
+		
+		
+		logger.debug("Updating data with emailId:"+customerDetails.getEmailid());
+		logger.debug("Calling CustDetailsRepository to save Customers Data");
+		CustomerDetails customer = custDetailsRepository.findByEmailid(customerDetails.getEmailid());
+		
+		customer.setAddress(customerDetails.getAddress());
+		customer.setName(customerDetails.getName());
+		custDetailsRepository.save(customer);
+		logger.debug("Data Successfully saved");
+		
+	}
 	
 	
 		public boolean doesEmailIDExists(String username){
