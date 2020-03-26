@@ -13,7 +13,7 @@ public interface CustDetailsRepository extends JpaRepository<CustomerDetails, St
 	 *@param emailid
 	 *@return CustomerDetails sql bean
 	 */
-	@Query("SELECT r FROM CustomerDetails r where r.emailid = :userName")
+	@Query("SELECT r FROM CustomerDetails r where r.emailid = :emailid")
 	public CustomerDetails findByEmailid(String emailid);
     
 }
