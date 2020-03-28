@@ -9,11 +9,14 @@
   
     <div class="collapse navbar-collapse" id="navbarColor0">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/loginsignup">Login/SignUp</a>
+        <li class="nav-item active" *ngIf="!isUserLoggedIn">
+          <a class="nav-link" routerLink="/loginsignup" routerLinkActive="active">Login/SignUp</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/feedback">Feedback</a>
+        <li class="nav-item" *ngIf="isUserLoggedIn">
+          <a class="nav-link" routerLink="/activities" routerLinkActive="active">Activities</a>
+        </li>
+        <li class="nav-item" *ngIf="isUserLoggedIn" >
+          <a class="nav-link" routerLink="/feedback" routerLinkActive="active">Feedback</a>
         </li>
         
       </ul>
