@@ -5,20 +5,24 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myproject.connections.entitybeans.Address;
+import com.myproject.connections.entitybeans.AddressEntity;
 import com.myproject.connections.entitybeans.CustomerDetails;
 import com.myproject.connections.entitybeans.MessageBean;
 import com.myproject.connections.models.CustomerModel;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
+import com.myproject.connections.utility.CustomerResource;
 
 /**
  * @author acer
@@ -44,7 +48,13 @@ public class CustomerController {
 	
 	@Autowired
 	StatesServiceImpl stateService;
+	
+	@Autowired
+	private CustomerResource resource;
+	
 
+	@Autowired
+	private CustDetailsRepository custDetailsRepository;
 
 	
 	@PostMapping("/api/signup")
@@ -74,12 +84,12 @@ public class CustomerController {
 	public MessageBean updateCustomer(@RequestBody CustomerModel customerDetails,BindingResult bindingResult){
 		logger.info("Validating customer details for updating Customer Profile");
 
-		Address address = new Address(customerDetails.getStreet(),
+		AddressEntity address = new AddressEntity(customerDetails.getStreet(),
 				customerDetails.getHouseNumber(),customerDetails.getLandMark(),
 				customerDetails.getCity(),customerDetails.getState());
 
 		CustomerDetails customerSql = new CustomerDetails();
-		customerSql.setAddress(address);
+		customerSql.setAddressEntity(address);
 		customerSql.setName(customerDetails.getName());
 		customerSql.setEmailid(customerDetails.getEmailid());
 
@@ -89,6 +99,18 @@ public class CustomerController {
 		logger.info("Calling CustomerServiceImpl to update Customer Data");
 		return new MessageBean();
 	}
+	
+	
+
+	@GetMapping("/api/getCustomer/{emailId}")
+	 public ResponseEntity<CustomerModel> getCustomer(@PathVariable final String
+	 emailId) {
+	   return custDetailsRepository.findById(emailId)
+			   .map(resource::toModel)
+			   .map(ResponseEntity::ok)
+			   .orElse(ResponseEntity.notFound().build());	
+	 }
+	 
 	
 	
 	

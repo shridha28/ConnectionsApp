@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address implements Serializable{
+public class AddressEntity implements Serializable{
 	
 	/**
 	 * 
