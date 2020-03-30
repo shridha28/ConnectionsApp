@@ -14,6 +14,9 @@ import { EditprofileComponent } from './loginsignup/editprofile/editprofile.comp
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ConfirmEqualValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
+import { ActivitiesComponent } from './activities/activities.component';
+import {AppRoutingModule} from './app-routing.module';
+
 
 const appRoutes:Routes=[
   {
@@ -32,6 +35,12 @@ const appRoutes:Routes=[
     component:EditprofileComponent,
     data: {animation: 'EditProfile'}
   },
+
+  {
+    path:'activities',
+    component:ActivitiesComponent,
+    data: {animation: 'EditProfile'}
+  },
   {
     path:'',
     component:LoginsignupComponent,
@@ -46,8 +55,7 @@ const appRoutes:Routes=[
 ];
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent,  
     NavigationComponent,
     FeedbackComponent,
     LoginsignupComponent,
@@ -57,7 +65,7 @@ const appRoutes:Routes=[
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes,{enableTracing:true}),
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule

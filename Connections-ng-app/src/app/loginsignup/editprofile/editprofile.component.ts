@@ -3,6 +3,7 @@ import { SignUpViewModel } from '../loginsignup.component';
 import {DataServiceService} from '../../services-shared/data-service.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {NavigationComponent} from '../../navigation/navigation.component';
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
@@ -62,7 +63,9 @@ export class EditprofileComponent implements OnInit {
    this.http.patch(url,this.eProfileModel).subscribe(
     res =>  {
      alert("Profile Updated Successfully");
-     this.response = JSON.parse(JSON.stringify(res));
+    // this.response = JSON.parse(JSON.stringify(res));
+     this.transferService.isUserLoggedIn.next(true);
+     this.router.navigateByUrl('/activities');
     },
     err=> {alert("Sorry an error occured");
    });
