@@ -19,7 +19,7 @@ export class LoginsignupComponent implements OnInit {
   }
   
   loginModel:LoginViewModel={
-    username:'',
+    emailId:'',
     password:''
   }
 
@@ -69,6 +69,6 @@ export interface SignUpViewModel{
 
 
 export interface LoginViewModel{
-  username:string,
+  emailId:string,
   password:string
 }

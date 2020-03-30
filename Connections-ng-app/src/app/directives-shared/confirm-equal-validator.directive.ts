@@ -24,3 +24,24 @@ validate(control:AbstractControl):{[key:string]:any}|null{
 }
 
 }
+
+@Directive({
+    selector:'[passwordStrength]',
+    providers: [{
+        provide:NG_VALIDATORS,
+        useExisting:PasswordValidatorDirective,
+        multi:true
+    }]
+})
+export class PasswordValidatorDirective implements Validator{
+
+validate(control:AbstractControl):{[key:string]:any}|null{
+    //const controlToCompare = control.parent.get(this.passwordStrength);
+    const Regex_exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    if(Regex_exp.test(control.value)){
+        return null;
+    }
+    return {'invalidp':true};
+}
+
+}

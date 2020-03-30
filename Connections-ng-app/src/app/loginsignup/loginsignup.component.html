@@ -1,138 +1,154 @@
 <div class="container">
-        <div class="row">
+  <div class="row">
+  
+    <div class="col-md-4">
+          <h4><label for="name" class="font-weight-bold">Login</label></h4>
+      <form name="loginForm" #loginForm="ngForm" (submit)="loginForm.form.valid && login()"   novalidate class="feedback-form">
+        <!-- Name -->
         
-          <div class="col-md-4">
-                <h4><label for="name" class="font-weight-bold">Login</label></h4>
-            <form name="loginForm" #loginForm="ngForm" (submit)="loginForm.form.valid && login()"   novalidate class="feedback-form">
-              <!-- Name -->
-              
-
-              <div class="form-group">
-                <label for="name">UserName</label>
-                <input ngModel type="text"
-                       id="username"
-                       class="form-control"
-                       name="username"
-                       placeholder="Your username"
-                       [(ngModel)]="loginModel.username"
-                       #usname="ngModel"
-                       [ngClass]="{'is-invalid':loginForm.submitted && usname.invalid}"
-                       required
-                       />
-
-
-               
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password"
-                       id="password"
-                       class="form-control"
-                       name="password"
-                       placeholder="Your password"
-                       [(ngModel)]="loginModel.password"/>
-              </div>
-              <button type="submit" class="btn btn-info pull-right">
-               <span>Submit</span>
-              </button>
-            </form>
-          </div>
-		       <div class="col-md-3"></div>
-		        <div class="col-md-5">
-             <h4><label for="name" class="font-weight-bold">Sign Up</label></h4>
-            <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signup()" 
-            novalidate class="feedback-form">
-            <div *ngIf="response" class="alert alert-danger">
-              {{response.error}}
+        <div>
+        <div class="form-group">
+          <label for="name">Email-ID</label>
+          <input ngModel type="text"
+                 id="lemailId"
+                 class="form-control"
+                 name="lemailId"
+                 placeholder="Your email-ID"
+                 [(ngModel)]="loginModel.emailId"
+                 #loginEmail="ngModel"
+                 [ngClass]="{'is-invalid':loginForm.submitted && loginEmail.invalid}"
+                 required
+                 />
+                 <div *ngIf="loginEmail.errors && loginForm.submitted" class="alert alert-danger">
+                  Email-ID is required.
+                </div>
             </div>
-              <div class="form-group">
-               <b> <label for="emailid">Email-ID</label></b>  
-                <input ngModel type="email"
-                       email
-                       id="emailid"
-                       class="form-control"
-                       name="emailid"
-                       placeholder="Your email-ID"
-                       [(ngModel)]="signupModel.emailid" 
-                       #emailname="ngModel"
-                       [ngClass]="{'is-invalid':f.submitted && emailname.invalid}"
-                       required/>
-                         
-                       <div *ngIf="emailname.errors && f.submitted" class="alert alert-danger">
-                        Email-ID is required.
-                      </div>
-                     
-              </div>
-              
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input ngModel type="password"
-                       id="passwordr"
-                       class="form-control"
-                       name="passwordr"
-                       placeholder="Your password"
-                       [(ngModel)]="signupModel.password"
-                       #passwname="ngModel"
-                       [ngClass]="{'is-invalid':f.submitted && passwname.invalid}"
-                       required
-                       />
-                       <div *ngIf="passwname.errors?.required && f.submitted
-                       " class="alert alert-danger">
-                        Password is required.
-                      </div>
-              </div>
-
-              <div class="form-group">
-                    <label for="repassword">Confirm Password</label>
-                    <input validatePassword="passwordr" ngModel type="password"
-                           id="repassword"
-                           class="form-control"
-                           name="repassword"
-                           placeholder="Retype your password"
-                           #passwrname="ngModel"
-                       [ngClass]="{'is-invalid':f.submitted && passwrname.invalid
-                      && emailname.valid &&
-                      passwname.valid}"
-                       required
-                           />
-                           <div *ngIf="
-                            passwrname.errors?.required && f.submitted" class="alert alert-danger">
-                            Please confirm your password.
-                          </div>
-
-                          <div *ngIf="passwrname.errors?.notEqual && f.submitted" class="alert alert-danger">
-                            Password and Confirm Password Do Not Match
-                          </div>
-
-                          
-                  </div>
-                  
-                    
-
-              <button type="submit" class="btn btn-info pull-right">
-                <span>Register</span>
-              </button>
-
-
-
-            </form>
-            
-          </div>
-          
-         
-        </div>
-       
-         
-        
-     </div>
-
-     <div class="container">
-
-        <div class="row">
-
            
+         
         </div>
-     </div>
-     <!--<div *ngIf="emailname.valid">
-      <app-editprofile [email_Id]="signupModel.emailid"></app-editprofile>
-      </div>-->
+        <div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input ngModel type="password"
+                 id="password"
+                 class="form-control"
+                 name="password"
+                 placeholder="Your password"
+                 [(ngModel)]="loginModel.password"
+                 #loginPassw="ngModel"
+                 [ngClass]="{'is-invalid':loginForm.submitted && loginPassw.invalid}"
+                 required
+                 />
+                 <div *ngIf="loginPassw.errors?.required && loginForm.submitted
+                 " class="alert alert-danger">
+                  Password is required.
+                </div>
+        </div>
+        </div>
+        <div>
+        <button type="submit" class="btn btn-info pull-right">
+         <span>Submit</span>
+        </button>
+      </div>
+      </form>
+    </div>
+     <div class="col-md-3"></div>
+      <div class="col-md-5">
+       <h4><label for="name" class="font-weight-bold">Sign Up</label></h4>
+      <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signup()" 
+      novalidate class="feedback-form">
+      <div *ngIf="response" class="alert alert-danger">
+        {{response.error}}
+      </div>
+        <div class="form-group">
+         <b> <label for="emailid">Email-ID</label></b>  
+          <input ngModel type="email"
+                 email
+                 id="emailid"
+                 class="form-control"
+                 name="emailid"
+                 placeholder="Your email-ID"
+                 [(ngModel)]="signupModel.emailid" 
+                 #emailname="ngModel"
+                 [ngClass]="{'is-invalid':f.submitted && emailname.invalid}"
+                 required/>
+                   
+                 <div *ngIf="emailname.errors && f.submitted" class="alert alert-danger">
+                  Email-ID is required.
+                </div>
+               
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input passwordStrength ngModel type="password"
+                 id="passwordr"
+                 class="form-control"
+                 name="passwordr"
+                 placeholder="Your password"
+                 [(ngModel)]="signupModel.password"
+                 #passwname="ngModel"
+                 [ngClass]="{'is-invalid':f.submitted && passwname.invalid}"
+                 required
+                 />
+                 <div *ngIf="passwname.errors?.required && f.submitted
+                 " class="alert alert-danger">
+                  Password is required.
+                </div>
+                <div *ngIf="passwname.errors?.invalidp && f.submitted" class="alert alert-danger">
+                  Password do not match the criteria.
+                </div>
+        </div>
+
+        <div class="form-group">
+              <label for="repassword">Confirm Password</label>
+              <input validatePassword="passwordr" ngModel type="password"
+                     id="repassword"
+                     class="form-control"
+                     name="repassword"
+                     placeholder="Retype your password"
+                     #passwrname="ngModel"
+                 [ngClass]="{'is-invalid':f.submitted && passwrname.invalid
+                && emailname.valid &&
+                passwname.valid}"
+                 required
+                     />
+                     <div *ngIf="
+                      passwrname.errors?.required && f.submitted" class="alert alert-danger">
+                      Please confirm your password.
+                    </div>
+
+                    <div *ngIf="passwrname.errors?.notEqual && f.submitted" class="alert alert-danger">
+                      Password and Confirm Password Do Not Match
+                    </div>
+
+                    
+            </div>
+            
+              
+
+        <button type="submit" class="btn btn-info pull-right">
+          <span>Register</span>
+        </button>
+
+
+
+      </form>
+      
+    </div>
+    
+   
+  </div>
+
+</div>
+
+<div class="container">
+
+  <div class="row">
+
+     
+  </div>
+</div>
+<!--<div *ngIf="emailname.valid">
+<app-editprofile [email_Id]="signupModel.emailid"></app-editprofile>
+</div>-->
