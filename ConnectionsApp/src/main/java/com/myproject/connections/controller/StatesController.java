@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myproject.connections.entitybeans.CityEntity;
-import com.myproject.connections.entitybeans.StatesEntity;
+import com.myproject.connections.entitybeans.City;
+import com.myproject.connections.entitybeans.States;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
 
 
@@ -27,18 +27,18 @@ public class StatesController {
 	StatesServiceImpl stateService;
 	
 	@GetMapping("/getStatesData")
-	public Iterable<StatesEntity> getStates(){
+	public Iterable<States> getStates(){
 		logger.info("Retrieving list of states");
-		 Iterable<StatesEntity> assureurs = new ArrayList<>();
+		 Iterable<States> assureurs = new ArrayList<>();
 		 assureurs = stateService.getAllStates();
 		return assureurs;
 		
 	}
 	
 	@GetMapping("/getStatesData/{stateID}")
-	public List<CityEntity> getCitiesPerState(@PathVariable("stateID") String state){
+	public List<City> getCitiesPerState(@PathVariable("stateID") String state){
 		
-		List<CityEntity> cities = stateService.getCityPerState(state);
+		List<City> cities = stateService.getCityPerState(state);
 		return cities;
 	}
 

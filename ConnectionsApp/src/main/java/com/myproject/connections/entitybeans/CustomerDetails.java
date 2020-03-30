@@ -32,7 +32,7 @@ public class CustomerDetails extends Auditable<String> implements Serializable{
 	private String emailid;
 	
 	@Embedded
-	private AddressEntity addressEntity;
+	private Address address;
 	
 	private String password;
     
@@ -51,13 +51,13 @@ public class CustomerDetails extends Auditable<String> implements Serializable{
 	}
 
 
-	public AddressEntity getAddressEntity() {
-		return addressEntity;
+	public Address getAddress() {
+		return address;
 	}
 
 
-	public void setAddressEntity(AddressEntity addressEntity) {
-		this.addressEntity = addressEntity;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 

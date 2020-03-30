@@ -3,13 +3,12 @@ package com.myproject.connections.serviceimpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.myproject.connections.entitybeans.CityEntity;
-import com.myproject.connections.entitybeans.StatesEntity;
+import com.myproject.connections.entitybeans.City;
+import com.myproject.connections.entitybeans.States;
 import com.myproject.connections.repository.CityRepository;
 import com.myproject.connections.repository.StateRepository;
 
@@ -26,9 +25,9 @@ public class StatesServiceImpl {
 	@Autowired
 	CityRepository cityRepository;
 	
-	public List<StatesEntity> getAllStates(){
+	public List<States> getAllStates(){
 		
-	List<StatesEntity> states = stateRepository.findAll(Sort.by(Sort.Direction.ASC, "stateName"));
+	List<States> states = stateRepository.findAll(Sort.by(Sort.Direction.ASC, "stateName"));
 		
 	 states = states.stream().map(s->{
 		 String setName = s.getStateName().substring(0, 1)+
@@ -41,8 +40,7 @@ public class StatesServiceImpl {
 	}
 	
 	
-	public List<CityEntity> getCityPerState(String state){
-		
+	public List<City> getCityPerState(String state){
 		return cityRepository.findByCstateIDOrderByCityNameAsc(state);
 	}
 

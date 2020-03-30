@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.myproject.connections.entitybeans.CityEntity;
+import com.myproject.connections.entitybeans.City;
 
 
-public interface CityRepository extends JpaRepository<CityEntity, String>{
+public interface CityRepository extends JpaRepository<City, String>{
 	
-	public List<CityEntity> findByCstateIDOrderByCityNameAsc(String stateID);
+	public List<City> findByCstateIDOrderByCityNameAsc(String stateID);
 	
 	
 	 

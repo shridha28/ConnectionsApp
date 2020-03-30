@@ -58,11 +58,4 @@ public class ConnectionsAppApplication {
 	 * source.registerCorsConfiguration("/**", configuration); return source; }
 	 */
 
-	
-		
-	
-	
-	
-	
-
 }

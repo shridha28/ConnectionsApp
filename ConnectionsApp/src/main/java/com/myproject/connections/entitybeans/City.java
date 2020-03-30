@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @IdClass(CityPK.class)
 @Data
-public class CityEntity implements Serializable {	
+public class City implements Serializable {	
 	
 	private static final long serialVersionUID = -7307713924718229168L;
 	
