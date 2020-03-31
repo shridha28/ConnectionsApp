@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ConfirmEqualValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
 import { ActivitiesComponent } from './activities/activities.component';
 import {AppRoutingModule} from './app-routing.module';
+import {PasswordValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
 
 
 const appRoutes:Routes=[
@@ -61,7 +62,8 @@ const appRoutes:Routes=[
     LoginsignupComponent,
     NotfoundComponent,
     EditprofileComponent,
-    ConfirmEqualValidatorDirective
+    ConfirmEqualValidatorDirective,
+    PasswordValidatorDirective
   ],
   imports: [
     BrowserModule,
