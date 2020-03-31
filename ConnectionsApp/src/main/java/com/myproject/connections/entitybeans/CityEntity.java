@@ -6,10 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
+@Table(name="City")
 @IdClass(CityPK.class)
 @Data
 public class CityEntity implements Serializable {	

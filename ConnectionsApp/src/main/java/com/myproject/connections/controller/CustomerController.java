@@ -101,7 +101,7 @@ public class CustomerController {
 	}
 	
 	
-
+//shreya code for Hateos//
 	@GetMapping("/api/getCustomer/{emailId}")
 	 public ResponseEntity<CustomerModel> getCustomer(@PathVariable final String
 	 emailId) {
