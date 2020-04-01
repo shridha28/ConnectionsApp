@@ -19,9 +19,12 @@ label{
 }
 
 
-.container{
-  
-  opacity: 0.75;
-  max-height: max-content ;
-  background-size: cover;
+.container {
+	
+	border-radius: 12px;
+	padding: 40px;
+	border-style: solid;
+	border-color: #d35400;
+	margin-top:40px;
+	
 }
