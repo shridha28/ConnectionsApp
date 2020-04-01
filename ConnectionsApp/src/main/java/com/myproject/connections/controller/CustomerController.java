@@ -1,5 +1,7 @@
 package com.myproject.connections.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -101,18 +103,26 @@ public class CustomerController {
 	}
 	
 	
-//shreya code for Hateos//
-	@GetMapping("/api/getCustomer/{emailId}")
-	 public ResponseEntity<CustomerModel> getCustomer(@PathVariable final String
-	 emailId) {
-	   return custDetailsRepository.findById(emailId)
-			   .map(resource::toModel)
-			   .map(ResponseEntity::ok)
-			   .orElse(ResponseEntity.notFound().build());	
-	 }
-	 
 	
+	  //shreya code for Hateos//
+	  //TBD
+	  @GetMapping("/api/getCustomer/{emailId}")
+	  public ResponseEntity<CustomerModel>
+	  getCustomer(@PathVariable("emailId") String emailId) { 
+		  Optional<CustomerDetails> customerDetails=custDetailsRepository.findById(emailId);
+		  return customerDetails.map(resource::toModel)
+				  .map(ResponseEntity::ok)
+				  .orElse(ResponseEntity.notFound().build());
 	
+	  }
+	  
+	  //TBD
+	  @GetMapping("/api/getCustomers/{emailId}")
+	  public CustomerDetails
+	  getCustomerDetail(@PathVariable("emailId") String emailId) { 
+		 return custDetailsRepository.findById(emailId).get();
+		   	  }
+	  
 	
 	
 	/* Note: using getters and setters only for mockito*/

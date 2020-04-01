@@ -1,21 +1,24 @@
 package com.myproject.connections.mapper;
 
 
+import java.lang.reflect.Type;
 /*@author=Shreya*/
 /*&Mapper class for City*/
 import java.text.ParseException;
 import java.util.List;
-import java.lang.reflect.Type;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.myproject.connections.entitybeans.CityEntity;
 import com.myproject.connections.models.CityDto;
 import com.myproject.connections.repository.CityRepository;
 
+@Component
 public class CityMapper {
 	
     private static Logger logger = LoggerFactory.getLogger(CityMapper.class);

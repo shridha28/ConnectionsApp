@@ -44,26 +44,4 @@ public class ConnectionsAppApplication {
 		
 	}
 	
-	
-	/*
-	 * @Bean public CorsConfigurationSource corsConfigurationSource() { final
-	 * CorsConfiguration configuration = new CorsConfiguration();
-	 * configuration.setAllowedOrigins("*"); configuration.setAllowedMethods(new
-	 * List<String>{"HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-	 * configuration.setAllowCredentials(true);
-	 * configuration.setAllowedHeaders(ImmutableList.of("*"));
-	 * configuration.setExposedHeaders(ImmutableList.of("X-Auth-Token",
-	 * "Authorization","Access-Control-Allow-Origin",
-	 * "Access-Control-Allow-Credentials")); final UrlBasedCorsConfigurationSource
-	 * source = new UrlBasedCorsConfigurationSource();
-	 * source.registerCorsConfiguration("/**", configuration); return source; }
-	 */
-
-	
-		
-	
-	
-	
-	
-
 }

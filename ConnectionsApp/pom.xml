@@ -37,6 +37,7 @@
 			<artifactId>json</artifactId>
 			<version>20190722</version>
 		</dependency>
+		<!-- Added dependency for implentatation of Hateos -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>

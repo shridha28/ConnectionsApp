@@ -12,39 +12,24 @@ import lombok.Getter;
 
 @Getter
 @Component
-public class CustomerResource extends RepresentationModelAssemblerSupport<CustomerDetails,CustomerModel> {
+public class CustomerResource extends RepresentationModelAssemblerSupport<CustomerDetails, CustomerModel> {
 
-	public CustomerResource()
-	{
-		super(CustomerController.class,CustomerModel.class);
+	public CustomerResource() {
+		super(CustomerController.class, CustomerModel.class);
 	}
-	
-	
+
 	@SuppressWarnings("deprecation")
-	public CustomerModel toModel(CustomerDetails details)
-	{
-		CustomerModel model= instantiateModel(details);
-		model.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(CustomerController.class).getCustomer(details.getEmailid())).withSelfRel());
-		model.setEmailid(details.getEmailid());
-		model.setName(details.getName());
-		
-		return model;
-	
-	
+	public CustomerModel toModel(CustomerDetails details) {
+
+		CustomerModel customerModel = instantiateModel(details);
+
+		customerModel.add(ControllerLinkBuilder
+				.linkTo(ControllerLinkBuilder.methodOn(CustomerController.class).getCustomer(details.getEmailid()))
+				.withSelfRel());
+		customerModel.setEmailid(details.getEmailid());
+		customerModel.setName(details.getName());
+
+		return customerModel;
 	}
-	
-	
-	
-	/*
-	 * private final CustomerDetails customerdetails;
-	 * 
-	 * @SuppressWarnings("deprecation") public CustomerResource(final
-	 * CustomerDetails customerdetails) { this.customerdetails = customerdetails;
-	 * final String emailId = customerdetails.getEmailid();
-	 * add(ControllerLinkBuilder.linkTo(CustomerController.class).withRel(
-	 * "customers"));
-	 * add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(
-	 * CustomerController.class).getCustomer(emailId)) .withSelfRel()); }
-	 */
 
 }

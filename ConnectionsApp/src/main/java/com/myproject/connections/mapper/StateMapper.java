@@ -26,6 +26,9 @@ public class StateMapper {
 
 	@Autowired
 	StateRepository stateRepository;
+	
+	@Autowired
+	CityMapper cityMapper;
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -47,6 +50,7 @@ public class StateMapper {
 		List<StatesEntity> statesEntityList = stateRepository.findAll(Sort.by(Sort.Direction.ASC, "stateName"));
 		Type listType = new TypeToken<List<StatesDto>>() {
 		}.getType();
+		
 		List<StatesDto> statesDtoList = modelMapper.map(statesEntityList, listType);
 		
 		return statesDtoList;
@@ -56,8 +60,8 @@ public class StateMapper {
 		logger.info("Mapping list of StatesDto Objects to list of StatesEntity Objects");
 		Type listType = new TypeToken<List<StatesEntity>>() {
 		}.getType();
+		
 		List<StatesEntity> statesEntityList = modelMapper.map(listStatesEntity, listType);
-
 		return statesEntityList;
 	}
 

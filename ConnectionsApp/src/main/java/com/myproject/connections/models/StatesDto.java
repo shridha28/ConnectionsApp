@@ -5,11 +5,13 @@ package com.myproject.connections.models;
 import java.util.Date;
 import java.util.List;
 
-import com.myproject.connections.entitybeans.CityEntity;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class StatesDto {
 	
 	private String stateID;
@@ -17,7 +19,7 @@ public class StatesDto {
 	private Date creation_date;
 	private Date  modified_date;
 	
-	private List<CityEntity> cities;
+	private List<CityDto> cities;
 	
 
 }
