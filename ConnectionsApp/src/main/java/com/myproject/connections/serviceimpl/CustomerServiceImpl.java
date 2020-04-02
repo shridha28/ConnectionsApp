@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.myproject.connections.entitybeans.CustomerDetails;
+import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
 
@@ -30,14 +29,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustDetailsRepository custDetailsRepository;
 
-	public Long saveUser(CustomerDetails customerDetails) {
+	
+	/*
+	 * service method to save Customer data in the database
+	 * 
+	 * @param customerDetails sql bean
+	 */
+	public Long saveCustomer(CustomerEntity customerEntity) {
 		logger.debug("Encrypted password using password Encoder");
-		customerDetails.setPassword(bCryptPasswordEncoder.encode(customerDetails.getPassword()));
+		customerEntity.setPassword(bCryptPasswordEncoder.encode(customerEntity.getPassword()));
 		// customerDetails.setCreation_date(new
 		// java.sql.Date(Calendar.getInstance().getTime().getTime()));
-		logger.debug("Saving data with emailId:" + customerDetails.getEmailid());
+		logger.debug("Saving data with emailId:" + customerEntity.getEmailid());
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
-		custDetailsRepository.save(customerDetails);
+		custDetailsRepository.save(customerEntity);
 		logger.debug("Data Successfully saved");
 		return new Long(100);
 	}
@@ -47,35 +52,47 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 * @param customerDetails sql bean
 	 */
-	public void updateUser(CustomerDetails customerDetails) {
+	public void updateUser(CustomerEntity customerEntity) {
 		logger.debug("Encrypted password using password Encoder");
 
-		logger.debug("Updating data with emailId:" + customerDetails.getEmailid());
+		logger.debug("Updating data with emailId:" + customerEntity.getEmailid());
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
-		CustomerDetails customer = custDetailsRepository.findByEmailid(customerDetails.getEmailid());
+		CustomerEntity customerEntityUpdate = custDetailsRepository.findByEmailid(customerEntity.getEmailid());
 
-		customer.setAddressEntity(customerDetails.getAddressEntity());
-		customer.setName(customerDetails.getName());
-		custDetailsRepository.save(customer);
+		customerEntityUpdate.setAddressEntity(customerEntity.getAddressEntity());
+		customerEntityUpdate.setName(customerEntity.getName());
+		custDetailsRepository.save(customerEntityUpdate);
 		logger.debug("Data Successfully saved");
 
 	}
-
-	public boolean doesEmailIDExists(String username) {
+	
+	
+	/*
+	 * service method to get check if an Email Id exists in the database and return the associated
+	 * @param String emailId 
+	 * @return boolean value that indicates if an emailId exists 
+	 */
+	public boolean doesEmailExist(String emailId) {
 		logger.info("Checking if the emailID already exists");
-		logger.debug("Check if the email ID already exists using UniqeEmailCustomValidator:" + username);
+		logger.debug("Check if the email ID already exists using UniqeEmailCustomValidator:" + emailId);
 		boolean userInDb = true;
-		if (custDetailsRepository.findByEmailid(username) != null)
+		if (custDetailsRepository.findByEmailid(emailId) != null)
 			return userInDb;
 		else
 			return false;
 	}
 
-	public Optional<CustomerDetails> getCustomer(String emailId) {
+	
+	
+	/*
+	 * service method to get Customer data from the database
+	 * @param String emailId 
+	 * @return CustomerEntity Bean 
+	 */
+	public CustomerEntity getCustomer(String emailId) {
 		logger.debug("Fetching a Customer with Unique EmailId");
-		Optional<CustomerDetails> customerDetail = custDetailsRepository.findById(emailId);
-	//	Optional<CustomerDetails> CustomerDetail=Optional.of(customer);
-		return customerDetail;
+		CustomerEntity customerEntity = custDetailsRepository.findByEmailid(emailId);
+		return customerEntity;
 			
 	}
 

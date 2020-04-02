@@ -7,11 +7,15 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
-public class CustomerModel extends RepresentationModel<CustomerModel> implements Serializable{
+@NoArgsConstructor
+public class CustomerDto extends RepresentationModel<CustomerDto> implements Serializable{
 	
 	
 	private static final long serialVersionUID = -3617767414915807263L;
@@ -29,6 +33,7 @@ public class CustomerModel extends RepresentationModel<CustomerModel> implements
 	
 	
 	@NotNull
+	@JsonIgnore
 	private String password;
     
 	private Date creation_date;
@@ -37,7 +42,7 @@ public class CustomerModel extends RepresentationModel<CustomerModel> implements
 
 	
 	
-	public CustomerModel(String emailid, Date creation_date, Date modified_date,
+	public CustomerDto(String emailid, Date creation_date, Date modified_date,
 			String password) {
 		super();
 		

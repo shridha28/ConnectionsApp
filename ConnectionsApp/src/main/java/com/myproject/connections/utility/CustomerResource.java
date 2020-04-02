@@ -1,35 +1,36 @@
 package com.myproject.connections.utility;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import com.myproject.connections.controller.CustomerController;
-import com.myproject.connections.entitybeans.CustomerDetails;
-import com.myproject.connections.models.CustomerModel;
+import com.myproject.connections.entitybeans.CustomerEntity;
+import com.myproject.connections.models.CustomerDto;
 
 import lombok.Getter;
 
 @Getter
 @Component
-public class CustomerResource extends RepresentationModelAssemblerSupport<CustomerDetails, CustomerModel> {
+public class CustomerResource extends RepresentationModelAssemblerSupport<CustomerEntity, CustomerDto> {
 
+	ModelMapper modelMapper=new ModelMapper();
 	public CustomerResource() {
-		super(CustomerController.class, CustomerModel.class);
+		super(CustomerController.class, CustomerDto.class);
 	}
 
 	@SuppressWarnings("deprecation")
-	public CustomerModel toModel(CustomerDetails details) {
+	public CustomerDto toModel(CustomerEntity customerEntity) {
 
-		CustomerModel customerModel = instantiateModel(details);
+		CustomerDto customerDto = modelMapper.map(customerEntity, CustomerDto.class);
 
-		customerModel.add(ControllerLinkBuilder
-				.linkTo(ControllerLinkBuilder.methodOn(CustomerController.class).getCustomer(details.getEmailid()))
+		customerDto.add(ControllerLinkBuilder
+				.linkTo(ControllerLinkBuilder.methodOn(CustomerController.class).getCustomer(customerEntity.getEmailid()))
 				.withSelfRel());
-		customerModel.setEmailid(details.getEmailid());
-		customerModel.setName(details.getName());
-
-		return customerModel;
+		customerDto.add(ControllerLinkBuilder.linkTo(CustomerController.class).withRel("Customers"));
+		modelMapper.map(customerEntity, CustomerDto.class);
+		return customerDto;
 	}
 
 }

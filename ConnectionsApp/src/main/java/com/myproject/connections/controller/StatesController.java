@@ -44,7 +44,7 @@ public class StatesController {
 	
 	//Shreya
 	@GetMapping("/getStatesData")
-	public Iterable<StatesDto> getStatesDto(){
+	public Iterable<StatesDto> getAllStates(){
 		logger.info("Retrieving list of states");
 		 Iterable<StatesDto> assureurs = new ArrayList<>();
 		 assureurs = stateService.getStates();
