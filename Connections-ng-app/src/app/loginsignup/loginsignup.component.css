@@ -1,16 +1,30 @@
+#houseno {
+  width: 150px;
+  display: inline-block;
+}
 
-.invalid-input{
-    color: red;
-  }
-  .container{
-    background-image:url(../../assets/conn.jpg);
-    max-height: max-content ;
-    background-size: cover;
-  }
-
-  label{
-    font-weight: bold;
-  }
+#street {
+  width: 150px;
+  display: inline-block;
+}
 
 
-  
+#landmark {
+  width: 150px;
+  display: inline-block;
+}
+
+label{
+  font-weight: bold;
+}
+
+
+.container {
+	
+	border-radius: 12px;
+	padding: 40px;
+	border-style: solid;
+	border-color: #d35400;
+	margin-top:40px;
+	
+}
