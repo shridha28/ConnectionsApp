@@ -18,13 +18,17 @@ label{
   font-weight: bold;
 }
 
+h4,.container,label{
+	color: #ffffff;
+}
+
 
 .container {
 	
 	border-radius: 12px;
 	padding: 40px;
 	border-style: solid;
-	border-color: #d35400;
+	border-color: #ffa31a;
 	margin-top:40px;
 	
 }

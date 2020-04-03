@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
 import {DataServiceService} from '../services-shared/data-service.service';
+import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
+import {ForgotPasswordDialog} from './forgotpassword.component';
+
 
 @Component({
   selector: 'app-loginsignup',
@@ -24,7 +27,8 @@ export class LoginsignupComponent implements OnInit {
   }
 
   constructor(private http:HttpClient,
-    private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService) { 
+    private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService,
+    private dialog: MatDialog) { 
         
       transferService.setData(this.signupModel.emailid);  
     }
@@ -38,6 +42,21 @@ export class LoginsignupComponent implements OnInit {
      err=> {alert("Sorry an error occured");
     });
   
+  }
+
+
+  openDialog(){
+    const dialogRef = this.dialog.open(ForgotPasswordDialog, {
+      width: '400px',
+      disableClose : true,
+      data: {},
+      backdropClass: 'backdropBackground'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('Dialog closed');
+    });
   }
 
   signup():void{  
@@ -72,3 +91,6 @@ export interface LoginViewModel{
   emailId:string,
   password:string
 }
+
+
+

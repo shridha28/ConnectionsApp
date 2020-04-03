@@ -20,16 +20,10 @@ import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
 
+
+ 
 /**
- * @author acer
- *
- */
-/**
- * @author acer
- *
- */
-/**
- * @author acer
+ * @author Shridha S Jalihal
  *
  */
 @RestController
