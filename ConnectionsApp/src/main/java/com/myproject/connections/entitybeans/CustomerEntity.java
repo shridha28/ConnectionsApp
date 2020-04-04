@@ -43,6 +43,8 @@ public class CustomerEntity extends Auditable<String> implements Serializable{
 	@OneToOne
 	private Role role;
 	
+	private String resetToken;
+	
 	public CustomerEntity() {}
 	
 	

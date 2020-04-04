@@ -95,5 +95,17 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerEntity;
 			
 	}
+	
+	
+	/*
+	 * service method to get Customer Entity bean from the database
+	 * @param String resetToken 
+	 * @return CustomerEntity Bean 
+	 */
+	public Optional<CustomerEntity> findUserByResetToken(String resetToken)
+	{
+		logger.debug("Fetching a Customer based on resetToken");
+		return custDetailsRepository.findByResetToken(resetToken);
+	}
 
 }
