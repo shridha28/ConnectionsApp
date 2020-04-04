@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
 import {DataServiceService} from '../services-shared/data-service.service';
+import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
+import {ForgotPasswordDialog} from './forgotpassword.component';
+
 
 @Component({
   selector: 'app-loginsignup',
@@ -11,6 +14,8 @@ import {DataServiceService} from '../services-shared/data-service.service';
 export class LoginsignupComponent implements OnInit {
   response:any;
 
+     toggle1: boolean = false;
+     toggle2: boolean = false;
 
   signupModel:SignUpViewModel={
     username:'',
@@ -24,7 +29,8 @@ export class LoginsignupComponent implements OnInit {
   }
 
   constructor(private http:HttpClient,
-    private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService) { 
+    private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService,
+    private dialog: MatDialog) { 
         
       transferService.setData(this.signupModel.emailid);  
     }
@@ -38,6 +44,35 @@ export class LoginsignupComponent implements OnInit {
      err=> {alert("Sorry an error occured");
     });
   
+  }
+
+  public togglePassw(input_password, num) {
+    if(input_password.type=='password') {
+      input_password.type = 'text';
+    } else {
+      input_password.type = 'password';
+    }
+    if(num==1) {
+      this.toggle1 = !this.toggle1;
+    } else {
+      this.toggle2 = !this.toggle2;
+    }
+
+  }
+
+
+  openDialog(){
+    const dialogRef = this.dialog.open(ForgotPasswordDialog, {
+      width: '400px',
+      disableClose : true,
+      data: {},
+      backdropClass: 'backdropBackground'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('Dialog closed');
+    });
   }
 
   signup():void{  
@@ -72,3 +107,6 @@ export interface LoginViewModel{
   emailId:string,
   password:string
 }
+
+
+
