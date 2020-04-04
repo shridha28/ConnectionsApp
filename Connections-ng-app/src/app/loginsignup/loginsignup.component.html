@@ -4,7 +4,7 @@
     <div class="col-md-4">
           <h4><label for="name" class="font-weight-bold">Login</label></h4>
       <form name="loginForm" #loginForm="ngForm" (submit)="loginForm.form.valid && login()"  
-       novalidate class="feedback-form">
+      novalidate class="feedback-form">
         <!-- Name -->
         
         <div>
@@ -45,17 +45,17 @@
                   Password is required.
                 </div>
               
-        </div>
-          <p>
-            <b><a href="" style="color:#FF0000;"
-             (click)="$event.preventDefault(); openDialog()">Forgot Password</a></b>
-          </p>
-        </div>
-        <div>
-        <button type="submit" class="btn btn-info pull-right">
-         <span>Login</span>
-        </button>
-      </div>
+              </div>
+                <p>
+                  <b><a href="" style="color:#FF0000;"
+                   (click)="$event.preventDefault(); openDialog()">Forgot Password</a></b>
+                </p>
+              </div>
+              <div>
+              <button type="submit" class="btn btn-info pull-right">
+               <span>Login</span>
+              </button>
+            </div>
       </form>
     </div>
      <div class="col-md-3"></div>
@@ -86,8 +86,16 @@
         </div>
         
         <div class="form-group">
-          <label for="password">Password</label>
-          <input passwordStrength ngModel type="password"
+          
+        <label for="password">Password</label> 
+          <i class="fa fa-info-circle"  style= "color: black" title="                 
+            -Atleast 8 characters.
+-Atleast one lowercase letter.
+-Atleast one uppercase letter.
+-Atleast one digit.
+-Atleast one special character." aria-hidden="true"></i>
+          <div class="input-group">
+	             <input passwordStrength ngModel type="password" #password1
                  id="passwordr"
                  class="form-control"
                  name="passwordr"
@@ -95,20 +103,26 @@
                  [(ngModel)]="signupModel.password"
                  #passwname="ngModel"
                  [ngClass]="{'is-invalid':f.submitted && passwname.invalid}"
-                 required
-                 />
+                 required 
+                 />  
+                <div class="input-group-append" (click)="togglePassw(password1, 1)">
+                  <span class="input-group-text" >  <i [ngClass]="toggle1 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                  </span>
+                </div> 
+              </div>
                  <div *ngIf="passwname.errors?.required && f.submitted
                  " class="alert alert-danger">
                   Password is required.
                 </div>
                 <div *ngIf="passwname.errors?.invalidp && f.submitted" class="alert alert-danger">
-                  Password do not match the criteria.
+                  Password Invalid. Please refer to the info.
                 </div>
         </div>
 
         <div class="form-group">
               <label for="repassword">Confirm Password</label>
-              <input validatePassword="passwordr" ngModel type="password"
+            <div class="input-group">
+              <input validatePassword="passwordr" ngModel type="password" #password2
                      id="repassword"
                      class="form-control"
                      name="repassword"
@@ -119,6 +133,11 @@
                 passwname.valid}"
                  required
                      />
+            <div class="input-group-append" (click)="togglePassw(password2, 2)">
+               <span class="input-group-text" >  <i [ngClass]="toggle2 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                  </span>
+              </div> 
+          </div>
                      <div *ngIf="
                       passwrname.errors?.required && f.submitted" class="alert alert-danger">
                       Please confirm your password.
@@ -148,5 +167,13 @@
 
 </div>
 
+<div class="container">
 
+  <div class="row">
 
+     
+  </div>
+</div>
+<!--<div *ngIf="emailname.valid">
+<app-editprofile [email_Id]="signupModel.emailid"></app-editprofile>
+</div>-->

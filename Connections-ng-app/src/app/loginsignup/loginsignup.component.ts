@@ -14,6 +14,8 @@ import {ForgotPasswordDialog} from './forgotpassword.component';
 export class LoginsignupComponent implements OnInit {
   response:any;
 
+     toggle1: boolean = false;
+     toggle2: boolean = false;
 
   signupModel:SignUpViewModel={
     username:'',
@@ -42,6 +44,20 @@ export class LoginsignupComponent implements OnInit {
      err=> {alert("Sorry an error occured");
     });
   
+  }
+
+  public togglePassw(input_password, num) {
+    if(input_password.type=='password') {
+      input_password.type = 'text';
+    } else {
+      input_password.type = 'password';
+    }
+    if(num==1) {
+      this.toggle1 = !this.toggle1;
+    } else {
+      this.toggle2 = !this.toggle2;
+    }
+
   }
 
 
