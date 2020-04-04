@@ -6,6 +6,11 @@ import {Router,Routes, RouterModule} from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { EditprofileComponent } from './loginsignup/editprofile/editprofile.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 const appRoutes:Routes=[
@@ -47,6 +52,10 @@ const appRoutes:Routes=[
   imports: [
     CommonModule,
     RouterModule.forRoot(appRoutes,{enableTracing:true}),
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   exports:[RouterModule]
 })

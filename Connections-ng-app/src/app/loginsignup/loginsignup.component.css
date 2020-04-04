@@ -1,16 +1,34 @@
+#houseno {
+  width: 150px;
+  display: inline-block;
+}
 
-.invalid-input{
-    color: red;
-  }
-  .container{
-    background-image:url(../../assets/conn.jpg);
-    max-height: max-content ;
-    background-size: cover;
-  }
-
-  label{
-    font-weight: bold;
-  }
+#street {
+  width: 150px;
+  display: inline-block;
+}
 
 
-  
+#landmark {
+  width: 150px;
+  display: inline-block;
+}
+
+label{
+  font-weight: bold;
+}
+
+h4,.container,label{
+	color: #ffffff;
+}
+
+
+.container {
+	
+	border-radius: 12px;
+	padding: 40px;
+	border-style: solid;
+	border-color: #ffa31a;
+	margin-top:40px;
+	
+}
