@@ -25,10 +25,6 @@ import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
 import com.myproject.connections.utility.CustomerResource;
 
- 
- * @author Shridha S Jalihal
- *
- */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerController {

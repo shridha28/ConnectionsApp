@@ -21,7 +21,7 @@ import com.myproject.connections.entitybeans.BeanAuditorAware;
 @SpringBootApplication (exclude = { SecurityAutoConfiguration.class })
 @ComponentScan(basePackages= {"com.myproject.connections.*"})
 @EnableJpaRepositories("com.myproject.connections.repository")
-@EntityScan( basePackages = {"com.myproject.connections.entitybeans","com.myproject.connections.mapper"} )
+@EntityScan(basePackages = {"com.myproject.connections.entitybeans","com.myproject.connections.mapper"} )
 
 //@EnableDiscoveryClient
 @Configuration

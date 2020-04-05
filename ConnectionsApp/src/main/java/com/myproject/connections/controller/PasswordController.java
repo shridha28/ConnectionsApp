@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +26,8 @@ import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
 /*@author=Shreya*/
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PasswordController {
 
 	@Autowired
@@ -36,9 +41,9 @@ public class PasswordController {
 
 
 	@PostMapping(value = "/forgot")
-	public ModelAndView processForgotPasswordForm(ModelAndView modelAndView, @RequestParam("email") String emailId,
+	public ModelAndView processForgotPasswordForm(ModelAndView modelAndView, @RequestBody String emailid,
 			HttpServletRequest request) {
-		CustomerEntity customerEntity = customerService.getCustomer(emailId);
+		CustomerEntity customerEntity = customerService.getCustomer(emailid);
 		Optional<CustomerEntity> optioanlCustomer = Optional.of(customerEntity);
 
 		if (!optioanlCustomer.isPresent()) {
@@ -55,7 +60,7 @@ public class PasswordController {
 			// Email Message
 			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
 
-			passwordResetEmail.setFrom("support@Connections.com");
+			passwordResetEmail.setFrom("shreya.jalihal@gmail.com");
 			passwordResetEmail.setTo(customerEntity.getEmailid());
 			passwordResetEmail.setSubject("Password Reset Request");
 			passwordResetEmail.setText("To reset your password, click the link below:\\n" + appUrl + "/reset?token="
@@ -84,6 +89,7 @@ public class PasswordController {
 		
 	}
 
+	@RequestMapping(value = "/reset", method = RequestMethod.POST)
 	public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
 
 		// Find the user associated with the reset token

@@ -24,11 +24,12 @@ import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
     }
     
     onClick():void{
-     this.message="Mail Sent! Please check your email inbox";
-     let url = "http://localhost:8787/api/sendemail/"+this.data.emailid;
-     
-     this.http.get(url).subscribe(
+         // let url = "http://localhost:8787/api/sendemail/"+this.data.emailid;
+      let url="http://localhost:8787/forgot";
+      
+     this.http.post(url,this.data.emailid).subscribe(
       res =>  {
+      this.message="Mail Sent! Please check your email inbox";
       },
       err=> {alert("Sorry an error occured");
      });
