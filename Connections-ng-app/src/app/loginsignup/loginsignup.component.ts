@@ -9,7 +9,7 @@ import {ForgotPasswordDialog} from './forgotpassword.component';
 @Component({
   selector: 'app-loginsignup',
   templateUrl: './loginsignup.component.html',
-  styleUrls: ['./loginsignup.component.css']
+  styleUrls: ['./loginsignup.component.scss']
 })
 export class LoginsignupComponent implements OnInit {
   response:any;
@@ -46,7 +46,7 @@ export class LoginsignupComponent implements OnInit {
   
   }
 
-  public togglePassw(input_password, num) {
+  public showPassword(input_password, num) {
     if(input_password.type=='password') {
       input_password.type = 'text';
     } else {
