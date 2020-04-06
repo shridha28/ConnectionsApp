@@ -6,6 +6,9 @@
       <form name="loginForm" #loginForm="ngForm" (submit)="loginForm.form.valid && login()"  
       novalidate class="feedback-form">
         <!-- Name -->
+        <div *ngIf="loginError" class="alert alert-danger">
+          {{loginError}}
+        </div>
         
         <div>
         <div class="form-group">
@@ -61,7 +64,7 @@
      <div class="col-md-4"></div>
       <div class="col-md-4">
        <h4><label for="name" class="font-weight-bold">Sign Up</label></h4>
-      <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signup()" 
+      <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signupCustomer()" 
       novalidate class="feedback-form">
       <div *ngIf="response" class="alert alert-danger">
         {{response.error}}

@@ -2,18 +2,24 @@ package com.myproject.connections.entitybeans;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.myproject.connections.utility.UniqueEmail;
 
-
+/*@author Shridha S Jalihal
+ * CustomerDetails Entity Beans*/
 @Entity
 @Table(name="customers")
 public class CustomerDetails extends Auditable<String> implements Serializable{
@@ -36,11 +42,21 @@ public class CustomerDetails extends Auditable<String> implements Serializable{
 	
 	private String password;
     
+	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.MERGE)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "emailid"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 	
-	@OneToOne
-	private Role role;
 	
-	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+
 	public String getName() {
 		return name;
 	}
@@ -71,16 +87,6 @@ public class CustomerDetails extends Auditable<String> implements Serializable{
 	}
 
 	
-	public Role getRole() {
-		return role;
-	}
-
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-
 	public CustomerDetails() {}
 	
 	
@@ -89,7 +95,7 @@ public class CustomerDetails extends Auditable<String> implements Serializable{
 		super();
 		this.id = id;
 		this.emailid = emailid;
-		this.role = role;
+		//this.role = role;
 		this.password = password;
 	}
 	public Long getId() {

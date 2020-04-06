@@ -6,16 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/*@author Shridha S Jalihal
+ *Role Entity*/
 @Entity
 @Table(name="Roles")
 public class Role {
+
+
 	@Id
-	private long id;
+	private long role_id;
+	
 	private String rolename;
+	
 	private Date creation_date;
+	
 	private Date modified_date;
-	
-	
+
+
 	public Date getCreation_date() {
 		return creation_date;
 	}
@@ -29,10 +37,10 @@ public class Role {
 		this.modified_date = modified_date;
 	}
 	public long getId() {
-		return id;
+		return role_id;
 	}
 	public void setId(long id) {
-		this.id = id;
+		this.role_id = id;
 	}
 	public String getRolename() {
 		return rolename;
@@ -42,7 +50,7 @@ public class Role {
 	}
 	public Role(long id, String rolename) {
 		super();
-		this.id = id;
+		this.role_id = id;
 		this.rolename = rolename;
 	}
 
