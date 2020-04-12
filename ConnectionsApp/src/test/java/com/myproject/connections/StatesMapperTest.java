@@ -9,14 +9,17 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.myproject.connections.entitybeans.CityEntity;
 import com.myproject.connections.entitybeans.StatesEntity;
 import com.myproject.connections.models.CityDto;
 import com.myproject.connections.models.StatesDto;
+
 
 public class StatesMapperTest {
 	

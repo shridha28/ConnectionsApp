@@ -9,6 +9,6 @@ public interface CustomerService {
 	public Long saveCustomer(CustomerEntity customer);
 	public boolean doesEmailExist(String emailId);
 	public void updateUser(CustomerEntity customer);
-	public Optional<CustomerEntity> findUserByResetToken(String resetToken);
+	public void updatePassword(CustomerEntity customerEntity);
 	
 }

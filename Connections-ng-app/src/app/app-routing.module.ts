@@ -5,6 +5,7 @@ import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import {Router,Routes, RouterModule} from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { EditprofileComponent } from './loginsignup/editprofile/editprofile.component';
+import { ResetComponent } from './reset/reset.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -37,6 +38,11 @@ const appRoutes:Routes=[
     data: {animation: 'EditProfile'}
   },
   {
+    path:'reset',
+    component:ResetComponent,
+    data: {animation: 'Reset'}
+  },
+  {
     path:'',
     component:LoginsignupComponent,
     pathMatch:'full'
@@ -45,8 +51,6 @@ const appRoutes:Routes=[
     path:'**',
     component:NotfoundComponent
   },
-
-  
 ];
 @NgModule({
   imports: [

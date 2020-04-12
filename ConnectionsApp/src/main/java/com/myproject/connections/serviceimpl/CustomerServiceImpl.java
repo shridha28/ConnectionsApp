@@ -1,7 +1,5 @@
 package com.myproject.connections.serviceimpl;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustDetailsRepository custDetailsRepository;
 
-	
 	/*
 	 * service method to save Customer data in the database
 	 * 
@@ -38,8 +35,6 @@ public class CustomerServiceImpl implements CustomerService {
 	public Long saveCustomer(CustomerEntity customerEntity) {
 		logger.debug("Encrypted password using password Encoder");
 		customerEntity.setPassword(bCryptPasswordEncoder.encode(customerEntity.getPassword()));
-		// customerDetails.setCreation_date(new
-		// java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		logger.debug("Saving data with emailId:" + customerEntity.getEmailid());
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
 		custDetailsRepository.save(customerEntity);
@@ -65,12 +60,14 @@ public class CustomerServiceImpl implements CustomerService {
 		logger.debug("Data Successfully saved");
 
 	}
-	
-	
+
 	/*
-	 * service method to get check if an Email Id exists in the database and return the associated
-	 * @param String emailId 
-	 * @return boolean value that indicates if an emailId exists 
+	 * service method to get check if an Email Id exists in the database and return
+	 * the associated
+	 * 
+	 * @param String emailId
+	 * 
+	 * @return boolean value that indicates if an emailId exists
 	 */
 	public boolean doesEmailExist(String emailId) {
 		logger.info("Checking if the emailID already exists");
@@ -82,30 +79,30 @@ public class CustomerServiceImpl implements CustomerService {
 			return false;
 	}
 
-	
-	
 	/*
 	 * service method to get Customer data from the database
-	 * @param String emailId 
-	 * @return CustomerEntity Bean 
+	 * 
+	 * @param String emailId
+	 * 
+	 * @return CustomerEntity Bean
 	 */
 	public CustomerEntity getCustomer(String emailId) {
 		logger.debug("Fetching a Customer with Unique EmailId");
 		CustomerEntity customerEntity = custDetailsRepository.findByEmailid(emailId);
 		return customerEntity;
-			
+
 	}
-	
-	
+
 	/*
-	 * service method to get Customer Entity bean from the database
-	 * @param String resetToken 
-	 * @return CustomerEntity Bean 
+	 * service method to update Customer's new password
+	 * 
+	 * @param CustomerEntity Bean
+	 * 
 	 */
-	public Optional<CustomerEntity> findUserByResetToken(String resetToken)
-	{
-		logger.debug("Fetching a Customer based on resetToken");
-		return custDetailsRepository.findByResetToken(resetToken);
+	public void updatePassword(CustomerEntity customerEntity) {
+		logger.debug("Saving customerEntity bean with new password");
+		custDetailsRepository.save(customerEntity);
+
 	}
 
 }

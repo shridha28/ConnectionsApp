@@ -22,7 +22,7 @@ export class LoginsignupComponent implements OnInit {
     password:'',
     emailid:''
   }
-  
+
   loginModel:LoginViewModel={
     emailId:'',
     password:''
@@ -30,20 +30,21 @@ export class LoginsignupComponent implements OnInit {
 
   constructor(private http:HttpClient,
     private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService,
-    private dialog: MatDialog) { 
-        
-      transferService.setData(this.signupModel.emailid);  
+    private dialog: MatDialog) {
+
+      transferService.setData(this.signupModel.emailid);
     }
 
-  login():void{  
+  login():void{
     let url = "http://localhost:8787/api/login";
+
     this.http.post(url,this.loginModel).subscribe(
      res =>  {
        this.router.navigateByUrl('/feedback');
      },
      err=> {alert("Sorry an error occured");
     });
-  
+
   }
 
   public togglePassw(input_password, num) {
@@ -75,24 +76,24 @@ export class LoginsignupComponent implements OnInit {
     });
   }
 
-  signup():void{  
+  signup():void{
     let url = "http://localhost:8787/api/signup";
     this.http.post(url,this.signupModel).subscribe(
      res =>  {
        this.transferService.setData(this.signupModel.emailid);
-      
+
       this.response = JSON.parse(JSON.stringify(res));
-      
+
      if(this.response.error==null || this.response.error=="")
       this.router.navigateByUrl('/editProfile');
      },
      err=> {alert("Sorry an error occured");
     });
-  
+
   }
 
   ngOnInit(): void {
-  } 
+  }
 
 }
 
@@ -107,6 +108,3 @@ export interface LoginViewModel{
   emailId:string,
   password:string
 }
-
-
-

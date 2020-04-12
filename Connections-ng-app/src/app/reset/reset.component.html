@@ -1,0 +1,58 @@
+<div *ngIf="isHidden" >
+<h2><p><b>We just sent you a verification code</b></p></h2>
+We just sent a verification code to your email. If you don't see our email in your inbox, check your spam folder<br/>&nbsp;
+</div>
+<div class="container" *ngIf="isHidden">
+   <div class="row">
+          <div class="offset-3"></div>
+             <div class="col-md-3">
+                   <form name="form" #f="ngForm" novalidate (submit)="verifyCode()">
+                     <!--Pin-->
+                     <div class="form-group">
+                         <label for="code"></label>
+                           <input [(ngModel)]="code" type="text"
+                            id="code"
+                            class="form-control"
+                            name="code"
+                            placeholder="Enter Code"/>
+                      </div>
+                      <div id="error" *ngIf="message">
+                          <p>{{message}}</p>
+                       </div>
+                            <br/>&nbsp;
+                            <button type="submit"  class="btn btn-info">
+                               <i class="fa"   ></i>
+                                <span>Submit</span>
+                             </button>
+                   </form>
+           </div>
+    </div>
+</div>
+<div *ngIf="!isHidden">
+    <div>
+    <p> Your code is verified! You can set your new password now</p>
+    </div>
+    <form name="changePasswordForm" novalidate (submit)="saveNewPassword()">
+          <div class="form-group">
+              <label for="newpassword">Enter new password</label>
+              <input [(ngModel)]="resetPassword.password" type="password"
+                            id="password"
+                            class="form-control"
+                            name="newpassword"
+                            placeholder="Enter new password"/>
+           </div>
+           <div class="form-group">
+              <label for="retypepassword">Retype password</label>
+              <input ngModel type="password"
+                            id="retypepassword"
+                            class="form-control"
+                            name="retypepassword"
+                            placeholder="Retype new password"/>
+           </div>
+            <button type="submit" class="btn btn-info">
+                <span>Submit</span>
+            </button>
+
+    </form>
+
+</div>

@@ -10,12 +10,12 @@ export class DataServiceService {
 
   private data:string;
 
-  setData(value) {      
-    this.data = value;  
+  setData(value) {
+    this.data = value;
   }  
-  
-  getData() {  
-    return this.data;   
+
+  getData() {
+    return this.data;
   }
 
   constructor() { }

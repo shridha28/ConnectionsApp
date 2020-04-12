@@ -20,6 +20,10 @@ import {ConfirmEqualValidatorDirective} from './directives-shared/confirm-equal-
 import { ActivitiesComponent } from './activities/activities.component';
 import {AppRoutingModule} from './app-routing.module';
 import {PasswordValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
+import { ResetComponent } from './reset/reset.component';
+
+
+
 
 
 
@@ -47,20 +51,27 @@ const appRoutes:Routes=[
     data: {animation: 'EditProfile'}
   },
   {
+    path:'reset',
+    component:ResetComponent,
+    data: {animation: 'Reset'}
+  },
+
+  {
     path:'',
     component:LoginsignupComponent,
     pathMatch:'full'
   },
+
   {
     path:'**',
     component:NotfoundComponent
   },
 
-  
+
 ];
 @NgModule({
   declarations: [
-    AppComponent,  
+    AppComponent,
     NavigationComponent,
     FeedbackComponent,
     LoginsignupComponent,
@@ -68,7 +79,8 @@ const appRoutes:Routes=[
     ForgotPasswordDialog,
     EditprofileComponent,
     ConfirmEqualValidatorDirective,
-    PasswordValidatorDirective
+    PasswordValidatorDirective,
+    ResetComponent
   ],
   imports: [
     MatButtonModule,

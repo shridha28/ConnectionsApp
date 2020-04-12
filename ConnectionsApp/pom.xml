@@ -30,7 +30,11 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- To generate 6-digit pin for password Reset -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
 			<groupId>org.json</groupId>
@@ -98,7 +102,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		<!-- Adding dependency for ModelMapper @Shreya-->
+		<!-- Adding dependency for ModelMapper @Shreya -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>

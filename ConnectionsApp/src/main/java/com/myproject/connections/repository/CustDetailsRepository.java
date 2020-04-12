@@ -19,11 +19,11 @@ public interface CustDetailsRepository extends JpaRepository<CustomerEntity, Str
 	@Query("SELECT r FROM CustomerEntity r where r.emailid = :emailid")
 	public CustomerEntity findByEmailid(String emailid);
 	
-	/*Method to retrieve CustomerEntity bean based on resetToken
-	 *@param String resetToken
+	/*Method to retrieve CustomerEntity bean based on code
+	 *@param String code
 	 *@return Optional<CustomerEntity> Bean
 	 */
-	Optional<CustomerEntity> findByResetToken(String resetToken);
+	Optional<CustomerEntity> findByCode(String code);
 	
     
 }

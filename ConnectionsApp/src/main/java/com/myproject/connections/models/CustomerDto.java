@@ -7,8 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,10 +28,10 @@ public class CustomerDto extends RepresentationModel<CustomerDto> implements Ser
 	private String landMark;
 	private String city;
 	private String state;
+	private String code;
 	
 	
 	@NotNull
-	@JsonIgnore
 	private String password;
     
 	private Date creation_date;

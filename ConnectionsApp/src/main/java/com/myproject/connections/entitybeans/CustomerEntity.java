@@ -15,41 +15,36 @@ import com.myproject.connections.utility.UniqueEmail;
 
 import lombok.Data;
 
-
 @Entity
 @Data
-@Table(name="customers")
-public class CustomerEntity extends Auditable<String> implements Serializable{
-	
-	
+@Table(name = "customers")
+public class CustomerEntity extends Auditable<String> implements Serializable {
+
 	private static final long serialVersionUID = -3617767414915807263L;
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	
+
 	private String name;
-	
+
 	@UniqueEmail
 	private String emailid;
-	
+
 	@Embedded
 	private AddressEntity addressEntity;
-	
+
 	private String password;
-	
+
 	@OneToOne
 	private Role role;
-	
-	private String resetToken;
-	
-	public CustomerEntity() {}
-	
-	
-	public CustomerEntity(Long id, String emailid, Date creation_date, Date modified_date,
-			Role role,String password) {
+
+	private String code;
+
+	public CustomerEntity() {
+	}
+
+	public CustomerEntity(Long id, String emailid, Date creation_date, Date modified_date, Role role, String password) {
 		super();
 		this.id = id;
 		this.emailid = emailid;
