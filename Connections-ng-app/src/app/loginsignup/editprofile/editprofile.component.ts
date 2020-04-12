@@ -7,7 +7,7 @@ import {NavigationComponent} from '../../navigation/navigation.component';
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
-  styleUrls: ['./editprofile.component.css']
+  styleUrls: ['./editprofile.component.scss']
 })
 export class EditprofileComponent implements OnInit {
 

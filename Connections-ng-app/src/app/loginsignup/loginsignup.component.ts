@@ -1,19 +1,23 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
 import {DataServiceService} from '../services-shared/data-service.service';
 import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import {ForgotPasswordDialog} from './forgotpassword.component';
+import {LoginsignupService} from './loginsignup.service';
+import {environment} from '../../environments/environment';
+import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
   selector: 'app-loginsignup',
   templateUrl: './loginsignup.component.html',
-  styleUrls: ['./loginsignup.component.css']
+  styleUrls: ['./loginsignup.component.scss']
 })
 export class LoginsignupComponent implements OnInit {
-  response:any;
-
+     response:any;
+     loginError:any;
+     authenticated:boolean;
      toggle1: boolean = false;
      toggle2: boolean = false;
 
@@ -30,24 +34,38 @@ export class LoginsignupComponent implements OnInit {
 
   constructor(private http:HttpClient,
     private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,private loginsignupservice:LoginsignupService) { 
 
       transferService.setData(this.signupModel.emailid);
     }
 
   login():void{
     let url = "http://localhost:8787/api/login";
+    const headers = new HttpHeaders(this.loginModel ? {
+      authorization : 'Basic ' + btoa(this.loginModel.emailId + ':' + this.loginModel.password)
+  } : {});
 
-    this.http.post(url,this.loginModel).subscribe(
-     res =>  {
-       this.router.navigateByUrl('/feedback');
-     },
-     err=> {alert("Sorry an error occured");
-    });
-
+  this.http.get(url, {headers: headers,observe:'response'}).subscribe(response => {
+      if(response!=null && response.status==200)
+        this.router.navigateByUrl('/activities');
+  },error=>{
+    this.loginError = "Invalid Credentials.Please try again."
+  });
   }
 
-  public togglePassw(input_password, num) {
+  signupCustomer():void{
+    this.loginsignupservice.signupCustomer(this.signupModel).subscribe(res =>  {
+ 
+      this.transferService.setData(this.signupModel.emailid);   
+      this.response = JSON.parse(JSON.stringify(res));
+        if(this.response.error==null || this.response.error=="")
+           this.router.navigateByUrl('/editProfile');
+         },
+      err=> {alert("Sorry an error occured");
+     });
+   }
+
+  public showPassword(input_password, num) {
     if(input_password.type=='password') {
       input_password.type = 'text';
     } else {
@@ -76,22 +94,9 @@ export class LoginsignupComponent implements OnInit {
     });
   }
 
-  signup():void{
-    let url = "http://localhost:8787/api/signup";
-    this.http.post(url,this.signupModel).subscribe(
-     res =>  {
-       this.transferService.setData(this.signupModel.emailid);
+ 
 
-      this.response = JSON.parse(JSON.stringify(res));
-
-     if(this.response.error==null || this.response.error=="")
-      this.router.navigateByUrl('/editProfile');
-     },
-     err=> {alert("Sorry an error occured");
-    });
-
-  }
-
+  
   ngOnInit(): void {
   }
 

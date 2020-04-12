@@ -21,6 +21,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 import {AppRoutingModule} from './app-routing.module';
 import {PasswordValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
 import { ResetComponent } from './reset/reset.component';
+import {LoginsignupService} from './loginsignup/loginsignup.service';
 
 
 
@@ -93,7 +94,7 @@ const appRoutes:Routes=[
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [LoginsignupService],
   entryComponents: [ForgotPasswordDialog],
   bootstrap: [AppComponent]
 })

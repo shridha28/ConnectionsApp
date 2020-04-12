@@ -10,7 +10,7 @@ import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
 
 /**
- * @author acer
+ * @author Shridha S Jalihal
  *
  */
 @Service
@@ -23,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
 	@Autowired
 	private CustDetailsRepository custDetailsRepository;
@@ -73,10 +74,18 @@ public class CustomerServiceImpl implements CustomerService {
 		logger.info("Checking if the emailID already exists");
 		logger.debug("Check if the email ID already exists using UniqeEmailCustomValidator:" + emailId);
 		boolean userInDb = true;
-		if (custDetailsRepository.findByEmailid(emailId) != null)
+		if (findByEmailId(emailId)!=null)
 			return userInDb;
 		else
 			return false;
+	}
+	
+	/*Method call to customerRepository to get the CustomerDetails
+	 * @param emailid
+	 * @return CustomerDetails
+	 */
+	public CustomerDetails findByEmailId(String emailid){
+		return custDetailsRepository.findByEmailid(emailid);
 	}
 
 	/*

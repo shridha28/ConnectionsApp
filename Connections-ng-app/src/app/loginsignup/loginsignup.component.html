@@ -6,6 +6,9 @@
       <form name="loginForm" #loginForm="ngForm" (submit)="loginForm.form.valid && login()"  
       novalidate class="feedback-form">
         <!-- Name -->
+        <div *ngIf="loginError" class="alert alert-danger">
+          {{loginError}}
+        </div>
         
         <div>
         <div class="form-group">
@@ -20,7 +23,7 @@
                  [ngClass]="{'is-invalid':loginForm.submitted && loginEmail.invalid}"
                  required
                  />
-                 <div *ngIf="loginEmail.errors && loginForm.submitted" class="alert alert-danger">
+                 <div *ngIf="loginEmail.errors && loginForm.submitted" style="color:red">
                   Email-ID is required.
                 </div>
             </div>
@@ -41,13 +44,13 @@
                  required
                  />
                  <div *ngIf="loginPassw.errors?.required && loginForm.submitted
-                 " class="alert alert-danger">
+                 " style="color:red">
                   Password is required.
                 </div>
               
               </div>
                 <p>
-                  <b><a href="" style="color:#FF0000;"
+                  <b><a href="" style="color:dodgerblue"
                    (click)="$event.preventDefault(); openDialog()">Forgot Password</a></b>
                 </p>
               </div>
@@ -58,16 +61,16 @@
             </div>
       </form>
     </div>
-     <div class="col-md-3"></div>
-      <div class="col-md-5">
+     <div class="col-md-4"></div>
+      <div class="col-md-4">
        <h4><label for="name" class="font-weight-bold">Sign Up</label></h4>
-      <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signup()" 
+      <form name="signUpform" #f="ngForm" (submit)="f.form.valid && signupCustomer()" 
       novalidate class="feedback-form">
       <div *ngIf="response" class="alert alert-danger">
         {{response.error}}
       </div>
         <div class="form-group">
-         <b> <label for="emailid">Email-ID</label></b>  
+         <label for="emailid">Email-ID</label>
           <input ngModel type="email"
                  email
                  id="emailid"
@@ -79,7 +82,7 @@
                  [ngClass]="{'is-invalid':f.submitted && emailname.invalid}"
                  required/>
                    
-                 <div *ngIf="emailname.errors && f.submitted" class="alert alert-danger">
+                 <div *ngIf="emailname.errors && f.submitted" style="color:red">
                   Email-ID is required.
                 </div>
                
@@ -88,7 +91,7 @@
         <div class="form-group">
           
         <label for="password">Password</label> 
-          <i class="fa fa-info-circle"  style= "color: black" title="                 
+        <i class="fa fa-fw fa-info-circle" title="                 
             -Atleast 8 characters.
 -Atleast one lowercase letter.
 -Atleast one uppercase letter.
@@ -105,17 +108,19 @@
                  [ngClass]="{'is-invalid':f.submitted && passwname.invalid}"
                  required 
                  />  
-                <div class="input-group-append" (click)="togglePassw(password1, 1)">
+                <div class="input-group-append" (click)="showPassword(password1, 1)">
                   <span class="input-group-text" >  <i [ngClass]="toggle1 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
                   </span>
                 </div> 
               </div>
                  <div *ngIf="passwname.errors?.required && f.submitted
-                 " class="alert alert-danger">
+                 " style="color:red">
                   Password is required.
                 </div>
-                <div *ngIf="passwname.errors?.invalidp && f.submitted" class="alert alert-danger">
+                <div *ngIf="!passwname.errors?.required">
+                <div *ngIf="passwname.errors?.invalidp && f.submitted" style="color:red">
                   Password Invalid. Please refer to the info.
+                </div>
                 </div>
         </div>
 
@@ -133,24 +138,22 @@
                 passwname.valid}"
                  required
                      />
-            <div class="input-group-append" (click)="togglePassw(password2, 2)">
+            <div class="input-group-append" (click)="showPassword(password2, 2)">
                <span class="input-group-text" >  <i [ngClass]="toggle2 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
                   </span>
               </div> 
           </div>
                      <div *ngIf="
-                      passwrname.errors?.required && f.submitted" class="alert alert-danger">
+                      passwrname.errors?.required && f.submitted" style="color:red">
                       Please confirm your password.
                     </div>
 
-                    <div *ngIf="passwrname.errors?.notEqual && f.submitted" class="alert alert-danger">
+                    <div *ngIf="passwrname.errors?.notEqual && f.submitted" style="color:red">
                       Password and Confirm Password Do Not Match
                     </div>
 
                     
             </div>
-            
-              
 
         <button type="submit" class="btn btn-info pull-right">
           <span>Register</span>
@@ -167,13 +170,8 @@
 
 </div>
 
-<div class="container">
 
-  <div class="row">
 
-     
-  </div>
-</div>
 <!--<div *ngIf="emailname.valid">
 <app-editprofile [email_Id]="signupModel.emailid"></app-editprofile>
 </div>-->

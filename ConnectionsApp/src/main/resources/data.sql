@@ -1,15 +1,8 @@
-Create Table IF NOT EXISTS Roles(
-   id BIGINT PRIMARY KEY,
-   rolename VARCHAR(50) NOT NULL,
-   creation_date DATE,
-   modified_date DATE
-);
 
-
-insert into Roles (id,rolename,creation_date,modified_date)
+insert into Roles (role_id,rolename,creation_date,modified_date)
 values(1000,'ADMIN',SYSDATE,SYSDATE);
 
-insert into Roles (id,rolename,creation_date,modified_date)
+insert into Roles (role_id,rolename,creation_date,modified_date)
 values (1001,'USER',SYSDATE,SYSDATE);
 
 CREATE TABLE if not exists  customers ( 
@@ -20,13 +13,7 @@ CREATE TABLE if not exists  customers (
    creation_date DATE,
    modified_date DATE
 );
-
-
- ALTER TABLE customers
-    ADD FOREIGN KEY (role_id) 
-    REFERENCES Roles(id);
-
-    
+   
 
 CREATE TABLE if not exists States (  
    stateID VARCHAR(50) PRIMARY KEY,

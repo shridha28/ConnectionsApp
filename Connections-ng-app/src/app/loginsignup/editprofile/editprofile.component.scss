@@ -19,9 +19,12 @@ label{
   }
 
 
-  .container{
-    background-image:url(../../../assets/bgimage_t.jpg);
-    opacity: 0.75;
-    max-height: max-content ;
-    background-size: cover;
-  }
+  .container {
+	
+	border-radius: 12px;
+	padding: 40px;
+	border-style: solid;
+	border-color: #ffa31a;
+	margin-top:40px;
+	
+}
