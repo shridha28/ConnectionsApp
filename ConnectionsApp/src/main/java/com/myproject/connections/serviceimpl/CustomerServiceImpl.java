@@ -84,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param emailid
 	 * @return CustomerDetails
 	 */
-	public CustomerDetails findByEmailId(String emailid){
+	public CustomerEntity findByEmailId(String emailid){
 		return custDetailsRepository.findByEmailid(emailid);
 	}
 

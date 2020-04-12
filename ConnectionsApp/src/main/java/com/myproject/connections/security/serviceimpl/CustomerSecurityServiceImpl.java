@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.myproject.connections.entitybeans.CustomerDetails;
+import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.Role;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
@@ -35,7 +35,7 @@ public class CustomerSecurityServiceImpl implements UserDetailsService{
 	 * */
 	@Override
 	public UserDetails loadUserByUsername(String emailid) throws UsernameNotFoundException {
-		CustomerDetails  customer = customerService.findByEmailId(emailid);
+		CustomerEntity  customer = customerService.findByEmailId(emailid);
 		List<GrantedAuthority> authorities = getUserAuthority(customer.getRoles());
 		return buildUserForAuthentication(customer, authorities);
 	}
@@ -61,7 +61,7 @@ public class CustomerSecurityServiceImpl implements UserDetailsService{
 	 * @param List of grantedAuthority
 	 * @return Spring bean's UserDetails
 	 * */
-	private UserDetails buildUserForAuthentication(CustomerDetails customerDetails, List<GrantedAuthority> authorities) {
+	private UserDetails buildUserForAuthentication(CustomerEntity customerDetails, List<GrantedAuthority> authorities) {
 		return new User(customerDetails.getEmailid(), customerDetails.getPassword(),
 				true, true, true, true, authorities);
 	}	
