@@ -5,33 +5,46 @@ import {DataServiceService} from '../services-shared/data-service.service';
 import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 
 
+
 @Component({
-  
+
     selector: 'forgotcomponentdialog',
     templateUrl: 'forgotpassword.component.html',
     styleUrls: ['forgotpassword.component.scss']
   })
   export class ForgotPasswordDialog {
-
+    response:any;
     message:string;
-  
+    email_id:string;
     constructor(
       public dialogRef: MatDialogRef<ForgotPasswordDialog>,
-      @Inject(MAT_DIALOG_DATA) public data: DialogData,private http:HttpClient) {}
-  
+      private router: Router, private _route:ActivatedRoute,
+      @Inject(MAT_DIALOG_DATA) public data: DialogData,private http:HttpClient,
+      private transferService:DataServiceService) {
+      }
+
     onNoClick(): void {
       this.dialogRef.close();
     }
-    
+
     onClick():void{
-     this.message="Mail Sent! Please check your email inbox";
-     let url = "http://localhost:8787/api/sendemail/"+this.data.emailid;
-     
-     this.http.get(url).subscribe(
+
+     let url="http://localhost:8787/forgotPassword";
+
+     this.http.post(url,this.data.emailid).subscribe(
       res =>  {
+     this.response = JSON.parse(JSON.stringify(res));
+     this.transferService.setData(this.data.emailid);
+     if(this.response.error==null || this.response.error==""){
+         this.router.navigateByUrl('/reset');
+         this.dialogRef.close();
+      }
+     else
+       this.message=this.response.error;
       },
-      err=> {alert("Sorry an error occured");
-     });
+     err=> {
+       alert("Sorry an error occured");
+    });
     }
   }
 

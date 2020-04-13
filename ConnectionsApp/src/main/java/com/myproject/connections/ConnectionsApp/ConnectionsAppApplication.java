@@ -21,7 +21,8 @@ import com.myproject.connections.entitybeans.BeanAuditorAware;
 @SpringBootApplication (exclude = { SecurityAutoConfiguration.class })
 @ComponentScan(basePackages= {"com.myproject.connections.*"})
 @EnableJpaRepositories("com.myproject.connections.repository")
-@EntityScan( basePackages = {"com.myproject.connections.entitybeans"} )
+@EntityScan(basePackages = {"com.myproject.connections.entitybeans","com.myproject.connections.mapper"} )
+
 //@EnableDiscoveryClient
 @Configuration
 @EnableJpaAuditing(auditorAwareRef="auditorAware")
@@ -43,19 +44,4 @@ public class ConnectionsAppApplication {
 		
 	}
 	
-	
-	/*
-	 * @Bean public CorsConfigurationSource corsConfigurationSource() { final
-	 * CorsConfiguration configuration = new CorsConfiguration();
-	 * configuration.setAllowedOrigins("*"); configuration.setAllowedMethods(new
-	 * List<String>{"HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-	 * configuration.setAllowCredentials(true);
-	 * configuration.setAllowedHeaders(ImmutableList.of("*"));
-	 * configuration.setExposedHeaders(ImmutableList.of("X-Auth-Token",
-	 * "Authorization","Access-Control-Allow-Origin",
-	 * "Access-Control-Allow-Credentials")); final UrlBasedCorsConfigurationSource
-	 * source = new UrlBasedCorsConfigurationSource();
-	 * source.registerCorsConfiguration("/**", configuration); return source; }
-	 */
-
 }

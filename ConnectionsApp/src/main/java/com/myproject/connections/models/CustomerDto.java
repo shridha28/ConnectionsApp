@@ -3,22 +3,17 @@ package com.myproject.connections.models;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.myproject.connections.utility.UniqueEmail;
+import org.springframework.hateoas.RepresentationModel;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 
 @Data
-public class CustomerModel implements Serializable{
+@NoArgsConstructor
+public class CustomerDto extends RepresentationModel<CustomerDto> implements Serializable{
 	
 	
 	private static final long serialVersionUID = -3617767414915807263L;
@@ -33,6 +28,8 @@ public class CustomerModel implements Serializable{
 	private String landMark;
 	private String city;
 	private String state;
+	private String code;
+	
 	
 	@NotNull
 	private String password;
@@ -43,7 +40,7 @@ public class CustomerModel implements Serializable{
 
 	
 	
-	public CustomerModel(String emailid, Date creation_date, Date modified_date,
+	public CustomerDto(String emailid, Date creation_date, Date modified_date,
 			String password) {
 		super();
 		

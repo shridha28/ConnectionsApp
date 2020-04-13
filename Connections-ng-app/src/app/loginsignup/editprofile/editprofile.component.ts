@@ -63,7 +63,6 @@ export class EditprofileComponent implements OnInit {
    this.http.patch(url,this.eProfileModel).subscribe(
     res =>  {
      alert("Profile Updated Successfully");
-    // this.response = JSON.parse(JSON.stringify(res));
      this.transferService.isUserLoggedIn.next(true);
      this.router.navigateByUrl('/activities');
     },

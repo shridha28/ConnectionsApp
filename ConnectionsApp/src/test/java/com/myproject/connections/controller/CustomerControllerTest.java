@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.myproject.connections.entitybeans.CustomerDetails;
+import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
@@ -38,7 +38,7 @@ class CustomerControllerTest {
 	@Test
 	void create_Customer_Shud_CreateAUser() {
 		controller.setCustomerService(serviceImpl);
-		CustomerDetails cust = new CustomerDetails(null,"abc.hu",null, null,null, "ddd");
+		CustomerEntity cust = new CustomerEntity(null,"abc.hu",null, null,null, "ddd");
 	//	System.out.println(cust.getId());
 	//	when(serviceImpl.saveUser(cust)).thenRetur());
 	//	Assertions.assertNotNull(cust.getId());

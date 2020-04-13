@@ -1,25 +1,29 @@
 package com.myproject.connections.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myproject.connections.entitybeans.Address;
-import com.myproject.connections.entitybeans.CustomerDetails;
+import com.myproject.connections.entitybeans.AddressEntity;
+import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
-import com.myproject.connections.models.CustomerModel;
+import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
-
+import com.myproject.connections.utility.CustomerResource;
 
 
 /**Class CustomerController. The contoller for customer api requests.
@@ -38,11 +42,18 @@ public class CustomerController {
 
 	@Autowired
 	StatesServiceImpl stateService;
+	
+	@Autowired
+	private CustomerResource customerResource;
 
 
-
+	/*End Point to save Customer data in the database
+	 *@param CustomerEntity bean
+	 *@param bindingResults containing errors when validation fails
+	 *@return messageBean contains server errors if any after server validation
+	 */
 	@PostMapping("/api/signup")
-	public MessageBean signUpCustomer(@RequestBody @Valid CustomerDetails customerDetails,BindingResult bindingResult){
+	public MessageBean signUpCustomer(@RequestBody @Valid CustomerEntity customerEntity,BindingResult bindingResult){
 		logger.info("Validating customer details");
 		if(bindingResult.hasErrors()) {
 			logger.info("Server error: Invalid Customer details,returning server error in the front end");
@@ -55,7 +66,7 @@ public class CustomerController {
 
 		logger.info("Saving Customer Data in the database");
 		logger.info("Calling CustomerServiceImpl to save Customer Data");
-		customerService.saveUser(customerDetails);
+	        customerService.saveCustomer(customerEntity);
 		return new MessageBean();
 	}
 
@@ -65,19 +76,19 @@ public class CustomerController {
 	 *@return messageBean contains server errors if any after server validation
 	 */
 	@PatchMapping("/api/updateProfile")
-	public MessageBean updateCustomer(@RequestBody CustomerModel customerDetails,BindingResult bindingResult){
+	public MessageBean updateCustomer(@RequestBody CustomerDto customerDto,BindingResult bindingResult){
 		logger.info("Validating customer details for updating Customer Profile");
 
-		Address address = new Address(customerDetails.getStreet(),
-				customerDetails.getHouseNumber(),customerDetails.getLandMark(),
-				customerDetails.getCity(),customerDetails.getState());
+		AddressEntity address = new AddressEntity(customerDto.getStreet(),
+				customerDto.getHouseNumber(),customerDto.getLandMark(),
+				customerDto.getCity(),customerDto.getState());
 
-		CustomerDetails customerSql = new CustomerDetails();
-		customerSql.setAddress(address);
-		customerSql.setName(customerDetails.getName());
-		customerSql.setEmailid(customerDetails.getEmailid());
+		CustomerEntity customerEntity = new CustomerEntity();
+		customerEntity.setAddressEntity(address);
+		customerEntity.setName(customerDto.getName());
+		customerEntity.setEmailid(customerDto.getEmailid());
 
-		customerService.updateUser(customerSql);
+		customerService.updateUser(customerEntity);
 
 		logger.info("Updating Customer Data in the database");
 		logger.info("Calling CustomerServiceImpl to update Customer Data");
@@ -92,6 +103,38 @@ public class CustomerController {
 		System.out.println("Logged in");
 	}	
 
+	/*End Point to get Customer's data in the database based on Email ID(supports HATEOAS) 
+	 *@pathvariable String emailId
+	 *@returns ResponseEntity<CustomerDto> contains Customer details and HATEOAS links
+	 */
+	  @GetMapping("/api/getCustomer/{emailId}")
+	  public ResponseEntity<CustomerDto>
+	  getCustomer(@PathVariable("emailId") String emailId) { 
+		  logger.info("Getting a CustomerEntity Bean from repository ");
+		  CustomerEntity customerEntity=customerService.getCustomer(emailId);
+		  Optional<CustomerEntity> optionalCustomer=Optional.of(customerEntity);
+		  return optionalCustomer.map(customerResource::toModel)
+				  .map(ResponseEntity::ok)
+				  .orElse(ResponseEntity.notFound().build());
+	
+	  }
+	  
+	  
+	  //TBD--->Working/changed the @Id for EMail however Id is going null
+	  @GetMapping("/api/getCustomers/{emailId}")
+	  public CustomerEntity
+	  getCustomerDetail(@PathVariable("emailId") String emailId) { 
+		 return customerService.getCustomer(emailId);
+		   	  }
+	  
+	
+	/*
+	 * //Working
+	 * 
+	 * @GetMapping("/getAllCustomers") public List<CustomerEntity> getAllCustomers()
+	 * { return custDetailsRepository.findAll(); }
+	 */
+	  
 
 	/* Note: using getters and setters only for mockito*/
 

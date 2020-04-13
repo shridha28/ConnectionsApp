@@ -26,7 +26,7 @@ export class LoginsignupComponent implements OnInit {
     password:'',
     emailid:''
   }
-  
+
   loginModel:LoginViewModel={
     emailId:'',
     password:''
@@ -35,11 +35,11 @@ export class LoginsignupComponent implements OnInit {
   constructor(private http:HttpClient,
     private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService,
     private dialog: MatDialog,private loginsignupservice:LoginsignupService) { 
-        
-      transferService.setData(this.signupModel.emailid);  
+
+      transferService.setData(this.signupModel.emailid);
     }
 
-  login():void{  
+  login():void{
     let url = "http://localhost:8787/api/login";
     const headers = new HttpHeaders(this.loginModel ? {
       authorization : 'Basic ' + btoa(this.loginModel.emailId + ':' + this.loginModel.password)
@@ -98,7 +98,7 @@ export class LoginsignupComponent implements OnInit {
 
   
   ngOnInit(): void {
-  } 
+  }
 
 }
 
@@ -113,6 +113,3 @@ export interface LoginViewModel{
   emailId:string,
   password:string
 }
-
-
-
