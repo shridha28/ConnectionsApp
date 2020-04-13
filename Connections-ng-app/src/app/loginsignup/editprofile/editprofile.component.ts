@@ -57,14 +57,12 @@ export class EditprofileComponent implements OnInit {
  }
 
  submit():void{
-    console.log(this.email_Id);
    this.eProfileModel.state = this.response[this.state].stateName;
    this.eProfileModel.emailid = this.email_Id;
    let url = "http://localhost:8787/api/updateProfile";
    this.http.patch(url,this.eProfileModel).subscribe(
     res =>  {
      alert("Profile Updated Successfully");
-    // this.response = JSON.parse(JSON.stringify(res));
      this.transferService.isUserLoggedIn.next(true);
      this.router.navigateByUrl('/activities');
     },
