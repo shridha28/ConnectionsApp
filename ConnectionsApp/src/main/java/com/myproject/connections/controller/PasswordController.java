@@ -64,7 +64,7 @@ public class PasswordController {
 			customerEntity.setCode(RandomStringUtils.randomNumeric(6).toString());
 			logger.debug("Saving the customer Entity with the code generated" + " " + customerEntity);
 			// save the code to the Database
-			customerService.saveCustomer(customerEntity);
+			customerService.updateCustomer(customerEntity);
 
 			// Email Message
 			logger.debug("Sending an email with a 6-digit code to reset password");
@@ -144,7 +144,7 @@ public class PasswordController {
 
 			// Save customer
 			logger.debug("Saving customer in the database with  a new password set");
-			customerService.saveCustomer(customerEntity);
+			customerService.updateCustomer(customerEntity);
 
 		} else {
 			logger.error("Error occurred while trying to save the customer Entity details with new password");

@@ -19,7 +19,8 @@
       code:any;
       emailid:string;
       message:string;
-
+      toggle1: boolean = false;
+      toggle2: boolean = false;
 
       resetPassword:ResetPassword={
         code:'',
@@ -69,6 +70,20 @@
             err=> {alert("Sorry an error occured");
           });
         }
+
+        public showPassword(input_password, num) {
+          if(input_password.type=='password') {
+            input_password.type = 'text';
+          } else {
+            input_password.type = 'password';
+          }
+          if(num==1) {
+            this.toggle1 = !this.toggle1;
+          } else {
+            this.toggle2 = !this.toggle2;
+          }
+        }
+
       }
 
       export interface ResetPassword{
