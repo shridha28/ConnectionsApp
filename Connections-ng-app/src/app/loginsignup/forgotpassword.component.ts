@@ -35,17 +35,14 @@ import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
       res =>  {
      this.response = JSON.parse(JSON.stringify(res));
      this.transferService.setData(this.data.emailid);
-     if(this.response.error==null || this.response.error=="")
-     {
-     this.router.navigateByUrl('/reset');
-     this.dialogRef.close();
+     if(this.response.error==null || this.response.error==""){
+         this.router.navigateByUrl('/reset');
+         this.dialogRef.close();
       }
-     else {
+     else
        this.message=this.response.error;
-     }
       },
      err=> {
-
        alert("Sorry an error occured");
     });
     }
