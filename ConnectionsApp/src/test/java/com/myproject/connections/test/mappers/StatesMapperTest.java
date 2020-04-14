@@ -1,4 +1,4 @@
-package com.myproject.connections;
+package com.myproject.connections.test.mappers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

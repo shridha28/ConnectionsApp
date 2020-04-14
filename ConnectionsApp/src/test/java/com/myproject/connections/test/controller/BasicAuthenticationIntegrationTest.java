@@ -62,7 +62,7 @@ public class BasicAuthenticationIntegrationTest {
 		CustomerEntity customer = new CustomerEntity();
 		customer.setEmailid("shridha.jalihal@gmail.com");
 		customer.setPassword(encoder.encode("Akka@1801"));
-		when(customerServiceImpl.findByEmailId("shridha.jalihal@gmail.com")).thenReturn(customer);
+		when(customerServiceImpl.getCustomer("shridha.jalihal@gmail.com")).thenReturn(customer);
 		try {
 			this.mockMvc.perform(get("/api/login")
 			.with(httpBasic("shridha.jalihal@gmail.com","Akka@1801")))
@@ -81,7 +81,7 @@ public class BasicAuthenticationIntegrationTest {
 		CustomerEntity customer = new CustomerEntity();
 		customer.setEmailid("shridha.jalihal@gmail.com");
 		customer.setPassword(encoder.encode("Akka@1801"));
-		when(customerServiceImpl.findByEmailId("shridha.jalihal@gmail.com")).thenReturn(customer);
+		when(customerServiceImpl.getCustomer("shridha.jalihal@gmail.com")).thenReturn(customer);
 		try {
 			this.mockMvc.perform(get("/api/login")
 			.with(httpBasic("shridha.jalihal@gmail.com","Akka@18011")))
@@ -99,7 +99,7 @@ public class BasicAuthenticationIntegrationTest {
 		CustomerEntity customer = new CustomerEntity();
 		customer.setEmailid("shridha.jalihal@gmail.com");
 		customer.setPassword(encoder.encode("Akka@1801"));
-		when(customerServiceImpl.findByEmailId("shridha.jalihal@gmail.com")).thenReturn(customer);
+		when(customerServiceImpl.getCustomer("shridha.jalihal@gmail.com")).thenReturn(customer);
 		try {
 			this.mockMvc.perform(get("/api/login")
 			.with(httpBasic("shridha.jalihal@gmail.com","Akka@18011")))

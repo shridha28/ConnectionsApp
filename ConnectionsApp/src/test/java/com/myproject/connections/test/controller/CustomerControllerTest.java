@@ -1,4 +1,4 @@
-package com.myproject.connections.controller;
+package com.myproject.connections.test.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.myproject.connections.entitybeans.CustomerEntity;
+import com.myproject.connections.controller.CustomerController;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
