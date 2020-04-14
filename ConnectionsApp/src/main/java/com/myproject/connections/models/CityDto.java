@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*@author Shreya S Jalihal
+ *Dto class for City 
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

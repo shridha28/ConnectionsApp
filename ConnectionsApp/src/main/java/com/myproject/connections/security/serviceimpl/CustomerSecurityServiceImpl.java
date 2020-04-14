@@ -35,7 +35,7 @@ public class CustomerSecurityServiceImpl implements UserDetailsService{
 	 * */
 	@Override
 	public UserDetails loadUserByUsername(String emailid) throws UsernameNotFoundException {
-		CustomerEntity  customer = customerService.findByEmailId(emailid);
+		CustomerEntity  customer = customerService.getCustomer(emailid);
 		List<GrantedAuthority> authorities = getUserAuthority(customer.getRoles());
 		return buildUserForAuthentication(customer, authorities);
 	}

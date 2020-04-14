@@ -1,8 +1,3 @@
-/*
- * @author=Shreya
- * 
- * */
-
 package com.myproject.connections.controller;
 
 import java.util.Optional;
@@ -27,6 +22,9 @@ import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.service.EmailService;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
+/*@author Shreya S Jalihal
+ * PasswordController:Controller class to handle forgot password/password change api requests.
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PasswordController {
@@ -43,8 +41,8 @@ public class PasswordController {
 	private static final Logger logger = LoggerFactory.getLogger(PasswordController.class);
 
 	/*
-	 * End Point to generate and save reset code for changing password send an email
-	 * to the customer with reset code
+	 * End Point to generate and save reset code for changing password and send an
+	 * email to the customer with the reset code
 	 * 
 	 * @param String emailId
 	 * 
@@ -60,13 +58,12 @@ public class PasswordController {
 		if (!optionalCustomer.isPresent()) {
 			String message = "Oops! We didn't find an account for that e-mail address";
 			messageBean.setError(message);
-
 			return messageBean;
 		} else {
 			// Generate random 6 character string Pin for reset password
 			customerEntity.setCode(RandomStringUtils.randomNumeric(6).toString());
-
-			// save the token to the Database
+			logger.debug("Saving the customer Entity with the code generated" + " " + customerEntity);
+			// save the code to the Database
 			customerService.saveCustomer(customerEntity);
 
 			// Email Message
@@ -83,12 +80,11 @@ public class PasswordController {
 			emailService.sendEmail(passwordResetEmail);
 			logger.info("Email with a reset code sent");
 		}
-
 		return messageBean;
 	}
 
 	/*
-	 * End Point to verify the resetcode for password change
+	 * End Point to verify the reset code for password change
 	 * 
 	 * @param String code
 	 * 
@@ -105,15 +101,13 @@ public class PasswordController {
 		// If customer is present check if the code matches
 		logger.debug(
 				"verifying if the customerEntity Bean exists and the param code value matches the code saved for the customer in the database");
-		if (customerEntity != null && code.equals(customerEntity.getCode())) 
+		if (customerEntity != null && code.equals(customerEntity.getCode()))
 			return messageBean;
-		 else { // Code not found in DB
+		else { // Code not found in DB
 			logger.error("Code verfication failed");
 			messageBean.setError("Hmm, that's not the right code.");
-			
 		}
 		return messageBean;
-
 	}
 
 	/*
@@ -133,7 +127,6 @@ public class PasswordController {
 			messageBean.setError(message);
 			return messageBean;
 		}
-
 		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId");
 		// Find the user associated with the emailId
 		CustomerEntity customerEntity = customerService.getCustomer(customerDto.getEmailid());
@@ -158,7 +151,5 @@ public class PasswordController {
 			messageBean.setError("We experienced an error while saving your new password");
 		}
 		return messageBean;
-
 	}
-
 }

@@ -12,14 +12,17 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
+/*@author Shreya S Jalihal
+ *Entity class for States 
+ */
 @Data
 @Entity
 @Table(name="States")
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class StatesEntity implements Serializable{
 	
 	private static final long serialVersionUID = 4254428267358544179L;
@@ -34,20 +37,5 @@ public class StatesEntity implements Serializable{
 	@OneToMany /* (cascade=CascadeType.ALL) */
 	@JoinColumn(name="c_stateID")
 	private List<CityEntity> cities;
-	
-	
-	
-	public StatesEntity() {}
-	
-	public StatesEntity(String stateID, String stateName, Date creation_date, Date modified_date) {
-		super();
-		this.stateID = stateID;
-		this.stateName = stateName;
-		this.creation_date = creation_date;
-		this.modified_date = modified_date;
-	}
-
-	
-	
 	
 }

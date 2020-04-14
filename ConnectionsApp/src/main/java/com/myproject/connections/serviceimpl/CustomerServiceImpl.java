@@ -5,25 +5,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
 
 /**
+ * Service class implementation for Customer
+ * 
  * @author Shridha S Jalihal
  *
  */
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	/**
-	 * 
-	 */
 	private static Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
 	@Autowired
 	private CustDetailsRepository custDetailsRepository;
@@ -31,7 +30,9 @@ public class CustomerServiceImpl implements CustomerService {
 	/*
 	 * service method to save Customer data in the database
 	 * 
-	 * @param customerDetails sql bean
+	 * @param CustomerEntity bean
+	 * 
+	 * return long
 	 */
 	public Long saveCustomer(CustomerEntity customerEntity) {
 		logger.debug("Encrypted password using password Encoder");
@@ -46,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
 	/*
 	 * service method to update Customer data in the database
 	 * 
-	 * @param customerDetails sql bean
+	 * @param CustomerEntity bean
 	 */
 	public void updateUser(CustomerEntity customerEntity) {
 		logger.debug("Encrypted password using password Encoder");
@@ -64,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	/*
 	 * service method to get check if an Email Id exists in the database and return
-	 * the associated
+	 * boolean value
 	 * 
 	 * @param String emailId
 	 * 
@@ -74,18 +75,10 @@ public class CustomerServiceImpl implements CustomerService {
 		logger.info("Checking if the emailID already exists");
 		logger.debug("Check if the email ID already exists using UniqeEmailCustomValidator:" + emailId);
 		boolean userInDb = true;
-		if (findByEmailId(emailId)!=null)
+		if (getCustomer(emailId) != null)
 			return userInDb;
 		else
 			return false;
-	}
-	
-	/*Method call to customerRepository to get the CustomerDetails
-	 * @param emailid
-	 * @return CustomerDetails
-	 */
-	public CustomerEntity findByEmailId(String emailid){
-		return custDetailsRepository.findByEmailid(emailid);
 	}
 
 	/*
@@ -93,25 +86,11 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 * @param String emailId
 	 * 
-	 * @return CustomerEntity Bean
+	 * @return CustomerEntity bean
 	 */
 	public CustomerEntity getCustomer(String emailId) {
 		logger.debug("Fetching a Customer with Unique EmailId");
 		CustomerEntity customerEntity = custDetailsRepository.findByEmailid(emailId);
 		return customerEntity;
-
 	}
-
-	/*
-	 * service method to update Customer's new password
-	 * 
-	 * @param CustomerEntity Bean
-	 * 
-	 */
-	public void updatePassword(CustomerEntity customerEntity) {
-		logger.debug("Saving customerEntity bean with new password");
-		custDetailsRepository.save(customerEntity);
-
-	}
-
 }
