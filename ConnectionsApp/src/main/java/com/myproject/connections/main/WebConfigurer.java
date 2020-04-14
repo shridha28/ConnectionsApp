@@ -1,4 +1,4 @@
-package com.myproject.connections.ConnectionsApp;
+package com.myproject.connections.main;
 
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

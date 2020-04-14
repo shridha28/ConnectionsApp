@@ -1,4 +1,4 @@
-package com.myproject.connections.ConnectionsApp;
+package com.myproject.connections.main;
 
 
 import org.slf4j.Logger;
@@ -14,6 +14,7 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.myproject.connections.main.ConnectionsAppApplication;
 import com.myproject.connections.entitybeans.BeanAuditorAware;
 
 
