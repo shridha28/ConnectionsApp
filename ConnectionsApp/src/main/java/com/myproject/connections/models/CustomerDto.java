@@ -10,7 +10,9 @@ import org.springframework.hateoas.RepresentationModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/*@author Shridha S Jalihal
+ *Dto class for Customer 
+ */
 @Data
 @NoArgsConstructor
 public class CustomerDto extends RepresentationModel<CustomerDto> implements Serializable{

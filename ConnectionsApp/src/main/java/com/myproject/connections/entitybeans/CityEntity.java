@@ -11,7 +11,9 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/*@author Shridha S Jalihal
+ *Entity class for City 
+ */
 @Entity
 @Table(name="City")
 @IdClass(CityPK.class)

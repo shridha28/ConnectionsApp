@@ -12,44 +12,50 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myproject.connections.entitybeans.CityEntity;
-import com.myproject.connections.entitybeans.StatesEntity;
 import com.myproject.connections.models.StatesDto;
 import com.myproject.connections.serviceimpl.StatesServiceImpl;
 
-
+/**
+ * Class CustomerController. The contoller for States api requests.
+ * 
+ * @author Shridha S Jalihal
+ *
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StatesController {
-	
-	
-    private static Logger logger = LoggerFactory.getLogger(StatesController.class);
-	
+
+	private static Logger logger = LoggerFactory.getLogger(StatesController.class);
+
 	@Autowired
 	StatesServiceImpl stateService;
-	
+
 	/*
-	 * @GetMapping("/getStatesData") public Iterable<StatesEntity> getStates(){
-	 * logger.info("Retrieving list of states"); Iterable<StatesEntity> assureurs =
-	 * new ArrayList<>(); assureurs = stateService.getAllStates(); return assureurs;
+	 * End Point to get cities associated with a stateID from the database
 	 * 
-	 * }
+	 * @pathvariable String state
+	 *
+	 * @return list of CityEntity objects
 	 */
-	
 	@GetMapping("/getStatesData/{stateID}")
-	public List<CityEntity> getCitiesPerState(@PathVariable("stateID") String state){
-		
+	public List<CityEntity> getCitiesPerState(@PathVariable("stateID") String state) {
+
 		List<CityEntity> cities = stateService.getCityPerState(state);
 		return cities;
 	}
-	
-	//Shreya
+
+	/*
+	 * End Point to get all States
+	 * 
+	 * @return Iterable list of StatesDto beans
+	 */
 	@GetMapping("/getStatesData")
-	public Iterable<StatesDto> getAllStates(){
+	public Iterable<StatesDto> getAllStates() {
 		logger.info("Retrieving list of states");
-		 Iterable<StatesDto> assureurs = new ArrayList<>();
-		 assureurs = stateService.getStates();
-		return assureurs;
-		
+		Iterable<StatesDto> listofStatesDto = new ArrayList<>();
+		listofStatesDto = stateService.getAllStates();
+		return listofStatesDto;
+
 	}
 
 }

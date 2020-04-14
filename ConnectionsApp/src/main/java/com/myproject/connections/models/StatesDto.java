@@ -1,7 +1,5 @@
 package com.myproject.connections.models;
 
-/*@author="Shreya"*/
-//Created a Dto/Pojo class for States_27032020// 
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/*@author Shridha S Jalihal
+ *Dto class for States 
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
