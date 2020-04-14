@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.myproject.connections.entitybeans.CityEntity;
+import com.myproject.connections.entitybeans.StatesEntity;
 import com.myproject.connections.mapper.StateMapper;
 import com.myproject.connections.models.StatesDto;
 import com.myproject.connections.repository.CityRepository;
@@ -48,15 +49,13 @@ public class StatesServiceImpl implements StatesService {
 	}
 
 	/*
-	 * method to retrieve list of cities associated with every state
+	 * method to retrieve list of StatesEntity beans from the database
 	 *
-	 * @param String state
-	 *
-	 * @return list of CityEntity beans
+	 * @return list of StatesEntity beans
 	 */
-	public List<CityEntity> getCityPerState(String state) {
+	public List<StatesEntity> findAllStates() {
+		return stateRepository.findAll(Sort.by(Sort.Direction.ASC, "stateName"));
 
-		return cityRepository.findByCstateIDOrderByCityNameAsc(state);
 	}
 
 }

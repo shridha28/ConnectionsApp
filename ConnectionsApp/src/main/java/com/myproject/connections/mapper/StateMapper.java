@@ -3,6 +3,7 @@ package com.myproject.connections.mapper;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
@@ -10,9 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+
 import com.myproject.connections.entitybeans.StatesEntity;
 import com.myproject.connections.models.StatesDto;
-import com.myproject.connections.repository.StateRepository;
+import com.myproject.connections.serviceimpl.StatesServiceImpl;
 
 /*@author Shreya S Jalihal
  *Mapper class for States class
@@ -23,7 +25,7 @@ public class StateMapper {
 	private static Logger logger = LoggerFactory.getLogger(StateMapper.class);
 
 	@Autowired
-	StateRepository stateRepository;
+	StatesServiceImpl statesServiceImpl;
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -61,7 +63,7 @@ public class StateMapper {
 	 */
 	public List<StatesDto> getListofStatesDto() {
 		logger.info("Mapping list of StatesEntity Objects to list of StatesDto Objects");
-		List<StatesEntity> statesEntityList = stateRepository.findAll(Sort.by(Sort.Direction.ASC, "stateName"));
+		List<StatesEntity> statesEntityList = statesServiceImpl.findAllStates();
 		Type listType = new TypeToken<List<StatesDto>>() {
 		}.getType();
 

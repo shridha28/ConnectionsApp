@@ -12,7 +12,7 @@ import com.myproject.connections.entitybeans.CityEntity;
 public interface CityRepository extends JpaRepository<CityEntity, String> {
 
 	
-	/*Method to get CustomerDetails data based on EmaiID
+	/*Method to get list of CityEntity beans based on StateID
 	 *@param String stateID
 	 *@return List of CityEntity beans
 	 */

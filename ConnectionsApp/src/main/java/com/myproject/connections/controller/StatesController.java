@@ -31,20 +31,6 @@ public class StatesController {
 	StatesServiceImpl stateService;
 
 	/*
-	 * End Point to get cities associated with a stateID from the database
-	 * 
-	 * @pathvariable String state
-	 *
-	 * @return list of CityEntity objects
-	 */
-	@GetMapping("/getStatesData/{stateID}")
-	public List<CityEntity> getCitiesPerState(@PathVariable("stateID") String state) {
-
-		List<CityEntity> cities = stateService.getCityPerState(state);
-		return cities;
-	}
-
-	/*
 	 * End Point to get all States
 	 * 
 	 * @return Iterable list of StatesDto beans
