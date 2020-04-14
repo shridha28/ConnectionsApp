@@ -1,7 +1,10 @@
 package com.myproject.connections.models;
-/*@author="Shreya"*/
+
 import lombok.Data;
 
+/*@author Shreya S Jalihal
+ *Dto class for Address 
+ */
 @Data
 public class AddressDto {
 
