@@ -19,6 +19,7 @@
       code:any;
       emailid:string;
       message:string;
+      error:any=[];
       toggle1: boolean = false;
       toggle2: boolean = false;
 
@@ -50,7 +51,11 @@
               else
                  this.message=this.response.error;
             },
-            err=> {alert("Sorry an error occured");
+            err=> {
+              console.error('error caught in component');
+              console.log(err);
+              this.error=err;
+              //throw err;
           });
         }
         //function call to save the new password of the customer to the database.
@@ -67,7 +72,8 @@
                 alert("Your password has been changed successfully");
                 this.router.navigateByUrl('/loginsignup');
             },
-            err=> {alert("Sorry an error occured");
+            err=> {
+              this.error=err;
           });
         }
 

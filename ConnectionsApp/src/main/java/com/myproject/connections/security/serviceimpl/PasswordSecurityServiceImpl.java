@@ -1,4 +1,4 @@
-package com.myproject.connections.controller;
+package com.myproject.connections.security.serviceimpl;
 
 import java.util.Optional;
 
@@ -8,26 +8,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
 import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.service.EmailService;
+import com.myproject.connections.service.PasswordSecurityService;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
-/*@author Shreya S Jalihal
- * PasswordController:Controller class to handle forgot password/password change api requests.
+/**
+ * @author Shreya S Jalihal Service class PasswordSecurityServiceImpl for Password
+ *         change related functionality.
  */
-@RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-public class PasswordController {
+@Service
+public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 
 	@Autowired
 	private CustomerServiceImpl customerService;
@@ -38,20 +33,18 @@ public class PasswordController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	private static final Logger logger = LoggerFactory.getLogger(PasswordController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PasswordSecurityServiceImpl.class);
 
 	/*
-	 * End Point to generate and save reset code for changing password and send an
-	 * email to the customer with the reset code
+	 * Method to send an email with ResetCode for password change
 	 * 
-	 * @param String emailId
+	 * @param emailid.
 	 * 
-	 * @return messageBean contains server errors if any after server validation
+	 * return MessageBean bean
 	 */
-	@PostMapping("/forgotPassword")
-	public MessageBean processForgotPasswordForm(@RequestBody String emailId) {
-		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId ");
+	public MessageBean sendEmailWithResetCode(String emailId) {
 		MessageBean messageBean = new MessageBean();
+		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId ");
 		CustomerEntity customerEntity = customerService.getCustomer(emailId);
 		Optional<CustomerEntity> optionalCustomer = Optional.ofNullable(customerEntity);
 		logger.debug("Validating if a CustomerEntity associated to the emailId exists");
@@ -60,7 +53,7 @@ public class PasswordController {
 			messageBean.setError(message);
 			return messageBean;
 		} else {
-			// Generate random 6 character string Pin for reset password
+			// Generate random 6 character string code for reset password
 			customerEntity.setCode(RandomStringUtils.randomNumeric(6).toString());
 			logger.debug("Saving the customer Entity with the code generated" + " " + customerEntity);
 			// save the code to the Database
@@ -81,20 +74,17 @@ public class PasswordController {
 			logger.info("Email with a reset code sent");
 		}
 		return messageBean;
+
 	}
 
 	/*
-	 * End Point to verify the reset code for password change
+	 * Method to verify Code for password change
 	 * 
-	 * @param String code
+	 * @param String code,String emailId.
 	 * 
-	 * @param String emailId
-	 * 
-	 * @return messageBean contains server errors if any after server validation
+	 * return MessageBean bean
 	 */
-	@GetMapping("/resetform")
-	public MessageBean displayResetPasswordPage(@RequestParam("code") String code,
-			@RequestParam("emailId") String emailId) {
+	public MessageBean verifyResetCode(String code, String emailId) {
 		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId ");
 		CustomerEntity customerEntity = customerService.getCustomer(emailId);
 		MessageBean messageBean = new MessageBean();
@@ -111,22 +101,14 @@ public class PasswordController {
 	}
 
 	/*
-	 * End Point to save the Customer Entity with new password
+	 * Method to save new Password after password change
 	 * 
-	 * @param CustomerDto customerDto
+	 * @param CustomerDto customerDto.
 	 * 
-	 * @return messageBean contains server errors if any after server validation
+	 * return MessageBean bean
 	 */
-	@PostMapping("/reset")
-	public MessageBean setNewPassword(@RequestBody CustomerDto customerDto, BindingResult bindingResult) {
-		logger.info("Validating customer details");
+	public MessageBean saveCustomerwithnewPassword(CustomerDto customerDto) {
 		MessageBean messageBean = new MessageBean();
-		if (bindingResult.hasErrors()) {
-			logger.debug("Server error: Invalid Customer details,returning server error in the front end");
-			String message = bindingResult.getFieldError().getDefaultMessage();
-			messageBean.setError(message);
-			return messageBean;
-		}
 		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId");
 		// Find the user associated with the emailId
 		CustomerEntity customerEntity = customerService.getCustomer(customerDto.getEmailid());

@@ -3,6 +3,11 @@
     <br/>&nbsp;
 </div>
 <div class="container" *ngIf="isHidden">
+  <div class="row" *ngIf="error.length>0">
+      <div class="col-sm-12 alert alert-warning">
+      {{error}}
+    </div>
+  </div>
     <div class="row">
         <div class="offset-3"></div>
         <div class="col-md-3">
@@ -29,6 +34,11 @@
     </div>
 </div>
 <div class="container" *ngIf="!isHidden">
+  <div class="row" *ngIf="error.length>0">
+      <div class="col-sm-12 alert alert-warning">
+      {{error}}
+    </div>
+  </div>
     <div>
         <p> Your code is verified! You can set your new password now</p>
     </div>
@@ -78,7 +88,7 @@
                     <div *ngIf="retypedpassword.errors?.notEqual && newPasswordForm.submitted" style="color:red">
                         Password and Retyped Password Do Not Match
                     </div>
-
+                    <br>
                     <button type="submit" class="btn btn-info">
                         <span>Submit</span>
                     </button>
