@@ -1,103 +1,100 @@
 <div *ngIf="isHidden">
-    <h2><p><b>We just sent you a verification code</b></p></h2> We just sent a verification code to your email. If you don't see our email in your inbox, check your spam folder
-    <br/>&nbsp;
+   <h2>
+      <p><b>We just sent you a verification code</b></p>
+   </h2>
+   We just sent a verification code to your email. If you don't see our email in your inbox, check your spam folder
+   <br/>&nbsp;
 </div>
 <div class="container" *ngIf="isHidden">
-
-  <div class="row" *ngIf="error.length>0">
+   <div class="row" *ngIf="error.length>0">
       <div class="col-sm-12 alert alert-warning">
-      {{error}}
-    </div>
-  </div>
-    <div class="row">
-        <div class="offset-3"></div>
-        <div class="col-md-3">
-            <form name="form" #verificationForm="ngForm" novalidate (submit)="verificationForm.form.valid && verifyCode()">
-                <!--Code-->
-                <div class="form-group">
-                    <label for="code"></label>
-                    <input [(ngModel)]="code" type="text" id="code" class="form-control" name="code" required #codeInput="ngModel" [ngClass]="{'is-invalid':verificationForm.submitted && codeInput.invalid}" placeholder="Enter Code" />
-                </div>
-                <div *ngIf="
-                            codeInput.errors?.required && verificationForm.submitted" style="color:red">
-                    Please enter the code.
-                </div>
-                <div id="error" *ngIf="message">
-                    <p>{{message}}</p>
-                </div>
-                <br/>&nbsp;
-                <button type="submit" class="btn btn-info">
-                    <i class="fa"></i>
-                    <span>Submit</span>
-                </button>
-            </form>
-        </div>
-    </div>
+         {{error}}
+      </div>
+   </div>
+   <div class="row">
+      <div class="offset-3"></div>
+      <div class="col-md-3">
+         <form name="form" #verificationForm="ngForm" novalidate (submit)="verificationForm.form.valid && verifyCode()">
+         <!--Code-->
+         <div class="form-group">
+            <label for="code"></label>
+            <input [(ngModel)]="code" type="text" id="code" class="form-control" name="code" required #codeInput="ngModel" [ngClass]="{'is-invalid':verificationForm.submitted && codeInput.invalid}" placeholder="Enter Code" />
+         </div>
+         <div *ngIf="
+            codeInput.errors?.required && verificationForm.submitted" style="color:red">
+            Please enter the code.
+         </div>
+         <div id="error" *ngIf="message">
+            <p>{{message}}</p>
+         </div>
+         <br/>&nbsp;
+         <button type="submit" class="btn btn-info">
+         <i class="fa"></i>
+         <span>Submit</span>
+         </button>
+         </form>
+      </div>
+   </div>
 </div>
 <div class="container" *ngIf="!isHidden">
-<<<<<<< HEAD
-  <div class="row" *ngIf="error.length>0">
+   <div class="row" *ngIf="error.length>0">
       <div class="col-sm-12 alert alert-warning">
-      {{error}}
-    </div>
-  </div>
-    <div>
-        <p> Your code is verified! You can set your new password now</p>
-    </div>
-    <div class="row">
-        <div class="offset-3"></div>
-        <div class="col-md-6">
-            <form name="changePasswordForm" #newPasswordForm="ngForm" novalidate (submit)="newPasswordForm.form.valid && saveNewPassword()">
-                <div class="form-group">
-                    <label for="newpassword">Enter new password</label>
-                    <i class="fa fa-fw fa-info-circle" title="
-                    -Atleast 8 characters.
-                    -Atleast one lowercase letter.
-                    -Atleast one uppercase letter.
-                    -Atleast one digit.
-                    -Atleast one special character." aria-hidden="true"></i>
-                    <div class="input-group">
-                        <input passwordStrength ngModel [(ngModel)]="resetPassword.password" type="password" #passwordone id="newpassword" class="form-control" name="newpassword" placeholder="Enter new password" #newpasswordr="ngModel" [ngClass]="{'is-invalid':newPasswordForm.submitted && newpasswordr.invalid}" required />
-                        <div class="input-group-append" (click)="showPassword(passwordone, 1)">
-                            <span class="input-group-text">  <i [ngClass]="toggle1 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
-                                  </span>
-                        </div>
-                    </div>
-                    <div *ngIf="newpasswordr.errors?.required && newPasswordForm.submitted" style="color:red">
-                        Password is required.
-                    </div>
-                    <div *ngIf="!newpasswordr.errors?.required">
-                        <div *ngIf="newpasswordr.errors?.invalidp && newPasswordForm.submitted" style="color:red">
-                            Password Invalid. Please refer to the info.
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label for="retypepassword">Retype password</label>
-                    <div class="input-group">
-                        <input validatePassword="newpassword" ngModel type="password" #passwordtwo id="retypepassword" class="form-control" name="retypepassword" placeholder="Retype new password" #retypedpassword="ngModel" [ngClass]="{'is-invalid':newPasswordForm.submitted && retypedpassword.invalid
-                               && newpasswordr.valid}" required/>
-                        <div class="input-group-append" (click)="showPassword(passwordtwo, 2)">
-                            <span class="input-group-text">  <i [ngClass]="toggle2 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
-                                  </span>
-                        </div>
-                    </div>
-                    <div *ngIf="retypedpassword.errors?.required && newPasswordForm.submitted" style="color:red">
-                        Please confirm your password.
-                    </div>
-
-                    <div *ngIf="retypedpassword.errors?.notEqual && newPasswordForm.submitted" style="color:red">
-                        Password and Retyped Password Do Not Match
-                    </div>
-
-                    <br>
-                    <button type="submit" class="btn btn-info">
-                        <span>Submit</span>
-                    </button>
-
-                </div>
-            </form>
-        </div>
-    </div>
+         {{error}}
+      </div>
+   </div>
+   <div>
+      <p> Your code is verified! You can set your new password now</p>
+   </div>
+   <div class="row">
+      <div class="offset-3"></div>
+      <div class="col-md-6">
+         <form name="changePasswordForm" #newPasswordForm="ngForm" novalidate (submit)="newPasswordForm.form.valid && saveNewPassword()">
+         <div class="form-group">
+            <label for="newpassword">Enter new password</label>
+            <i class="fa fa-fw fa-info-circle" title="
+               -Atleast 8 characters.
+               -Atleast one lowercase letter.
+               -Atleast one uppercase letter.
+               -Atleast one digit.
+               -Atleast one special character." aria-hidden="true"></i>
+            <div class="input-group">
+               <input passwordStrength ngModel [(ngModel)]="resetPassword.password" type="password" #passwordone id="newpassword" class="form-control" name="newpassword" placeholder="Enter new password" #newpasswordr="ngModel" [ngClass]="{'is-invalid':newPasswordForm.submitted && newpasswordr.invalid}" required />
+               <div class="input-group-append" (click)="showPassword(passwordone, 1)">
+                  <span class="input-group-text">  <i [ngClass]="toggle1 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                  </span>
+               </div>
+            </div>
+            <div *ngIf="newpasswordr.errors?.required && newPasswordForm.submitted" style="color:red">
+               Password is required.
+            </div>
+            <div *ngIf="!newpasswordr.errors?.required">
+               <div *ngIf="newpasswordr.errors?.invalidp && newPasswordForm.submitted" style="color:red">
+                  Password Invalid. Please refer to the info.
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="retypepassword">Retype password</label>
+            <div class="input-group">
+               <input validatePassword="newpassword" ngModel type="password" #passwordtwo id="retypepassword" class="form-control" name="retypepassword" placeholder="Retype new password" #retypedpassword="ngModel" [ngClass]="{'is-invalid':newPasswordForm.submitted && retypedpassword.invalid
+               && newpasswordr.valid}" required/>
+               <div class="input-group-append" (click)="showPassword(passwordtwo, 2)">
+                  <span class="input-group-text">  <i [ngClass]="toggle2 ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                  </span>
+               </div>
+            </div>
+            <div *ngIf="retypedpassword.errors?.required && newPasswordForm.submitted" style="color:red">
+               Please confirm your password.
+            </div>
+            <div *ngIf="retypedpassword.errors?.notEqual && newPasswordForm.submitted" style="color:red">
+               Password and Retyped Password Do Not Match
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info">
+            <span>Submit</span>
+            </button>
+         </div>
+         </form>
+      </div>
+   </div>
 </div>
