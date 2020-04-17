@@ -7,7 +7,7 @@ import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import {Router,Routes, RouterModule} from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { config } from 'rxjs';
 import {ForgotPasswordDialog} from '../app/loginsignup/forgotpassword.component';
 import { EditprofileComponent } from './loginsignup/editprofile/editprofile.component';
@@ -22,6 +22,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {PasswordValidatorDirective} from './directives-shared/confirm-equal-validator.directive';
 import { ResetComponent } from './reset/reset.component';
 import {LoginsignupService} from './loginsignup/loginsignup.service';
+import { GlobalHttpInterceptorService} from './services-shared/global-http-interceptor.service';
 
 
 
@@ -94,7 +95,7 @@ const appRoutes:Routes=[
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [LoginsignupService],
+  providers: [LoginsignupService,{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  }],
   entryComponents: [ForgotPasswordDialog],
   bootstrap: [AppComponent]
 })

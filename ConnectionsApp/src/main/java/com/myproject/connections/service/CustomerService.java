@@ -7,6 +7,6 @@ public interface CustomerService {
 	
 	public Long saveCustomer(CustomerEntity customer);
 	public boolean doesEmailExist(String emailId);
-	public void updateUser(CustomerEntity customer);
+	public void updateCustomer(CustomerEntity customerEntity);
 	
 }

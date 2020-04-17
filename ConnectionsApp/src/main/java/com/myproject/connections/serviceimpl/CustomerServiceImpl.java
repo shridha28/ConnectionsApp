@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.myproject.connections.entitybeans.CustomerEntity;
+import com.myproject.connections.exceptions.EmailNotFoundException;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
 
@@ -93,4 +94,17 @@ public class CustomerServiceImpl implements CustomerService {
 		CustomerEntity customerEntity = custDetailsRepository.findByEmailid(emailId);
 		return customerEntity;
 	}
+
+	/*
+	 * service method to update Customer's new password
+	 * 
+	 * @param CustomerEntity Bean
+	 * 
+	 */
+	public void updateCustomer(CustomerEntity customerEntity) {
+		logger.debug("Saving customerEntity bean with new password");
+		custDetailsRepository.save(customerEntity);
+
+	}
+
 }
