@@ -27,7 +27,11 @@ import com.myproject.connections.main.ConnectionsAppApplication;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
-
+/*
+ * @author Shridha S Jalihal
+ * Integration test Class to test Basic Authentication 
+ * for logging in the application.
+ * */
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes=ConnectionsAppApplication.class)
 @Transactional

@@ -18,6 +18,12 @@ import org.springframework.web.context.WebApplicationContext;
 import com.myproject.connections.controller.StatesController;
 import com.myproject.connections.main.ConnectionsAppApplication;
 
+
+/*
+ * @author Shridha S Jalihal
+ * Integration test Class to test the States Controller class to  
+ * retrieve states and cities data.
+ * */
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT,classes = StatesController.class)
 @ContextConfiguration(classes=ConnectionsAppApplication.class)
 class StatesControllerIntegrationTest {
