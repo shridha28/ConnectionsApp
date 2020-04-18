@@ -10,6 +10,6 @@ public interface PasswordSecurityService {
 	
 	public MessageBean sendEmailWithResetCode(String emailId);
 	public MessageBean verifyResetCode(String code, String emailId);
-	public MessageBean saveCustomerwithnewPassword(CustomerDto customerDto);
+	public MessageBean saveCustomerWithNewPassword(CustomerDto customerDto);
 
 }
