@@ -107,7 +107,7 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 	 * 
 	 * return MessageBean bean
 	 */
-	public MessageBean saveCustomerwithnewPassword(CustomerDto customerDto) {
+	public MessageBean saveCustomerWithNewPassword(CustomerDto customerDto) {
 		MessageBean messageBean = new MessageBean();
 		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId");
 		// Find the user associated with the emailId
@@ -134,4 +134,10 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 		}
 		return messageBean;
 	}
+	
+	
+	
+	
+	
+	
 }

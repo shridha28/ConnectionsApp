@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myproject.connections.entitybeans.MessageBean;
 import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.security.serviceimpl.PasswordSecurityServiceImpl;
-import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
 /*@author Shreya S Jalihal
  * PasswordController:Controller class to handle forgot password/password change api requests.
@@ -22,9 +21,6 @@ import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PasswordController {
-
-	@Autowired
-	private CustomerServiceImpl customerService;
 
 	@Autowired
 	private PasswordSecurityServiceImpl passwordSecurityServiceImpl;
@@ -79,6 +75,6 @@ public class PasswordController {
 			messageBean.setError(message);
 			return messageBean;
 		}
-		return passwordSecurityServiceImpl.saveCustomerwithnewPassword(customerDto);
+		return passwordSecurityServiceImpl.saveCustomerWithNewPassword(customerDto);
 	}
 }
