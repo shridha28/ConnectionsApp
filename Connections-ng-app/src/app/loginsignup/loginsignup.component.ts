@@ -7,6 +7,7 @@ import {ForgotPasswordDialog} from './forgotpassword.component';
 import {LoginsignupService} from './loginsignup.service';
 import {environment} from '../../environments/environment';
 import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
+import { debuglog } from 'util';
 
 
 @Component({
@@ -35,7 +36,6 @@ export class LoginsignupComponent implements OnInit {
   constructor(private http:HttpClient,
     private router: Router, private _route:ActivatedRoute,private transferService:DataServiceService,
     private dialog: MatDialog,private loginsignupservice:LoginsignupService) { 
-
       transferService.setData(this.signupModel.emailid);
     }
 
@@ -44,10 +44,12 @@ export class LoginsignupComponent implements OnInit {
     const headers = new HttpHeaders(this.loginModel ? {
       authorization : 'Basic ' + btoa(this.loginModel.emailId + ':' + this.loginModel.password)
   } : {});
-
+debugger
   this.http.get(url, {headers: headers,observe:'response'}).subscribe(response => {
-      if(response!=null && response.status==200)
+      if(response!=null && response.status==200){
+        localStorage.setItem('currentUser',this.loginModel.emailId);
         this.router.navigateByUrl('/activities');
+      }
   },error=>{
     this.loginError = "Invalid Credentials.Please try again."
   });
@@ -59,6 +61,7 @@ export class LoginsignupComponent implements OnInit {
       this.transferService.setData(this.signupModel.emailid);   
       this.response = JSON.parse(JSON.stringify(res));
         if(this.response.error==null || this.response.error=="")
+        localStorage.setItem('currentUser',this.signupModel.emailid);
            this.router.navigateByUrl('/editProfile');
          },
       err=> {alert("Sorry an error occured");

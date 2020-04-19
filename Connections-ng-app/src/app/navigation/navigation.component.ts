@@ -1,5 +1,6 @@
 import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import {DataServiceService} from '../services-shared/data-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -10,7 +11,7 @@ export class NavigationComponent implements OnInit{
 
   isUserLoggedIn: boolean;
   constructor(private dataSharingService: DataServiceService,
-    private changeDetectorRef: ChangeDetectorRef) {
+    private changeDetectorRef: ChangeDetectorRef,private router: Router) {
     
    }
 
@@ -21,4 +22,11 @@ export class NavigationComponent implements OnInit{
     }); 
   }
 
+
+  logout():void{
+    localStorage.removeItem('currentUser');
+    this.router.navigateByUrl('/loginsignup');
+    this.isUserLoggedIn = false;
+
+  }
 }

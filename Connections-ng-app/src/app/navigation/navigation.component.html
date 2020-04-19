@@ -18,6 +18,11 @@
         <li class="nav-item" *ngIf="isUserLoggedIn" >
           <a class="nav-link" routerLink="/feedback" routerLinkActive="active">Feedback</a>
         </li>
+       
+        
       </ul>
+      <div class="shiftend" *ngIf="isUserLoggedIn">
+          <a class="nav-link" routerLink="/logout"  (click)="logout()" style="color:white">Logout</a>
+      </div>
     </div>
   </nav>

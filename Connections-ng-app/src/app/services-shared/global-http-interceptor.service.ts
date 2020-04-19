@@ -10,14 +10,15 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
 intercept(request:HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>>{
       return next.handle(request)
       .pipe(
-         catchError( (error: HttpErrorResponse) => {
+         catchError((error: HttpErrorResponse) => {
             let errMsg = '';
             // Client Side Error
             if (error.error instanceof ErrorEvent) {
               errMsg = `Error: ${error.error.message}`;
               console.log('error is intercepted');
             }
-            else {  // Server Side Error
+            // Server Side Error
+            else { 
               errMsg = `Error Code: ${error.status},  Message: ${error.message}`;
               console.log('error is intercepted');
             }

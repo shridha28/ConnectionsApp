@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {DataServiceService} from '../services-shared/data-service.service';
 
 @Component({
   selector: 'app-feedback',
@@ -12,10 +13,12 @@ export class FeedbackComponent implements OnInit {
     email:'',
     feedback:''
   };
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private transferService:DataServiceService) {
 
    }
   ngOnInit(): void { 
+    if(localStorage.getItem('currentUser'))
+    this.transferService.isUserLoggedIn.next(true);
   }
 
   sendFeedback():void{
