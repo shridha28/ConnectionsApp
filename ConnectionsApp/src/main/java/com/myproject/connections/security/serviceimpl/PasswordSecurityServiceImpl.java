@@ -12,14 +12,15 @@ import org.springframework.stereotype.Service;
 
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
+import com.myproject.connections.exceptions.EmailNotFoundException;
 import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.service.EmailService;
 import com.myproject.connections.service.PasswordSecurityService;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 
 /**
- * @author Shreya S Jalihal Service class PasswordSecurityServiceImpl for Password
- *         change related functionality.
+ * @author Shreya S Jalihal Service class PasswordSecurityServiceImpl for
+ *         Password change related functionality.
  */
 @Service
 public class PasswordSecurityServiceImpl implements PasswordSecurityService {
@@ -42,39 +43,41 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 	 * 
 	 * return MessageBean bean
 	 */
-	public MessageBean sendEmailWithResetCode(String emailId) {
-		MessageBean messageBean = new MessageBean();
+	public MessageBean sendEmailWithResetCode(String emailId,MessageBean messageBean)throws EmailNotFoundException  {
 		logger.debug("Retrieving CustomerEntity Bean from the database associated with emailId ");
 		CustomerEntity customerEntity = customerService.getCustomer(emailId);
 		Optional<CustomerEntity> optionalCustomer = Optional.ofNullable(customerEntity);
 		logger.debug("Validating if a CustomerEntity associated to the emailId exists");
-		if (!optionalCustomer.isPresent()) {
-			String message = "Oops! We didn't find an account for that e-mail address";
-			messageBean.setError(message);
-			return messageBean;
-		} else {
-			// Generate random 6 character string code for reset password
-			customerEntity.setCode(RandomStringUtils.randomNumeric(6).toString());
-			logger.debug("Saving the customer Entity with the code generated" + " " + customerEntity);
-			// save the code to the Database
-			customerService.updateCustomer(customerEntity);
+		
+			//isPresent() returns true if the Optional contains a non-null value
+			if (!optionalCustomer.isPresent()) {
+				String message = "Oops! We didn't find an account for that e-mail address";
+				messageBean.setError(message);
+				logger.error("Email not found in the database");
+				throw new EmailNotFoundException(emailId+" "+"Email not found in the Database");
+			}
+			 else {
+				// Generate random 6 character string code for reset password
+				customerEntity.setCode(RandomStringUtils.randomNumeric(6).toString());
+				logger.debug("Saving the customer Entity with the code generated" + " " + customerEntity);
+				// save the code to the Database
+				customerService.updateCustomer(customerEntity);
 
-			// Email Message
-			logger.debug("Sending an email with a 6-digit code to reset password");
-			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
-			passwordResetEmail.setFrom("shreya.jalihal@gmail.com");
-			passwordResetEmail.setTo(customerEntity.getEmailid());
-			passwordResetEmail.setSubject("Password Reset Request");
-			passwordResetEmail.setText("Hi" + " " + customerEntity.getName() + "\n"
-					+ "We received a request to reset the password on your Account." + "\n" + customerEntity.getCode()
-					+ "\n" + "Enter this code to complete the reset." + "\n"
-					+ "Thanks for helping us keep your account secure." + "\n" + "The ConnectionsApp Team");
+				// Email Message
+				logger.debug("Sending an email with a 6-digit code to reset password");
+				SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
+				passwordResetEmail.setFrom("shreya.jalihal@gmail.com");
+				passwordResetEmail.setTo(customerEntity.getEmailid());
+				passwordResetEmail.setSubject("Password Reset Request");
+				passwordResetEmail.setText("Hi" + " " + customerEntity.getName() + "\n"
+						+ "We received a request to reset the password on your Account." + "\n"
+						+ customerEntity.getCode() + "\n" + "Enter this code to complete the reset." + "\n"
+						+ "Thanks for helping us keep your account secure." + "\n" + "The ConnectionsApp Team");
 
-			emailService.sendEmail(passwordResetEmail);
-			logger.info("Email with a reset code sent");
-		}
+				emailService.sendEmail(passwordResetEmail);
+				logger.info("Email with a reset code sent");
+		} 
 		return messageBean;
-
 	}
 
 	/*
@@ -134,10 +137,5 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 		}
 		return messageBean;
 	}
-	
-	
-	
-	
-	
-	
+
 }
