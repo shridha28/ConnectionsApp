@@ -53,8 +53,7 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 			if (!optionalCustomer.isPresent()) {
 				String message = "Oops! We didn't find an account for that e-mail address";
 				messageBean.setError(message);
-				logger.error("Email not found in the database");
-				throw new EmailNotFoundException(emailId+" "+"Email not found in the Database");
+				throw new EmailNotFoundException("Email not found in the Database");
 			}
 			 else {
 				// Generate random 6 character string code for reset password

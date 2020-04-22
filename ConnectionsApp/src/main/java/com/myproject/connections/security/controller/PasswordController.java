@@ -44,7 +44,7 @@ public class PasswordController {
 					"Calling PasswordSecurityServiceImpl to send an email on" + emailId + " " + "with a reset Code");
 			messageBean = passwordSecurityServiceImpl.sendEmailWithResetCode(emailId,messageBean);
 		} catch (EmailNotFoundException ex) {
-			return messageBean;
+			logger.error("Email not found in the Database");
 		}
 		return messageBean;
 
