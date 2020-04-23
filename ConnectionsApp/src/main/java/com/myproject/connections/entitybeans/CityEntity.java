@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
  *Entity class for City 
  */
 @Entity
-@Table(name="City")
 @IdClass(CityPK.class)
 @Data
+@Table(name="city")
 @NoArgsConstructor
 @AllArgsConstructor
 public class CityEntity implements Serializable {	

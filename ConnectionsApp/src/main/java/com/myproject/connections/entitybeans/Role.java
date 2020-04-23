@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 /*@author Shridha S Jalihal
  *Role Entity*/
 @Entity
-@Table(name = "Roles")
+@Table(name = "roles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

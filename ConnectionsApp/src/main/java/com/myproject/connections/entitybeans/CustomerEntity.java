@@ -22,9 +22,9 @@ import lombok.NoArgsConstructor;
  *Customer Entity to save CustomerDetails in the database*/
 @Entity
 @Data
+@Table(name="customers")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "customers")
 public class CustomerEntity extends Auditable<String> implements Serializable {
 
 	private static final long serialVersionUID = -3617767414915807263L;
@@ -33,20 +33,19 @@ public class CustomerEntity extends Auditable<String> implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String name;
-
 	@UniqueEmail
 	private String emailid;
-
-	@Embedded
-	private AddressEntity addressEntity;
-
+	
 	private String password;
+	
+	private String name;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "emailid"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
 	private String code;
 
+	@Embedded
+	private AddressEntity addressEntity;
 }

@@ -98,11 +98,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -114,6 +114,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+	<!-- mysql dependency for database -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+	</dependency>
+       
 	</dependencies>
 	
 	<dependencyManagement>
@@ -137,8 +143,9 @@
         <excludes>
           <exclude>**/*IntegrationTest.java</exclude>
         </excludes>
+        <skipTests>true</skipTests>
       </configuration>
-      <executions>
+      	<executions>
         <execution>
           <id>integration-test</id>
           <goals>
@@ -161,23 +168,26 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+              		<wait>1000</wait>
+              		<maxAttempts>180</maxAttempts>
+              		<skip>true</skip>
+     			</configuration>
 				<executions>
-          <execution>
-            <id>pre-integration-test</id>
-            <goals>
-              <goal>start</goal>
-            </goals>
-            
-          </execution>
-          <execution>
-            <id>post-integration-test</id>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-            
-          </execution>
-        </executions>
-    	</plugin>
+		          <execution>
+		            <id>pre-integration-test</id>
+		            <goals>
+		              <goal>start</goal>
+		            </goals>
+		          </execution>
+		          <execution>
+		            <id>post-integration-test</id>
+		            <goals>
+		              <goal>stop</goal>
+		            </goals>
+		          </execution>
+        		</executions>
+    		</plugin>
 			
 		</plugins>
 	</build>
