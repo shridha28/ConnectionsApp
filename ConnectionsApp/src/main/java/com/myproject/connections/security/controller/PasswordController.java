@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myproject.connections.entitybeans.MessageBean;
+import com.myproject.connections.exceptions.EmailNotFoundException;
 import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.security.serviceimpl.PasswordSecurityServiceImpl;
 
@@ -37,8 +38,15 @@ public class PasswordController {
 	 */
 	@PostMapping("/forgotPassword")
 	public MessageBean processForgotPasswordForm(@RequestBody String emailId) {
-		logger.info("Calling PasswordSecurityServiceImpl to send an email on" + emailId + " " + "with a reset Code");
-		return passwordSecurityServiceImpl.sendEmailWithResetCode(emailId);
+		MessageBean messageBean = new MessageBean();
+		try {
+			logger.info(
+					"Calling PasswordSecurityServiceImpl to send an email on" + emailId + " " + "with a reset Code");
+			messageBean = passwordSecurityServiceImpl.sendEmailWithResetCode(emailId,messageBean);
+		} catch (EmailNotFoundException ex) {
+			logger.error("Email not found in the Database");
+		}
+		return messageBean;
 
 	}
 
