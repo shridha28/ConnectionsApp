@@ -10,7 +10,7 @@ import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 
     selector: 'forgotcomponentdialog',
     templateUrl: 'forgotpassword.component.html',
-    styleUrls: ['forgotpassword.component.scss']
+    styleUrls: ['forgotpassword.component.css']
   })
   export class ForgotPasswordDialog {
     response:any;

@@ -6,9 +6,7 @@
     "Connections-ng-app": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        }
+        
       },
       "root": "",
       "sourceRoot": "src",
@@ -28,7 +26,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -92,7 +90,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }

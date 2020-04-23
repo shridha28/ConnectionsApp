@@ -35,14 +35,14 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 * return long
 	 */
-	public Long saveCustomer(CustomerEntity customerEntity) {
+	public CustomerEntity saveCustomer(CustomerEntity customerEntity) {
 		logger.debug("Encrypted password using password Encoder");
 		customerEntity.setPassword(bCryptPasswordEncoder.encode(customerEntity.getPassword()));
 		logger.debug("Saving data with emailId:" + customerEntity.getEmailid());
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
 		custDetailsRepository.save(customerEntity);
 		logger.debug("Data Successfully saved");
-		return new Long(100);
+		return customerEntity;
 	}
 
 	/*

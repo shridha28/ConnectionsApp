@@ -1,0 +1,207 @@
+@import url('../vendor/Grid.css');
+@import url('../vendor/normalize.css');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box; 
+    
+}
+html
+{
+    background-color: white;
+    color:black;
+    font-family: 'Lato','Arial',sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+.row
+{
+    max-width: 1140px;
+    margin: 0 auto;
+}
+header
+{
+    background-color: black;
+    background-position: center;
+    background-size: cover;
+    height: 13vh;
+    background-attachment: fixed;
+    
+}
+.top-text
+{
+   position: absolute;
+   width: 1140px;
+   top:50%;
+   left:50%;
+   transform: translate(-50%,-50%);
+   
+}
+
+/*----Headings-----------------------*/
+h1,h2,h3
+{
+    
+    text-transform: uppercase;  
+    font-weight: 300;
+    
+    
+}
+h1
+{
+    color: #fff;
+    font-size: 150%;
+    word-spacing: 3px;
+    font-family:Gadget, sans-serif  
+       
+}
+h2
+{
+    color: black;
+    font-size: 150%;
+    word-spacing: 1px;
+    text-align: center;
+    letter-spacing: 1px;
+    padding : 10px;
+    
+}
+h2:after
+{
+    display: block;
+    width: 100px;
+    height: 2px;
+    margin: 0 auto;
+    border-bottom: 2px solid #d35400;
+    content:" ";
+    margin-top: 30px;
+    
+    
+}
+h3
+{
+    font-size: 100%;
+}
+
+/*---------------------------------*/
+        /*---Buttons----*/
+/*---------------------------------*/
+.btn
+{
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 350;
+    text-decoration: none;
+    border-radius:200px;  
+    transition: background-color 0.2s,border 0.2s;
+    
+}
+.btn-full:link,
+.btn-full:visited
+{
+    background-color: #d35400; 
+    border: 1px solid #d35400;
+    color:#fff;
+    
+}
+.btn-ghost:link,
+.btn-ghost:visited
+{
+     border: 1px solid #d35400;
+     color: #fff;
+     margin-left: 10px;
+}
+
+.btn-full:active,
+.btn-full:hover
+{
+    background-color:  #b14600;  
+    color:#fff;
+    
+}
+.btn-ghost:active,
+.btn-ghost:hover
+{
+     background-color:  #b14600;  
+     border: 1px solid #b14600;
+     color: #fff;
+}
+
+
+/*--------------------------------*/
+/*----------Navigation------------*/
+/*--------------------------------*/
+.main-nav
+{
+    float: right;
+    list-style: none;
+    margin-top: 50px;
+    
+}
+.main-nav li
+{
+    display: inline-block;
+    margin-left: 40px;
+    
+    
+}
+.main-nav li a:link,
+.main-nav li a:visited
+{
+    padding: 8px 0;
+    text-decoration: none;
+    color:#fff; 
+    text-transform: uppercase;
+    word-spacing: 2px;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+}
+.main-nav li a:hover,
+.main-nav li a:active
+{
+    border-bottom: 2px solid #b14600;
+    
+    
+}
+
+.box
+{
+    padding: 1px;
+}
+
+.logo
+{
+    height: 100px;
+    width:auto;
+    float: left;
+    border-radius: 70px;
+   
+   
+}
+
+body {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.43),
+	rgba(0, 0, 0, 0.43)), url("/assets/mainpg_header.jpg");
+	background-position: center;
+	background-size: cover;
+	height : 100vh;
+	background-attachment: fixed;
+	height: 100vh;
+	
+}
+.long-copy
+{
+    line-height: 145%;
+    width: 70%;
+    margin-left: 15%;
+    text-align: center;
+}
+.icon-big
+{
+    font-size: 300%;
+    color: #d35400;
+    display: block;
+    margin-bottom: 10px;
+}

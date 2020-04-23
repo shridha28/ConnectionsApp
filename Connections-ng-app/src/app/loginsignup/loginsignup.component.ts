@@ -10,9 +10,9 @@ import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
-  selector: 'app-loginsignup',
+  
   templateUrl: './loginsignup.component.html',
-  styleUrls: ['./loginsignup.component.scss']
+  styleUrls: ['./loginsignup.component.css']
 })
 export class LoginsignupComponent implements OnInit {
      response:any;

@@ -1,5 +1,40 @@
-<div [@routeAnimations]="prepareRoute(outlet)" 
+<!-- <div [@routeAnimations]="prepareRoute(outlet)" 
 class="container">
 <app-navigation></app-navigation>
 <router-outlet #outlet="outlet"></router-outlet>
-</div>
+</div> -->
+<!doctype html>
+<html lang="en">
+         <head>
+         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400&display=swap" rel="stylesheet">
+         <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+         <title>Wilkommen zu Heilbronn!</title>
+         </head>
+         <body>
+            <header>
+                <nav>
+                        
+                    <div class="row">
+                            <img src="assets/horse.JPG" class="logo"> 
+                            <h1 class="logo"><a>ERUDITE MINDS</a></h1>
+                       <ul class="main-nav">
+                      
+                           
+                          <li><a routerLink="/wdwdo">What do we do</a></li>
+                          <li><a href="#">Tutorials</a></li>
+                          <li class="nav-item active">
+                           <a class="nav-link" routerLink="/loginsignup" routerLinkActive="active">SignUp</a>
+                         </li>
+                       </ul>
+                    </div>
+                 </nav>
+            </header>
+           
+  
+         </body>
+</html> 
+
+
+
+
+

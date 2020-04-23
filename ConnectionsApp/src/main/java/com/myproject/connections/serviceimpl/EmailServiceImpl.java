@@ -16,7 +16,7 @@ import com.myproject.connections.service.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-	@Autowired
+	@Autowired(required=true)
 	private JavaMailSender mailSender;
 
 	/*
