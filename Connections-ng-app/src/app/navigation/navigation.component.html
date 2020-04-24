@@ -1,24 +1,2 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-    <i class="fa fa-anchor" style="color:red"></i>
-      <span class="text-warning">Connections</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarColor0">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" *ngIf="!isUserLoggedIn">
-          <a class="nav-link" routerLink="/loginsignup" routerLinkActive="active">Login/SignUp</a>
-        </li>
-        <li class="nav-item" *ngIf="isUserLoggedIn">
-          <a class="nav-link" routerLink="/activities" routerLinkActive="active">Activities</a>
-        </li>
-        <li class="nav-item" *ngIf="isUserLoggedIn" >
-          <a class="nav-link" routerLink="/feedback" routerLinkActive="active">Feedback</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+
   

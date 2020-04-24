@@ -11,10 +11,16 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { HomeComponent } from './homecomponent/home/home.component';
 
 
 
 const appRoutes:Routes=[
+  {
+    path:'',
+    component:HomeComponent,
+    data: {animation: 'LoginSingUp'}
+  },
   {
     path:'loginsignup',
     component:LoginsignupComponent,
@@ -42,11 +48,7 @@ const appRoutes:Routes=[
     component:ResetComponent,
     data: {animation: 'Reset'}
   },
-  {
-    path:'',
-    component:LoginsignupComponent,
-    pathMatch:'full'
-  },
+
   {
     path:'**',
     component:NotfoundComponent

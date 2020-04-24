@@ -1,38 +1,16 @@
-#houseno {
-  width: 150px;
-  display: inline-block;
-}
-
-#street {
-  width: 150px;
-  display: inline-block;
-}
-
-
-#landmark {
-  width: 150px;
-  display: inline-block;
-}
-
-label{
-  font-weight: bold;
-}
 
 h4,.container,label{
 	color: #ffffff;
 }
 
-
 .container {
 	
-	border-radius: 12px;
+
 	padding: 40px;
-	border-style: solid;
-	border-color: #ffa31a;
-	margin-top:40px;
+
+
 	
 }
-
 
 .field-icon {
   float: right;
@@ -40,4 +18,14 @@ h4,.container,label{
   margin-top: -25px;
   position: relative;
   z-index: 2;
+}
+
+section {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.43),
+	rgba(0, 0, 0, 0.43)), url("/assets/road.jpg");
+	background-position: center;
+	background-size: cover;
+	height : 100vh;
+	background-attachment: fixed;
+	
 }

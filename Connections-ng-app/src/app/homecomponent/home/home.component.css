@@ -1,0 +1,23 @@
+
+
+section {
+	
+	background-size: cover;
+	height : 100vh;
+	
+}
+#section3 {
+	background-color: black;
+	background-position: center;
+	background-size: cover;
+	height : 70 vh;
+	background-attachment: fixed;
+	
+	
+}
+
+
+.container {
+    z-index:-100;
+	padding: 40px;	
+}

@@ -23,54 +23,9 @@ import {PasswordValidatorDirective} from './directives-shared/confirm-equal-vali
 import { ResetComponent } from './reset/reset.component';
 import {LoginsignupService} from './loginsignup/loginsignup.service';
 import { GlobalHttpInterceptorService} from './services-shared/global-http-interceptor.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './homecomponent/home/home.component';
 
-
-
-
-
-
-const appRoutes:Routes=[
-  {
-    path:'loginsignup',
-    component:LoginsignupComponent,
-    data: {animation: 'LoginSingUp'}
-  },
-  {
-    path:'feedback',
-    component:FeedbackComponent,
-    data: {animation: 'Feedback'}
-  },
-
-  {
-    path:'editProfile',
-    component:EditprofileComponent,
-    data: {animation: 'EditProfile'}
-  },
-
-  {
-    path:'activities',
-    component:ActivitiesComponent,
-    data: {animation: 'EditProfile'}
-  },
-  {
-    path:'reset',
-    component:ResetComponent,
-    data: {animation: 'Reset'}
-  },
-
-  {
-    path:'',
-    component:LoginsignupComponent,
-    pathMatch:'full'
-  },
-
-  {
-    path:'**',
-    component:NotfoundComponent
-  },
-
-
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +37,8 @@ const appRoutes:Routes=[
     EditprofileComponent,
     ConfirmEqualValidatorDirective,
     PasswordValidatorDirective,
-    ResetComponent
+    ResetComponent,
+    HomeComponent
   ],
   imports: [
     MatButtonModule,
@@ -93,7 +49,8 @@ const appRoutes:Routes=[
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [LoginsignupService,{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  }],
   entryComponents: [ForgotPasswordDialog],
