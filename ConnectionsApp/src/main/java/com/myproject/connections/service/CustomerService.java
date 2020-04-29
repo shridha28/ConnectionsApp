@@ -5,7 +5,7 @@ import com.myproject.connections.entitybeans.CustomerEntity;
  *Customer Service interface */
 public interface CustomerService {
 	
-	public Long saveCustomer(CustomerEntity customer);
+	public CustomerEntity saveCustomer(CustomerEntity customer);
 	public boolean doesEmailExist(String emailId);
 	public void updateCustomer(CustomerEntity customerEntity);
 	
