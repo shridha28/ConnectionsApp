@@ -110,7 +110,8 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
+					<artifactId>junit-vintage-en
+					gine</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
