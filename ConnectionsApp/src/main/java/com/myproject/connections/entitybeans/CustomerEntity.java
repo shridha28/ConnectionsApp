@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,6 +48,7 @@ public class CustomerEntity extends Auditable<String> implements Serializable {
 
 	private String technologies;
 
+	@Column(length=10)
 	private String username;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
