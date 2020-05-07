@@ -1,11 +1,9 @@
 package com.myproject.connections.controller;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
 import com.myproject.connections.models.CustomerDto;
-import com.myproject.connections.models.ImageModel;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
-import com.myproject.connections.serviceimpl.StatesServiceImpl;
 import com.myproject.connections.utility.CustomerResource;
 
 /**
@@ -47,8 +42,6 @@ public class CustomerController {
 	@Autowired
 	CustomerServiceImpl customerService;
 
-	@Autowired
-	StatesServiceImpl stateService;
 
 	@Autowired
 	private CustomerResource customerResource;
@@ -87,7 +80,7 @@ public class CustomerController {
 	 * 
 	 * @param bindingResults containing errors when validation fails
 	 * 
-	 * @return messageBean cont ains server errors if any after server validation
+	 * @return messageBean contains server errors if any after server validation
 	 */
 	@PatchMapping(value = "/api/updateProfile")
 	public MessageBean updateCustomer(@RequestParam(value = "myFile", required = false) MultipartFile file,
