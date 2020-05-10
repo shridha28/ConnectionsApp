@@ -1,8 +1,5 @@
 package com.myproject.connections.serviceimpl;
 
-import java.io.IOException;
-
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +7,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.Role;
-import com.myproject.connections.exceptions.EmailNotFoundException;
 import com.myproject.connections.models.CustomerDto;
-import com.myproject.connections.models.ImageModel;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
+import com.myproject.connections.utility.impl.MapperUtility;
 
 /**
  * Service class implementation for Customer
@@ -30,6 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private static Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
+	@Autowired
+	MapperUtility mapperUtility;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -63,33 +61,15 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param CustomerEntity bean
 	 */
 	public void updateUser(MultipartFile file, String model) {
-		logger.info("Mapping model to CustomerDto Object using Object Mapper");
-		ObjectMapper mapper = new ObjectMapper();
-		ModelMapper modelMapper = new ModelMapper();
-		CustomerEntity customerEntity = null;
-		try {
-			CustomerDto customerDto = mapper.readValue(model, CustomerDto.class);
-			customerEntity = new CustomerEntity();
-			customerEntity = modelMapper.map(customerDto, CustomerEntity.class);
-			if (file != null) {
-				ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(), file.getBytes());
-				customerEntity.setImageModel(img);
-			}
-			if (customerDto.getTechnologies() != null)
-				customerEntity.setTechnologies(customerDto.getTechnologies());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		logger.debug("Updating data with emailId");
-		logger.debug("Calling CustDetailsRepository to save Customers Data");
-		CustomerEntity customerEntityUpdate = custDetailsRepository.findByEmailid(customerEntity.getEmailid());
-		customerEntityUpdate.setImageModel(customerEntity.getImageModel());
-		if (customerEntity.getLinkedInUrl() != null)
-			customerEntityUpdate.setLinkedInUrl(customerEntity.getLinkedInUrl());
-		if (customerEntity.getTechnologies() != null)
-			customerEntityUpdate.setTechnologies(customerEntity.getTechnologies());
-		custDetailsRepository.save(customerEntityUpdate);
-
+		logger.info("calling method to map JSON content into a CustomerDto object");
+		CustomerDto customerDto = mapperUtility.mapToCustomerDto(model);
+		CustomerEntity customerEntity = custDetailsRepository.findByEmailid(customerDto.getEmailid());
+		
+		logger.info("Mapping customerDto to customerEntity Object using Model Mapper");
+		customerEntity = mapperUtility.mapToCustomerEntity(customerEntity,file, customerDto);
+		
+		logger.info("Saving CustomerEntity Object after updating ");
+		custDetailsRepository.save(customerEntity);
 		logger.debug("Data Successfully saved");
 
 	}

@@ -80,7 +80,7 @@ public class CustomerController {
 	 * 
 	 * @param bindingResults containing errors when validation fails
 	 * 
-	 * @return messageBean cont ains server errors if any after server validation
+	 * @return messageBean contains server errors if any after server validation
 	 */
 	@PatchMapping(value = "/api/updateProfile")
 	public MessageBean updateCustomer(@RequestParam(value = "myFile", required = false) MultipartFile file,
@@ -124,7 +124,7 @@ public class CustomerController {
 		return customerService.getCustomer(emailId);
 	}
 
-	/* Note: using getters and setters only for mockito */
+	/* Note: using getters and setters only for mockito */	
 
 	public CustomerServiceImpl getCustomerService() {
 		return customerService;
