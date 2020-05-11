@@ -3,7 +3,9 @@ package com.myproject.connections.entitybeans;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.myproject.connections.models.ImageModel;
 import com.myproject.connections.utility.UniqueEmail;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +28,7 @@ import lombok.NoArgsConstructor;
  *Customer Entity to save CustomerDetails in the database*/
 @Entity
 @Data
-@Table(name="customers")
+@Table(name = "customers")
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerEntity extends Auditable<String> implements Serializable {
@@ -36,10 +41,15 @@ public class CustomerEntity extends Auditable<String> implements Serializable {
 
 	@UniqueEmail
 	private String emailid;
-	
+
+	private String linkedInUrl;
+
 	private String password;
-	
-	private String name;
+
+	private String technologies;
+
+	@Column(length=10)
+	private String username;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -48,5 +58,5 @@ public class CustomerEntity extends Auditable<String> implements Serializable {
 	private String code;
 
 	@Embedded
-	private AddressEntity addressEntity;
+	private ImageModel imageModel;
 }

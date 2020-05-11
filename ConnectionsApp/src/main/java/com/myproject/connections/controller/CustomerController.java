@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.myproject.connections.entitybeans.AddressEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
 import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
-import com.myproject.connections.serviceimpl.StatesServiceImpl;
 import com.myproject.connections.utility.CustomerResource;
 
 /**
@@ -40,8 +42,6 @@ public class CustomerController {
 	@Autowired
 	CustomerServiceImpl customerService;
 
-	@Autowired
-	StatesServiceImpl stateService;
 
 	@Autowired
 	private CustomerResource customerResource;
@@ -82,22 +82,12 @@ public class CustomerController {
 	 * 
 	 * @return messageBean contains server errors if any after server validation
 	 */
-	@PatchMapping("/api/updateProfile")
-	public MessageBean updateCustomer(@RequestBody CustomerDto customerDto, BindingResult bindingResult) {
-		logger.info("Validating customer details for updating Customer Profile");
-
-		AddressEntity address = new AddressEntity(customerDto.getStreet(), customerDto.getHouseNumber(),
-				customerDto.getLandMark(), customerDto.getCity(), customerDto.getState());
-
-		CustomerEntity customerEntity = new CustomerEntity();
-		customerEntity.setAddressEntity(address);
-		customerEntity.setName(customerDto.getName());
-		customerEntity.setEmailid(customerDto.getEmailid());
-
-		customerService.updateUser(customerEntity);
-
-		logger.info("Updating Customer Data in the database");
+	@PatchMapping(value = "/api/updateProfile")
+	public MessageBean updateCustomer(@RequestParam(value = "myFile", required = false) MultipartFile file,
+			@RequestParam(value = "model") String model) throws JsonMappingException, JsonProcessingException {
+				logger.info("Updating Customer Data in the database");
 		logger.info("Calling CustomerServiceImpl to update Customer Data");
+		customerService.updateUser(file,model);
 		return new MessageBean();
 	}
 
@@ -134,7 +124,7 @@ public class CustomerController {
 		return customerService.getCustomer(emailId);
 	}
 
-	/* Note: using getters and setters only for mockito */
+	/* Note: using getters and setters only for mockito */	
 
 	public CustomerServiceImpl getCustomerService() {
 		return customerService;

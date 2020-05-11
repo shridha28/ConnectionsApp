@@ -68,7 +68,7 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 				passwordResetEmail.setFrom("shreya.jalihal@gmail.com");
 				passwordResetEmail.setTo(customerEntity.getEmailid());
 				passwordResetEmail.setSubject("Password Reset Request");
-				passwordResetEmail.setText("Hi" + " " + customerEntity.getName() + "\n"
+				passwordResetEmail.setText("Hi" + " " + customerEntity.getUsername() + "\n"
 						+ "We received a request to reset the password on your Account." + "\n"
 						+ customerEntity.getCode() + "\n" + "Enter this code to complete the reset." + "\n"
 						+ "Thanks for helping us keep your account secure." + "\n" + "The ConnectionsApp Team");
@@ -130,7 +130,7 @@ public class PasswordSecurityServiceImpl implements PasswordSecurityService {
 			logger.debug("Saving customer in the database with  a new password set");
 			customerService.updateCustomer(customerEntity);
 
-		} else {
+		} else {	
 			logger.error("Error occurred while trying to save the customer Entity details with new password");
 			messageBean.setError("We experienced an error while saving your new password");
 		}

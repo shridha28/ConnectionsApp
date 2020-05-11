@@ -5,12 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.Role;
-import com.myproject.connections.exceptions.EmailNotFoundException;
+import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
+import com.myproject.connections.utility.impl.MapperUtility;
 
 /**
  * Service class implementation for Customer
@@ -23,6 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private static Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
+	@Autowired
+	MapperUtility mapperUtility;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -55,16 +60,16 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 * @param CustomerEntity bean
 	 */
-	public void updateUser(CustomerEntity customerEntity) {
-		logger.debug("Encrypted password using password Encoder");
-
-		logger.debug("Updating data with emailId:" + customerEntity.getEmailid());
-		logger.debug("Calling CustDetailsRepository to save Customers Data");
-		CustomerEntity customerEntityUpdate = custDetailsRepository.findByEmailid(customerEntity.getEmailid());
-
-		customerEntityUpdate.setAddressEntity(customerEntity.getAddressEntity());
-		customerEntityUpdate.setName(customerEntity.getName());
-		custDetailsRepository.save(customerEntityUpdate);
+	public void updateUser(MultipartFile file, String model) {
+		logger.info("calling method to map JSON content into a CustomerDto object");
+		CustomerDto customerDto = mapperUtility.mapToCustomerDto(model);
+		CustomerEntity customerEntity = custDetailsRepository.findByEmailid(customerDto.getEmailid());
+		
+		logger.info("Mapping customerDto to customerEntity Object using Model Mapper");
+		customerEntity = mapperUtility.mapToCustomerEntity(customerEntity,file, customerDto);
+		
+		logger.info("Saving CustomerEntity Object after updating ");
+		custDetailsRepository.save(customerEntity);
 		logger.debug("Data Successfully saved");
 
 	}
