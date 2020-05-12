@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myproject.connections.constants.RoleConstants;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.Role;
 import com.myproject.connections.models.CustomerDto;
@@ -46,8 +47,8 @@ public class CustomerServiceImpl implements CustomerService {
 		customerEntity.setPassword(bCryptPasswordEncoder.encode(customerEntity.getPassword()));
 		logger.debug("Saving data with emailId:" + customerEntity.getEmailid());
 		Role role = new Role();
-		role.setRole_id(1001);
-		role.setRolename("admin");
+		role.setRole_id(RoleConstants.user.getValue());
+		role.setRolename(RoleConstants.user.getRole());
 		customerEntity.getRoles().add(role);
 		logger.debug("Calling CustDetailsRepository to save Customers Data");
 		custDetailsRepository.save(customerEntity);
