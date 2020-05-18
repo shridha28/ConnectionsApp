@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
 import com.myproject.connections.models.CustomerDto;
+import com.myproject.connections.security.JWTUtil;
+import com.myproject.connections.security.model.JWTResponse;
+import com.myproject.connections.security.serviceimpl.CustomerSecurityServiceImpl;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.utility.CustomerResource;
 
@@ -46,6 +52,10 @@ public class CustomerController {
 	@Autowired
 	private CustomerResource customerResource;
 
+
+
+	@Autowired
+	private CustomerSecurityServiceImpl customerSecurityServiceImpl;
 	/*
 	 * End Point to save Customer data in the database
 	 * 
@@ -85,19 +95,13 @@ public class CustomerController {
 	@PatchMapping(value = "/api/updateProfile")
 	public MessageBean updateCustomer(@RequestParam(value = "myFile", required = false) MultipartFile file,
 			@RequestParam(value = "model") String model) throws JsonMappingException, JsonProcessingException {
-				logger.info("Updating Customer Data in the database");
+		
+		logger.info("Updating Customer Data in the database");
 		logger.info("Calling CustomerServiceImpl to update Customer Data");
 		customerService.updateUser(file,model);
 		return new MessageBean();
 	}
 
-	/*
-	 * End Point for Customer login.This is a dummy endpoint.Need to refactor later.
-	 */
-	@GetMapping("/api/login")
-	public void login() {
-		System.out.println("Logged in");
-	}
 
 	/*
 	 * End Point to get Customer's data in the database based on Email ID(supports
@@ -111,8 +115,11 @@ public class CustomerController {
 	@GetMapping("/api/getCustomer/{emailId}")
 	public ResponseEntity<CustomerDto> getCustomer(@PathVariable("emailId") String emailId) {
 		logger.info("Getting a CustomerEntity Bean from repository ");
+		
 		CustomerEntity customerEntity = customerService.getCustomer(emailId);
+		
 		Optional<CustomerEntity> optionalCustomer = Optional.of(customerEntity);
+		
 		return optionalCustomer.map(customerResource::toModel).map(ResponseEntity::ok)
 				.orElse(ResponseEntity.notFound().build());
 

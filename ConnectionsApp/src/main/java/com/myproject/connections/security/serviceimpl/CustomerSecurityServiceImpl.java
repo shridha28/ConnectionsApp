@@ -28,10 +28,13 @@ public class CustomerSecurityServiceImpl implements UserDetailsService{
 
 	@Autowired
 	private CustomerServiceImpl customerService;
+	
 
-
-	/*Method for authentication
+	/* Method for authentication
+	 * 
 	 * @param emailid.
+	 * 
+	 * @return UserDetails
 	 * */
 	@Override
 	public UserDetails loadUserByUsername(String emailid) throws UsernameNotFoundException {
@@ -40,8 +43,10 @@ public class CustomerSecurityServiceImpl implements UserDetailsService{
 		return buildUserForAuthentication(customer, authorities);
 	}
 	
-	/*Method to get user authorities
+	/* Method to get user authorities
+	 * 
 	 * @param Set of userRoles.
+	 * 
 	 * @return List of GrantedAuthority
 	 * */
 	private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
@@ -56,15 +61,17 @@ public class CustomerSecurityServiceImpl implements UserDetailsService{
 	}
 
 
-	/*Method to build Spring User bean with the provided credentials	
+	/*Method to build Spring User bean with the provided credentials
+	 * 	
 	 * @param customerDetails
+	 * 
 	 * @param List of grantedAuthority
+	 * 
 	 * @return Spring bean's UserDetails
 	 * */
 	private UserDetails buildUserForAuthentication(CustomerEntity customerDetails, List<GrantedAuthority> authorities) {
 		return new User(customerDetails.getEmailid(), customerDetails.getPassword(),
 				true, true, true, true, authorities);
 	}	
-
 
 }
