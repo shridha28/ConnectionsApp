@@ -8,9 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +23,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.MessageBean;
+import com.myproject.connections.models.ContactFormDto;
 import com.myproject.connections.models.CustomerDto;
-import com.myproject.connections.security.JWTUtil;
-import com.myproject.connections.security.model.JWTResponse;
 import com.myproject.connections.security.serviceimpl.CustomerSecurityServiceImpl;
 import com.myproject.connections.serviceimpl.CustomerServiceImpl;
 import com.myproject.connections.utility.CustomerResource;
@@ -83,6 +79,26 @@ public class CustomerController {
 		return new MessageBean();
 	}
 
+	
+	@PostMapping("/api/submitQuery")
+	public MessageBean submitContactQuery(@RequestBody ContactFormDto contactFormDto,BindingResult bindingResult ) {
+		logger.info("Validating customer details");
+		 if(bindingResult.hasErrors())
+		 {
+			 logger.info("Server error: Invalid details,returning server error in the front end"); 
+			 String message = bindingResult.getFieldError().getDefaultMessage();
+				MessageBean bean = new MessageBean();
+				bean.setError(message);
+				return bean;
+		 }
+		 logger.info("Calling the sendQueryEmail service to send the message");
+		 customerService.sendQueryEmail(contactFormDto);
+		 return new MessageBean();
+	}
+
+	
+	
+	
 	/*
 	 * End Point to update Customer data in the database
 	 * 
