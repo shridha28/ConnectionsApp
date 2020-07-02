@@ -3,6 +3,7 @@ package com.myproject.connections.serviceimpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,9 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.myproject.connections.constants.RoleConstants;
 import com.myproject.connections.entitybeans.CustomerEntity;
 import com.myproject.connections.entitybeans.Role;
+import com.myproject.connections.models.ContactFormDto;
 import com.myproject.connections.models.CustomerDto;
 import com.myproject.connections.repository.CustDetailsRepository;
 import com.myproject.connections.service.CustomerService;
+import com.myproject.connections.service.EmailService;
 import com.myproject.connections.utility.impl.MapperUtility;
 
 /**
@@ -35,6 +38,9 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustDetailsRepository custDetailsRepository;
 
+	
+	@Autowired
+	private EmailService emailService;
 	/*
 	 * service method to save Customer data in the database
 	 * 
@@ -56,6 +62,31 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerEntity;
 	}
 
+	/*
+	 * service method to send the query message
+	 * 
+	 * @param ContactFormDto bean
+	 * 
+	 * 
+	 */
+	
+	public void sendQueryEmail(ContactFormDto contactFormDto)
+	{
+		logger.debug("Sending an email with the query");
+		SimpleMailMessage sendQueryEmail = new SimpleMailMessage();
+		sendQueryEmail.setFrom(contactFormDto.getEmailId());
+		sendQueryEmail.setTo("shreya.jalihal@gmail.com");
+		sendQueryEmail.setSubject("Query ");
+		sendQueryEmail.setText("Hi" + " " + "You have received a query from"+" "+contactFormDto.getName()+"\n"+
+				"\n"+contactFormDto.getSelected()
+				+"\n"+contactFormDto.getMessage());
+
+		emailService.sendEmail(sendQueryEmail);
+		logger.info("Email sent with the message");
+		
+	}
+	
+	
 	/*
 	 * service method to update Customer data in the database
 	 * 
